@@ -256,8 +256,7 @@ export default function GuidedSession() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, ease: cubicEase }}
         style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(180deg, #0a0a0f 0%, #111118 100%)',
+          minHeight: '60vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -382,8 +381,7 @@ export default function GuidedSession() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: cubicEase }}
         style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(180deg, #0a0a0f 0%, #111118 100%)',
+          minHeight: '60vh',
           display: 'flex',
           flexDirection: 'column',
           fontFamily: baseFont,
@@ -627,8 +625,7 @@ export default function GuidedSession() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: cubicEase }}
         style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(180deg, #0a0a0f 0%, #111118 100%)',
+          minHeight: '60vh',
           display: 'flex',
           flexDirection: 'column',
           fontFamily: baseFont,
@@ -857,8 +854,7 @@ export default function GuidedSession() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: cubicEase }}
         style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(180deg, #0a0a0f 0%, #111118 100%)',
+          minHeight: '60vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

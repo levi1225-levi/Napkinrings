@@ -309,7 +309,7 @@ export default function Analytics() {
 
   return (
     <motion.div
-      className="w-full max-w-6xl mx-auto px-4 pb-32 pt-6"
+      className="w-full max-w-6xl mx-auto px-4 pb-8 pt-6"
       variants={pageVariants}
       initial="hidden"
       animate="show"

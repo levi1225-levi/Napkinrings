@@ -91,7 +91,7 @@ export default function Dashboard() {
       animate="visible"
       className="flex flex-col gap-6"
       style={{
-        padding: '24px',
+        padding: '24px 24px 32px',
         maxWidth: '960px',
         marginLeft: 'auto',
         marginRight: 'auto',

@@ -186,15 +186,15 @@ export default function AppShell() {
         backgroundColor: '#0a0a0f',
         color: '#f0f0f5',
         fontFamily: "'DM Sans', sans-serif",
-        minHeight: '100vh',
+        height: '100%',
+        overflow: 'hidden',
       }}
     >
       {/* Main scrollable area */}
       <main
-        className="overflow-y-auto overflow-x-hidden"
+        className="flex-1 overflow-y-auto overflow-x-hidden scroll-container"
         style={{
-          paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
-          height: '100vh',
+          paddingBottom: 'calc(72px + env(safe-area-inset-bottom, 0px))',
           WebkitOverflowScrolling: 'touch',
         }}
       >
