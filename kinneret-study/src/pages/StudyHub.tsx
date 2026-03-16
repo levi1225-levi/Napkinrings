@@ -7,6 +7,7 @@ import {
   Zap,
   BookOpen,
   GraduationCap,
+  ChevronRight,
 } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { FlashcardSession } from '../components/flashcard/FlashcardSession';
@@ -22,7 +23,6 @@ const MODES: {
   label: string;
   description: string;
   icon: typeof Layers;
-  gradient: string;
   accentColor: string;
   badge?: string;
 }[] = [
@@ -31,8 +31,6 @@ const MODES: {
     label: 'Guided Session',
     description: 'Learn step-by-step with teaching & quizzes',
     icon: GraduationCap,
-    gradient:
-      'linear-gradient(135deg, rgba(191,90,242,0.18), rgba(79,142,247,0.08))',
     accentColor: '#bf5af2',
     badge: 'Recommended',
   },
@@ -41,8 +39,6 @@ const MODES: {
     label: 'Flashcards',
     description: 'Review cards with spaced repetition',
     icon: Layers,
-    gradient:
-      'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(79,142,247,0.05))',
     accentColor: '#4f8ef7',
   },
   {
@@ -50,8 +46,6 @@ const MODES: {
     label: 'Quiz',
     description: 'Test your knowledge with multiple choice',
     icon: HelpCircle,
-    gradient:
-      'linear-gradient(135deg, rgba(52,199,89,0.15), rgba(52,199,89,0.05))',
     accentColor: '#34c759',
   },
   {
@@ -59,8 +53,6 @@ const MODES: {
     label: 'Speed Round',
     description: 'Fast-paced true or false challenge',
     icon: Zap,
-    gradient:
-      'linear-gradient(135deg, rgba(255,159,10,0.15), rgba(255,159,10,0.05))',
     accentColor: '#ff9f0a',
   },
 ];
@@ -80,8 +72,8 @@ export default function StudyHub() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-      className="flex flex-col gap-6 pb-8"
-      style={{ padding: '24px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}
+      className="flex flex-col gap-6"
+      style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}
     >
       <AnimatePresence mode="wait">
         {!studyMode ? (
@@ -99,28 +91,36 @@ export default function StudyHub() {
               <div
                 className="flex items-center justify-center"
                 style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '12px',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '14px',
                   background:
                     'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(191,90,242,0.15))',
                 }}
               >
                 <BookOpen
-                  size={20}
-                  style={{ color: 'var(--accent-blue)' }}
+                  size={22}
+                  style={{ color: '#4f8ef7' }}
                 />
               </div>
               <div>
                 <h1
-                  className="text-xl font-bold"
-                  style={{ color: 'var(--text-primary)' }}
+                  style={{
+                    fontSize: '22px',
+                    fontWeight: 700,
+                    color: '#f0f0f5',
+                    margin: 0,
+                    fontFamily: "'DM Sans', sans-serif",
+                  }}
                 >
                   Study Hub
                 </h1>
                 <p
-                  className="text-sm"
-                  style={{ color: 'var(--text-tertiary)' }}
+                  style={{
+                    fontSize: '14px',
+                    color: '#9999b0',
+                    margin: 0,
+                  }}
                 >
                   Choose your study mode
                 </p>
@@ -144,13 +144,18 @@ export default function StudyHub() {
                     onClick={() => setStudyMode(mode.id)}
                     className="flex items-center gap-4 w-full text-left"
                     style={{
-                      background: mode.gradient,
+                      background: '#111118',
                       borderRadius: '16px',
-                      border: `1px solid ${mode.accentColor}22`,
+                      border: `1px solid rgba(255,255,255,0.06)`,
                       padding: '18px 20px',
                       cursor: 'pointer',
                     }}
-                    whileHover={{ scale: 1.01, y: -1 }}
+                    whileHover={{
+                      scale: 1.01,
+                      y: -1,
+                      borderColor: `${mode.accentColor}40`,
+                      boxShadow: `0 4px 20px ${mode.accentColor}15`,
+                    }}
                     whileTap={{ scale: 0.99 }}
                   >
                     <div
@@ -159,8 +164,8 @@ export default function StudyHub() {
                         width: '48px',
                         height: '48px',
                         borderRadius: '14px',
-                        backgroundColor: `${mode.accentColor}18`,
-                        border: `1px solid ${mode.accentColor}30`,
+                        backgroundColor: `${mode.accentColor}15`,
+                        border: `1px solid ${mode.accentColor}25`,
                       }}
                     >
                       <Icon size={24} style={{ color: mode.accentColor }} />
@@ -168,8 +173,13 @@ export default function StudyHub() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3
-                          className="text-base font-semibold"
-                          style={{ color: 'var(--text-primary)' }}
+                          style={{
+                            fontSize: '16px',
+                            fontWeight: 600,
+                            color: '#f0f0f5',
+                            margin: 0,
+                            fontFamily: "'DM Sans', sans-serif",
+                          }}
                         >
                           {mode.label}
                         </h3>
@@ -191,30 +201,20 @@ export default function StudyHub() {
                         )}
                       </div>
                       <p
-                        className="text-sm"
-                        style={{ color: 'var(--text-secondary)' }}
+                        style={{
+                          fontSize: '13px',
+                          color: '#9999b0',
+                          margin: 0,
+                        }}
                       >
                         {mode.description}
                       </p>
                     </div>
                     <div
                       className="shrink-0"
-                      style={{ color: 'var(--text-tertiary)' }}
+                      style={{ color: '#55556a' }}
                     >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M7.5 5L12.5 10L7.5 15"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <ChevronRight size={20} />
                     </div>
                   </motion.button>
                 );
@@ -239,10 +239,10 @@ export default function StudyHub() {
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                color: 'var(--accent-blue)',
+                color: '#4f8ef7',
                 fontSize: '14px',
                 fontWeight: 500,
-                fontFamily: 'var(--font-ui)',
+                fontFamily: "'DM Sans', sans-serif",
                 padding: '4px 0',
               }}
             >
