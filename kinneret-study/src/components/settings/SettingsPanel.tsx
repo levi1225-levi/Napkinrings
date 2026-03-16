@@ -15,63 +15,55 @@ import Modal from '../ui/Modal';
  *  Reusable setting sub-components
  * ──────────────────────────────────────────── */
 
-/** Segmented control with animated sliding indicator */
-function SegmentedControl<T extends string | number>({
+/** Chip-based option selector — spacious, tappable pills that wrap naturally */
+function ChipSelect<T extends string | number>({
   options,
   value,
   onChange,
-  layoutId,
 }: {
   options: { label: string; value: T }[];
   value: T;
   onChange: (v: T) => void;
-  layoutId: string;
 }) {
   return (
     <div
-      className="relative inline-flex gap-0.5"
       style={{
-        backgroundColor: 'var(--bg-base)',
-        borderRadius: '10px',
-        border: '1px solid var(--bg-border)',
-        padding: '3px',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '8px',
+        justifyContent: 'flex-end',
       }}
     >
-      {options.map((opt) => (
-        <button
-          key={String(opt.value)}
-          onClick={() => onChange(opt.value)}
-          className="relative z-10 font-medium transition-colors duration-150"
-          style={{
-            color:
-              value === opt.value
-                ? 'var(--text-primary)'
-                : 'var(--text-tertiary)',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            borderRadius: '7px',
-            whiteSpace: 'nowrap',
-            padding: '6px 10px',
-            fontSize: '12px',
-            lineHeight: '16px',
-          }}
-        >
-          {value === opt.value && (
-            <motion.div
-              layoutId={layoutId}
-              className="absolute inset-0"
-              style={{
-                backgroundColor: 'var(--bg-elevated)',
-                borderRadius: '7px',
-                boxShadow: 'var(--shadow-sm)',
-              }}
-              transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-            />
-          )}
-          <span className="relative z-10">{opt.label}</span>
-        </button>
-      ))}
+      {options.map((opt) => {
+        const isSelected = value === opt.value;
+        return (
+          <motion.button
+            key={String(opt.value)}
+            onClick={() => onChange(opt.value)}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              padding: '7px 14px',
+              fontSize: '13px',
+              fontWeight: isSelected ? 600 : 500,
+              fontFamily: 'var(--font-ui)',
+              lineHeight: '18px',
+              borderRadius: '20px',
+              whiteSpace: 'nowrap',
+              cursor: 'pointer',
+              border: isSelected
+                ? '1.5px solid var(--accent-blue)'
+                : '1.5px solid var(--bg-border-strong)',
+              backgroundColor: isSelected
+                ? 'var(--accent-blue)'
+                : 'transparent',
+              color: isSelected ? '#fff' : 'var(--text-secondary)',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            {opt.label}
+          </motion.button>
+        );
+      })}
     </div>
   );
 }
@@ -317,8 +309,7 @@ export default function SettingsPanel() {
       {/* ── Study Settings ── */}
       <Section title="Study Settings">
         <SettingRow label="Daily card limit">
-          <SegmentedControl
-            layoutId="daily-limit"
+          <ChipSelect
             value={settings.dailyCardLimit}
             onChange={(v) => updateSettings({ dailyCardLimit: v })}
             options={[
@@ -332,8 +323,7 @@ export default function SettingsPanel() {
         </SettingRow>
 
         <SettingRow label="New cards per day">
-          <SegmentedControl
-            layoutId="new-cards"
+          <ChipSelect
             value={settings.newCardsPerDay}
             onChange={(v) => updateSettings({ newCardsPerDay: v })}
             options={[
@@ -346,8 +336,7 @@ export default function SettingsPanel() {
         </SettingRow>
 
         <SettingRow label="Session length">
-          <SegmentedControl
-            layoutId="session-length"
+          <ChipSelect
             value={settings.sessionLength}
             onChange={(v) => updateSettings({ sessionLength: v })}
             options={[
@@ -453,8 +442,7 @@ export default function SettingsPanel() {
       {/* ── Appearance ── */}
       <Section title="Appearance">
         <SettingRow label="Theme">
-          <SegmentedControl
-            layoutId="theme"
+          <ChipSelect
             value={settings.darkMode ? 'dark' : 'light'}
             onChange={(v) => updateSettings({ darkMode: v === 'dark' })}
             options={[
@@ -465,8 +453,7 @@ export default function SettingsPanel() {
         </SettingRow>
 
         <SettingRow label="Font size">
-          <SegmentedControl
-            layoutId="font-size"
+          <ChipSelect
             value={settings.fontSize}
             onChange={(v) => updateSettings({ fontSize: v })}
             options={[
@@ -478,8 +465,7 @@ export default function SettingsPanel() {
         </SettingRow>
 
         <SettingRow label="Hebrew text size">
-          <SegmentedControl
-            layoutId="hebrew-size"
+          <ChipSelect
             value={settings.hebrewFontSize}
             onChange={(v) => updateSettings({ hebrewFontSize: v })}
             options={[
@@ -491,8 +477,7 @@ export default function SettingsPanel() {
         </SettingRow>
 
         <SettingRow label="Animation speed">
-          <SegmentedControl
-            layoutId="anim-speed"
+          <ChipSelect
             value={settings.animationSpeed}
             onChange={(v) => updateSettings({ animationSpeed: v })}
             options={[
