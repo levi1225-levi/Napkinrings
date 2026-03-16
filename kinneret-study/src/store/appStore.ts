@@ -13,6 +13,7 @@ import {
   getDefaultSettings,
   getDefaultProfile,
 } from '../lib/storage';
+import { getSession } from '../lib/auth';
 import {
   calculateXPForReview,
   calculateSessionBonusXP,
@@ -216,6 +217,13 @@ export const useAppStore = create<AppStore>((set, get) => ({
       if (!data.cardStates[card.id]) {
         data.cardStates[card.id] = createInitialCardState(card.id);
       }
+    }
+
+    // Sync profile name from auth session
+    const sessionUser = getSession();
+    if (sessionUser && !data.profile.name) {
+      data.profile.name = sessionUser;
+      saveAppData(data);
     }
 
     // Apply all visual settings (theme, font size, animation speed)

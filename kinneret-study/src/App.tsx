@@ -1,14 +1,45 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AppShell from './components/layout/AppShell';
+import LoginScreen from './components/auth/LoginScreen';
 import { useAppStore } from './store/appStore';
+import { getSession, clearSession } from './lib/auth';
 
 function App() {
   const { initialize, initialized } = useAppStore();
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
 
+  // Check session on mount
   useEffect(() => {
-    initialize();
-  }, [initialize]);
+    const session = getSession();
+    setAuthenticated(session !== null);
+  }, []);
 
+  // Initialize store once authenticated
+  useEffect(() => {
+    if (authenticated && !initialized) {
+      initialize();
+    }
+  }, [authenticated, initialized, initialize]);
+
+  // Listen for logout events from settings
+  useEffect(() => {
+    const handler = () => {
+      clearSession();
+      setAuthenticated(false);
+    };
+    window.addEventListener('kinneret-logout', handler);
+    return () => window.removeEventListener('kinneret-logout', handler);
+  }, []);
+
+  // Still checking session
+  if (authenticated === null) return null;
+
+  // Not logged in
+  if (!authenticated) {
+    return <LoginScreen onAuthenticated={() => setAuthenticated(true)} />;
+  }
+
+  // Loading app data
   if (!initialized) {
     return (
       <div

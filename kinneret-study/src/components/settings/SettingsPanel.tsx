@@ -5,6 +5,7 @@ import {
   Upload,
   Trash2,
   AlertTriangle,
+  LogOut,
 } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import Modal from '../ui/Modal';
@@ -56,9 +57,10 @@ function SegmentedControl<T extends string | number>({
               layoutId={layoutId}
               className="absolute inset-0"
               style={{
-                backgroundColor: 'var(--bg-overlay)',
+                backgroundColor: 'var(--bg-elevated)',
                 borderRadius: '8px',
                 border: '1px solid var(--bg-border-strong)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             />
@@ -363,7 +365,7 @@ export default function SettingsPanel() {
               padding: '6px 10px',
               outline: 'none',
               fontFamily: 'var(--font-ui)',
-              colorScheme: 'dark',
+              colorScheme: settings.darkMode ? 'dark' : 'light',
             }}
           />
         </SettingRow>
@@ -507,6 +509,26 @@ export default function SettingsPanel() {
           >
             <Trash2 size={16} />
             Reset All Progress
+          </button>
+        </div>
+      </Section>
+
+      {/* ── Account ── */}
+      <Section title="Account">
+        <div className="py-3">
+          <button
+            onClick={() => window.dispatchEvent(new Event('kinneret-logout'))}
+            className="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium transition-colors duration-150"
+            style={{
+              backgroundColor: 'var(--bg-base)',
+              color: 'var(--text-secondary)',
+              borderRadius: '12px',
+              border: '1px solid var(--bg-border-strong)',
+              cursor: 'pointer',
+            }}
+          >
+            <LogOut size={16} />
+            Log Out
           </button>
         </div>
       </Section>
