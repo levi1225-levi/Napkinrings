@@ -8,6 +8,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
+import { getSession } from '../../lib/auth';
 import Modal from '../ui/Modal';
 
 /* ────────────────────────────────────────────
@@ -194,8 +195,10 @@ function Section({
  * ──────────────────────────────────────────── */
 
 export default function SettingsPanel() {
-  const { data, updateSettings, resetProgress, exportData, importData } = useAppStore();
+  const { data, updateSettings, updateProfile, resetProgress, exportData, importData } = useAppStore();
   const settings = data.settings;
+  const profile = data.profile;
+  const currentUser = getSession();
 
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetConfirmText, setResetConfirmText] = useState('');
@@ -250,6 +253,67 @@ export default function SettingsPanel() {
 
   return (
     <div className="flex flex-col gap-5">
+      {/* ── Profile ── */}
+      <Section title="Profile">
+        <SettingRow label="Display name">
+          <input
+            type="text"
+            value={profile.name}
+            onChange={(e) => updateProfile({ name: e.target.value })}
+            placeholder="Your name"
+            className="text-sm font-medium text-right"
+            style={{
+              backgroundColor: 'var(--bg-base)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--bg-border-strong)',
+              borderRadius: '8px',
+              padding: '6px 10px',
+              outline: 'none',
+              fontFamily: 'var(--font-ui)',
+              width: '160px',
+            }}
+          />
+        </SettingRow>
+        <SettingRow label="School">
+          <input
+            type="text"
+            value={profile.school}
+            onChange={(e) => updateProfile({ school: e.target.value })}
+            placeholder="School name"
+            className="text-sm font-medium text-right"
+            style={{
+              backgroundColor: 'var(--bg-base)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--bg-border-strong)',
+              borderRadius: '8px',
+              padding: '6px 10px',
+              outline: 'none',
+              fontFamily: 'var(--font-ui)',
+              width: '160px',
+            }}
+          />
+        </SettingRow>
+        <SettingRow label="Grade">
+          <input
+            type="text"
+            value={profile.grade}
+            onChange={(e) => updateProfile({ grade: e.target.value })}
+            placeholder="e.g. 10th"
+            className="text-sm font-medium text-right"
+            style={{
+              backgroundColor: 'var(--bg-base)',
+              color: 'var(--text-primary)',
+              border: '1px solid var(--bg-border-strong)',
+              borderRadius: '8px',
+              padding: '6px 10px',
+              outline: 'none',
+              fontFamily: 'var(--font-ui)',
+              width: '120px',
+            }}
+          />
+        </SettingRow>
+      </Section>
+
       {/* ── Study Settings ── */}
       <Section title="Study Settings">
         <SettingRow label="Daily card limit">
@@ -518,6 +582,32 @@ export default function SettingsPanel() {
 
       {/* ── Account ── */}
       <Section title="Account">
+        {currentUser && (
+          <div className="flex items-center gap-3 py-3">
+            <div
+              className="flex items-center justify-center shrink-0"
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
+                color: '#fff',
+                fontSize: '14px',
+                fontWeight: 700,
+              }}
+            >
+              {currentUser.charAt(0).toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                {currentUser}
+              </p>
+              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                Signed in
+              </p>
+            </div>
+          </div>
+        )}
         <div className="py-3">
           <button
             onClick={() => window.dispatchEvent(new Event('kinneret-logout'))}

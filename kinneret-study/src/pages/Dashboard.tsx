@@ -98,6 +98,34 @@ export default function Dashboard() {
         width: '100%',
       }}
     >
+      {/* Greeting */}
+      <motion.div variants={sectionVariants}>
+        <h1
+          style={{
+            fontSize: '24px',
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            fontFamily: "'DM Sans', sans-serif",
+            letterSpacing: '-0.02em',
+            margin: 0,
+          }}
+        >
+          {data.profile.name ? `Hey, ${data.profile.name}` : 'Welcome back'}
+        </h1>
+        <p
+          style={{
+            fontSize: '14px',
+            color: 'var(--text-secondary)',
+            marginTop: '4px',
+            fontFamily: "'DM Sans', sans-serif",
+          }}
+        >
+          {dueCount > 0
+            ? `You have ${dueCount} card${dueCount !== 1 ? 's' : ''} to review today`
+            : "You're all caught up!"}
+        </p>
+      </motion.div>
+
       {/* Continue Studying CTA */}
       <motion.div variants={sectionVariants}>
         <motion.div

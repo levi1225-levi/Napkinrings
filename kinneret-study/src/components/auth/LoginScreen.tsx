@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { LogIn, UserPlus, Eye, EyeOff } from 'lucide-react';
-import { signUp, logIn } from '../../lib/auth';
+import { signUp, logIn, hasAccounts } from '../../lib/auth';
 
 interface LoginScreenProps {
   onAuthenticated: () => void;
 }
 
 export default function LoginScreen({ onAuthenticated }: LoginScreenProps) {
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [mode, setMode] = useState<'login' | 'signup'>(
+    hasAccounts() ? 'login' : 'signup'
+  );
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
