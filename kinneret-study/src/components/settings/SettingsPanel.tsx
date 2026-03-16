@@ -28,18 +28,19 @@ function SegmentedControl<T extends string | number>({
 }) {
   return (
     <div
-      className="relative flex p-1"
+      className="relative inline-flex gap-0.5"
       style={{
         backgroundColor: 'var(--bg-base)',
         borderRadius: '10px',
         border: '1px solid var(--bg-border)',
+        padding: '3px',
       }}
     >
       {options.map((opt) => (
         <button
           key={String(opt.value)}
           onClick={() => onChange(opt.value)}
-          className="relative flex-1 z-10 py-2 px-2 text-xs font-medium transition-colors duration-150"
+          className="relative z-10 font-medium transition-colors duration-150"
           style={{
             color:
               value === opt.value
@@ -48,8 +49,11 @@ function SegmentedControl<T extends string | number>({
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            borderRadius: '8px',
+            borderRadius: '7px',
             whiteSpace: 'nowrap',
+            padding: '6px 10px',
+            fontSize: '12px',
+            lineHeight: '16px',
           }}
         >
           {value === opt.value && (
@@ -58,11 +62,10 @@ function SegmentedControl<T extends string | number>({
               className="absolute inset-0"
               style={{
                 backgroundColor: 'var(--bg-elevated)',
-                borderRadius: '8px',
-                border: '1px solid var(--bg-border-strong)',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
+                borderRadius: '7px',
+                boxShadow: 'var(--shadow-sm)',
               }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 35 }}
             />
           )}
           <span className="relative z-10">{opt.label}</span>

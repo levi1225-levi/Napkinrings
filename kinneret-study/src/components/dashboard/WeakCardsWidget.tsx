@@ -172,7 +172,7 @@ export default function WeakCardsWidget() {
                         flex: 1,
                         height: '4px',
                         borderRadius: '2px',
-                        backgroundColor: 'rgba(255,255,255,0.06)',
+                        backgroundColor: 'var(--bg-border-strong)',
                         overflow: 'hidden',
                       }}
                     >

@@ -289,7 +289,7 @@ export default function QuizResults({
                     className="w-full overflow-hidden"
                     style={{
                       height: '4px',
-                      backgroundColor: 'rgba(255,255,255,0.06)',
+                      backgroundColor: 'var(--bg-border-strong)',
                       borderRadius: '2px',
                     }}
                   >

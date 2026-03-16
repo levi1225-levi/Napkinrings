@@ -146,7 +146,7 @@ export default function StudyHub() {
                     style={{
                       background: 'var(--bg-elevated)',
                       borderRadius: '16px',
-                      border: `1px solid rgba(255,255,255,0.06)`,
+                      border: '1px solid var(--bg-border)',
                       padding: '18px 20px',
                       cursor: 'pointer',
                     }}
@@ -253,7 +253,7 @@ export default function StudyHub() {
             {/* Active study component */}
             <div>
               {studyMode === 'guided' && (
-                <Suspense fallback={<div className="flex items-center justify-center" style={{ minHeight: '40vh' }}><div className="animate-spin" style={{ width: 32, height: 32, border: '3px solid rgba(255,255,255,0.08)', borderTopColor: '#4f8ef7', borderRadius: '50%' }} /></div>}>
+                <Suspense fallback={<div className="flex items-center justify-center" style={{ minHeight: '40vh' }}><div className="animate-spin" style={{ width: 32, height: 32, border: '3px solid var(--bg-border-strong)', borderTopColor: '#4f8ef7', borderRadius: '50%' }} /></div>}>
                   <GuidedSession />
                 </Suspense>
               )}

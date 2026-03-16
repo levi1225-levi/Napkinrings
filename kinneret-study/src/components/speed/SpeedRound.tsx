@@ -515,7 +515,7 @@ export default function SpeedRound() {
                         width: '100%',
                         backgroundColor: isLast
                           ? 'rgba(79,142,247,0.5)'
-                          : 'rgba(255,255,255,0.08)',
+                          : 'var(--bg-overlay)',
                         borderRadius: '4px',
                         border: isLast ? '1px solid rgba(79,142,247,0.6)' : 'none',
                         minHeight: '6px',
@@ -598,7 +598,7 @@ export default function SpeedRound() {
         className="w-full overflow-hidden"
         style={{
           height: '6px',
-          backgroundColor: 'rgba(255,255,255,0.06)',
+          backgroundColor: 'var(--bg-overlay)',
           borderRadius: '3px',
         }}
       >
@@ -737,7 +737,7 @@ export default function SpeedRound() {
             <div
               style={{
                 height: '1px',
-                backgroundColor: 'rgba(255,255,255,0.06)',
+                backgroundColor: 'var(--bg-border)',
                 margin: '0 0 20px',
               }}
             />
@@ -745,7 +745,7 @@ export default function SpeedRound() {
             {/* Definition */}
             <p
               style={{
-                color: '#c0c0d0',
+                color: 'var(--text-secondary)',
                 fontSize: '16px',
                 textAlign: 'center',
                 margin: 0,

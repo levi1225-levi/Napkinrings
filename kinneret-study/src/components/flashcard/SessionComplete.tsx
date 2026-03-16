@@ -86,7 +86,7 @@ function ProgressRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="rgba(255,255,255,0.05)"
+          stroke="var(--bg-border)"
           strokeWidth={strokeWidth}
         />
         {/* Progress arc */}

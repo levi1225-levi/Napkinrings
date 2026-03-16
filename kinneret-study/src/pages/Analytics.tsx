@@ -45,16 +45,16 @@ const COLORS = {
   bgBase: 'var(--bg-base)',
   bgElevated: 'var(--bg-elevated)',
   bgOverlay: 'var(--bg-overlay)',
-  textPrimary: '#f0f0f5',
-  textSecondary: '#9999b0',
-  textTertiary: '#8888a0',
+  textPrimary: 'var(--text-primary)',
+  textSecondary: 'var(--text-secondary)',
+  textTertiary: 'var(--text-tertiary)',
   accentBlue: '#4f8ef7',
   accentGreen: '#34c759',
   accentRed: '#ff453a',
   accentOrange: '#ff9f0a',
   accentGold: '#ffd60a',
   accentPurple: '#bf5af2',
-  grid: 'rgba(255,255,255,0.06)',
+  grid: 'var(--bg-border)',
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -85,7 +85,7 @@ function CustomTooltip({
     <div
       style={{
         background: COLORS.bgOverlay,
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: '1px solid var(--bg-border-strong)',
         borderRadius: 10,
         padding: '10px 14px',
         fontFamily: "'DM Sans', sans-serif",
@@ -112,7 +112,7 @@ function SectionSkeleton({ h = 200 }: { h?: number }) {
         background: COLORS.bgElevated,
         borderRadius: 16,
         height: h,
-        border: '1px solid rgba(255,255,255,0.04)',
+        border: '1px solid var(--bg-border)',
       }}
     />
   );
@@ -137,7 +137,7 @@ function ChartCard({
       style={{
         background: COLORS.bgElevated,
         borderRadius: 16,
-        border: '1px solid rgba(255,255,255,0.04)',
+        border: '1px solid var(--bg-border)',
         padding: '20px 20px 12px',
       }}
     >

@@ -107,8 +107,8 @@ export default function Modal({
               maxHeight: '85vh',
               backgroundColor: 'var(--bg-elevated)',
               borderRadius: '16px',
-              border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
+              border: '1px solid var(--bg-border-strong)',
+              boxShadow: 'var(--shadow-lg)',
               fontFamily: "'DM Sans', sans-serif",
             }}
             role="dialog"
@@ -122,7 +122,7 @@ export default function Modal({
                 className="flex items-center justify-between shrink-0"
                 style={{
                   padding: '20px 24px 16px',
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderBottom: '1px solid var(--bg-border)',
                 }}
               >
                 <h2
@@ -138,7 +138,7 @@ export default function Modal({
                     width: '32px',
                     height: '32px',
                     borderRadius: '8px',
-                    backgroundColor: 'rgba(255,255,255,0.06)',
+                    backgroundColor: 'var(--bg-overlay)',
                     border: 'none',
                     cursor: 'pointer',
                     color: 'var(--text-secondary)',

@@ -173,7 +173,7 @@ export default function CardStatsTable() {
       style={{
         background: 'var(--bg-elevated)',
         borderRadius: '16px',
-        border: '1px solid rgba(255,255,255,0.04)',
+        border: '1px solid var(--bg-border)',
       }}
     >
       <table className="w-full min-w-[780px] border-collapse">
@@ -190,7 +190,7 @@ export default function CardStatsTable() {
                 style={{
                   color: 'var(--text-tertiary)',
                   textAlign: col.align,
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderBottom: '1px solid var(--bg-border-strong)',
                 }}
               >
                 <span className="inline-flex items-center gap-1">
@@ -239,7 +239,7 @@ function RowGroup({
   expanded: boolean;
   onToggle: (id: string) => void;
 }) {
-  const bgBase = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)';
+  const bgBase = idx % 2 === 0 ? 'transparent' : 'var(--bg-overlay)';
 
   return (
     <>
@@ -332,9 +332,9 @@ function RowGroup({
                 <div
                   className="px-6 py-5 grid gap-4"
                   style={{
-                    background: 'rgba(255,255,255,0.02)',
-                    borderTop: '1px solid rgba(255,255,255,0.04)',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    background: 'var(--bg-overlay)',
+                    borderTop: '1px solid var(--bg-border)',
+                    borderBottom: '1px solid var(--bg-border)',
                   }}
                 >
                   {/* Top row: Hebrew + definition */}

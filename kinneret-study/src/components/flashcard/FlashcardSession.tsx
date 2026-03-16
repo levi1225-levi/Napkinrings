@@ -286,7 +286,7 @@ export function FlashcardSession() {
 
         <div
           className="w-full h-1.5 rounded-full overflow-hidden"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
+          style={{ background: 'var(--bg-overlay)' }}
           role="progressbar"
           aria-valuenow={currentCardIndex + 1}
           aria-valuemin={0}

@@ -312,8 +312,8 @@ export default function GuidedSession() {
                 style={{
                   background: isSelected
                     ? `linear-gradient(135deg, ${opt.color}18, ${opt.color}08)`
-                    : 'rgba(255,255,255,0.03)',
-                  border: `1.5px solid ${isSelected ? opt.color : 'rgba(255,255,255,0.06)'}`,
+                    : 'var(--bg-overlay)',
+                  border: `1.5px solid ${isSelected ? opt.color : 'var(--bg-border-strong)'}`,
                   borderRadius: 16,
                   padding: '24px 16px',
                   cursor: 'pointer',
@@ -426,7 +426,7 @@ export default function GuidedSession() {
             style={{
               height: 3,
               borderRadius: 2,
-              background: 'rgba(255,255,255,0.06)',
+              background: 'var(--bg-border-strong)',
               overflow: 'hidden',
             }}
           >
@@ -458,7 +458,7 @@ export default function GuidedSession() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: springEase }}
             style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 24,
               padding: '40px 32px',
@@ -546,7 +546,7 @@ export default function GuidedSession() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.4, ease: cubicEase }}
               style={{
-                background: 'rgba(255,255,255,0.02)',
+                background: 'var(--bg-overlay)',
                 borderRadius: 12,
                 padding: '16px 20px',
                 textAlign: 'left',
@@ -670,7 +670,7 @@ export default function GuidedSession() {
             style={{
               height: 3,
               borderRadius: 2,
-              background: 'rgba(255,255,255,0.06)',
+              background: 'var(--bg-border-strong)',
               overflow: 'hidden',
             }}
           >
@@ -718,8 +718,8 @@ export default function GuidedSession() {
 
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12 }}>
             {currentQuiz.options.map((option, idx) => {
-              let borderColor = 'rgba(255,255,255,0.08)';
-              let bgColor = 'rgba(255,255,255,0.03)';
+              let borderColor = 'var(--bg-border-strong)';
+              let bgColor = 'var(--bg-overlay)';
               let textColor = '#c8c8d8';
 
               if (showFeedback) {
@@ -767,7 +767,7 @@ export default function GuidedSession() {
                       borderRadius: 8,
                       background: showFeedback && idx === currentQuiz.correctIndex
                         ? 'rgba(52,211,153,0.15)'
-                        : 'rgba(255,255,255,0.05)',
+                        : 'var(--bg-border)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -929,7 +929,7 @@ export default function GuidedSession() {
           {/* Cards learned */}
           <div
             style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
@@ -946,7 +946,7 @@ export default function GuidedSession() {
           {/* Accuracy */}
           <div
             style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
@@ -963,7 +963,7 @@ export default function GuidedSession() {
           {/* XP earned */}
           <div
             style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
@@ -980,7 +980,7 @@ export default function GuidedSession() {
           {/* Duration */}
           <div
             style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
@@ -1004,7 +1004,7 @@ export default function GuidedSession() {
             style={{
               maxWidth: 400,
               width: '100%',
-              background: 'rgba(255,255,255,0.02)',
+              background: 'var(--bg-overlay)',
               border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px',
@@ -1032,7 +1032,7 @@ export default function GuidedSession() {
                     alignItems: 'center',
                     gap: 10,
                     padding: '8px 0',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    borderBottom: '1px solid var(--bg-border)',
                   }}
                 >
                   <CheckCircle size={14} color="#34d399" />

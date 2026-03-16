@@ -85,8 +85,7 @@ export function FlashcardDisplay({
             WebkitBackfaceVisibility: 'hidden',
             background: 'var(--bg-elevated)',
             border: '1px solid var(--bg-border)',
-            boxShadow:
-              '0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset',
+            boxShadow: 'var(--shadow-lg)',
           }}
         >
           {/* Category chip */}
@@ -169,8 +168,7 @@ export function FlashcardDisplay({
             transform: 'rotateY(180deg)',
             background: 'var(--bg-elevated)',
             border: '1px solid var(--bg-border)',
-            boxShadow:
-              '0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset',
+            boxShadow: 'var(--shadow-lg)',
           }}
         >
           {/* Term header */}
@@ -228,7 +226,7 @@ export function FlashcardDisplay({
                       className="text-[13px] leading-relaxed pl-4 border-l-2 py-1"
                       style={{
                         color: 'var(--text-secondary)',
-                        borderColor: 'rgba(255,255,255,0.08)',
+                        borderColor: 'var(--bg-border)',
                       }}
                     >
                       {card.extendedNotes}
@@ -274,9 +272,9 @@ export function FlashcardDisplay({
                     key={rcId}
                     className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px]"
                     style={{
-                      background: 'rgba(255,255,255,0.04)',
+                      background: 'var(--bg-overlay)',
                       color: 'var(--text-tertiary)',
-                      border: '1px solid rgba(255,255,255,0.04)',
+                      border: '1px solid var(--bg-border)',
                     }}
                     title={rc?.term ?? rcId}
                   >

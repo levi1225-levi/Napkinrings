@@ -29,7 +29,7 @@ const variantConfig: Record<string, { dot: string; text: string; bg: string }> =
   },
   default: {
     dot: '#8888a0',
-    text: '#9999b0',
+    text: 'var(--text-secondary)',
     bg: 'rgba(85,85,106,0.12)',
   },
 };

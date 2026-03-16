@@ -51,7 +51,7 @@ export default function ChainDiagram() {
               {/* Static line */}
               <div
                 className="absolute inset-0"
-                style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
+                style={{ backgroundColor: 'var(--bg-border-strong)' }}
               />
               {/* Animated shimmer */}
               <motion.div

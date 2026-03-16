@@ -104,7 +104,7 @@ function Skeleton({ w = '100%', h = 16 }: { w?: string | number; h?: number }) {
       style={{
         width: w,
         height: h,
-        background: 'rgba(255,255,255,0.06)',
+        background: 'var(--bg-border-strong)',
       }}
     />
   );
@@ -410,9 +410,9 @@ function CountdownTile({
     <div
       className="flex flex-col items-center px-5 py-3 flex-1 min-w-[90px]"
       style={{
-        background: 'rgba(255,255,255,0.02)',
+        background: 'var(--bg-overlay)',
         borderRadius: 12,
-        border: '1px solid rgba(255,255,255,0.04)',
+        border: '1px solid var(--bg-border)',
       }}
     >
       <span className="text-xl font-bold tabular-nums" style={{ color }}>

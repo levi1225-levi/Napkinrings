@@ -143,7 +143,7 @@ export default function StatsOverview() {
             style={{
               background: 'var(--bg-elevated)',
               borderRadius: '16px',
-              border: '1px solid rgba(255,255,255,0.04)',
+              border: '1px solid var(--bg-border)',
             }}
           >
             {/* Icon circle */}

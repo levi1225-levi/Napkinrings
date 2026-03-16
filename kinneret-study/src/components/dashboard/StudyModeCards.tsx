@@ -90,7 +90,7 @@ export default function StudyModeCards() {
             variants={cardVariants}
             whileHover={{
               scale: 1.02,
-              boxShadow: '0 12px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08)',
+              boxShadow: '0 12px 40px rgba(0,0,0,0.45), 0 0 0 1px var(--bg-border-strong)',
             }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}

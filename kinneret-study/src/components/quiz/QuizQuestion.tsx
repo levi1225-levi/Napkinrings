@@ -65,16 +65,16 @@ export default function QuizQuestion({
         };
       case 'dimmed':
         return {
-          bg: 'rgba(255,255,255,0.02)',
-          border: 'rgba(255,255,255,0.04)',
-          text: '#8888a0',
+          bg: 'var(--bg-overlay)',
+          border: 'var(--bg-border)',
+          text: 'var(--text-tertiary)',
           shadow: 'none',
         };
       default:
         return {
           bg: 'var(--bg-elevated)',
-          border: 'rgba(255,255,255,0.06)',
-          text: '#f0f0f5',
+          border: 'var(--bg-border-strong)',
+          text: 'var(--text-primary)',
           shadow: '0 2px 12px rgba(0,0,0,0.2)',
         };
     }
@@ -88,7 +88,7 @@ export default function QuizQuestion({
           className="w-full overflow-hidden"
           style={{
             height: '3px',
-            backgroundColor: 'rgba(255,255,255,0.06)',
+            backgroundColor: 'var(--bg-border-strong)',
             borderRadius: '2px',
           }}
         >
@@ -112,7 +112,7 @@ export default function QuizQuestion({
           className="w-full overflow-hidden"
           style={{
             height: '4px',
-            backgroundColor: 'rgba(255,255,255,0.06)',
+            backgroundColor: 'var(--bg-border-strong)',
             borderRadius: '2px',
           }}
         >
@@ -270,13 +270,13 @@ export default function QuizQuestion({
                       ? 'rgba(52,199,89,0.2)'
                       : answered && isSelected && !isCorrect
                         ? 'rgba(255,69,58,0.2)'
-                        : 'rgba(255,255,255,0.06)',
+                        : 'var(--bg-border-strong)',
                   color:
                     answered && isCorrect
                       ? '#34c759'
                       : answered && isSelected && !isCorrect
                         ? '#ff453a'
-                        : '#9999b0',
+                        : 'var(--text-secondary)',
                 }}
               >
                 {optionLabels[index]}
@@ -363,7 +363,7 @@ export default function QuizQuestion({
             </div>
             <p
               style={{
-                color: '#c0c0d0',
+                color: 'var(--text-secondary)',
                 fontSize: '14px',
                 lineHeight: 1.6,
                 fontFamily: "'DM Sans', sans-serif",

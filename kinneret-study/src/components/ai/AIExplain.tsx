@@ -144,7 +144,7 @@ export default function AIExplain({
                     width: '24px',
                     height: '24px',
                     borderRadius: '6px',
-                    backgroundColor: 'rgba(255,255,255,0.04)',
+                    backgroundColor: 'var(--bg-border)',
                     border: 'none',
                     cursor: 'pointer',
                     color: 'var(--text-tertiary)',

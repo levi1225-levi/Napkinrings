@@ -66,7 +66,7 @@ function ToastItem({
         padding: '12px 16px',
         minWidth: '280px',
         maxWidth: '400px',
-        boxShadow: `0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)`,
+        boxShadow: 'var(--shadow-lg)',
         fontFamily: "'DM Sans', sans-serif",
       }}
     >
