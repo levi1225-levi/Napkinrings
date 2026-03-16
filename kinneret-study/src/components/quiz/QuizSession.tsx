@@ -235,7 +235,7 @@ export default function QuizSession() {
             >
               {totalQuestions}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>Questions</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Questions</p>
           </div>
           <div
             style={{
@@ -258,7 +258,7 @@ export default function QuizSession() {
             >
               {difficultyBreakdown.hard}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>Hard</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Hard</p>
           </div>
           <div
             style={{
@@ -281,7 +281,7 @@ export default function QuizSession() {
             >
               {categoryBreakdown.length}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>Topics</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Topics</p>
           </div>
         </div>
 

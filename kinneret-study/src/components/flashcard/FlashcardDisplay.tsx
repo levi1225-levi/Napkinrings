@@ -101,7 +101,7 @@ export function FlashcardDisplay({
           {showTimer && (
             <span
               className="absolute top-4 left-4 flex items-center gap-1.5 text-[11px] tabular-nums"
-              style={{ color: '#6b6b80' }}
+              style={{ color: '#8888a0' }}
             >
               <Clock size={12} strokeWidth={2.2} />
               {formatTime(elapsedTime)}
@@ -152,7 +152,7 @@ export function FlashcardDisplay({
           {/* Tap hint */}
           <motion.span
             className="absolute bottom-5 left-0 right-0 text-center text-[11px] tracking-wide"
-            style={{ color: '#55556a' }}
+            style={{ color: '#8888a0' }}
             animate={{ opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           >
@@ -265,7 +265,7 @@ export function FlashcardDisplay({
               <Link2
                 size={12}
                 strokeWidth={2.4}
-                style={{ color: '#55556a', marginRight: 2 }}
+                style={{ color: '#8888a0', marginRight: 2 }}
               />
               {card.relatedCards.slice(0, 5).map((rcId) => {
                 const rc = getCardById(rcId);
@@ -275,7 +275,7 @@ export function FlashcardDisplay({
                     className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px]"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
-                      color: '#6b6b80',
+                      color: '#8888a0',
                       border: '1px solid rgba(255,255,255,0.04)',
                     }}
                     title={rc?.term ?? rcId}

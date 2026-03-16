@@ -280,7 +280,7 @@ export default function SpeedRound() {
           </div>
           <p
             style={{
-              color: speedHighScore > 0 ? '#ffd60a' : '#55556a',
+              color: speedHighScore > 0 ? '#ffd60a' : '#8888a0',
               fontSize: '40px',
               fontWeight: 700,
               margin: 0,
@@ -322,7 +322,7 @@ export default function SpeedRound() {
                         minHeight: '4px',
                       }}
                     />
-                    <span style={{ color: '#55556a', fontSize: '10px' }}>{score}</span>
+                    <span style={{ color: '#8888a0', fontSize: '10px' }}>{score}</span>
                   </div>
                 );
               })}
@@ -430,7 +430,7 @@ export default function SpeedRound() {
             >
               x{finalComboMax}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>Max Combo</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Max Combo</p>
           </div>
           <div
             style={{
@@ -453,7 +453,7 @@ export default function SpeedRound() {
             >
               {currentSession?.correctCount ?? 0}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>Correct</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Correct</p>
           </div>
           <div
             style={{
@@ -476,7 +476,7 @@ export default function SpeedRound() {
             >
               +{xpEarned}
             </p>
-            <p style={{ color: '#55556a', fontSize: '12px', margin: '4px 0 0' }}>XP Earned</p>
+            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>XP Earned</p>
           </div>
         </motion.div>
 
@@ -523,7 +523,7 @@ export default function SpeedRound() {
                     />
                     <span
                       style={{
-                        color: isLast ? '#4f8ef7' : '#55556a',
+                        color: isLast ? '#4f8ef7' : '#8888a0',
                         fontSize: '11px',
                         fontWeight: isLast ? 600 : 400,
                       }}
@@ -639,7 +639,7 @@ export default function SpeedRound() {
               {Math.ceil(timeLeft)}
             </span>
           </div>
-          <span style={{ color: '#55556a', fontSize: '13px' }}>seconds</span>
+          <span style={{ color: '#8888a0', fontSize: '13px' }}>seconds</span>
         </div>
 
         {/* Score */}
@@ -682,7 +682,7 @@ export default function SpeedRound() {
             >
               {speedScore}
             </motion.p>
-            <p style={{ color: '#55556a', fontSize: '11px', margin: 0 }}>score</p>
+            <p style={{ color: '#8888a0', fontSize: '11px', margin: 0 }}>score</p>
           </div>
         </div>
       </div>
@@ -758,7 +758,7 @@ export default function SpeedRound() {
             {/* Prompt */}
             <p
               style={{
-                color: '#55556a',
+                color: '#8888a0',
                 fontSize: '13px',
                 textAlign: 'center',
                 margin: '16px 0 0',

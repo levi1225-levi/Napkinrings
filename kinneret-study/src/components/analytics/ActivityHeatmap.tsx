@@ -117,7 +117,7 @@ export default function ActivityHeatmap() {
         {/* Month labels */}
         <div
           className="flex text-[10px] mb-1"
-          style={{ color: '#55556a', paddingLeft: LEFT_PAD }}
+          style={{ color: '#8888a0', paddingLeft: LEFT_PAD }}
         >
           {monthLabels.map((ml, i) => (
             <span
@@ -142,7 +142,7 @@ export default function ActivityHeatmap() {
                 key={row}
                 className="absolute text-[10px]"
                 style={{
-                  color: '#55556a',
+                  color: '#8888a0',
                   top: row * (CELL + GAP) + 1,
                   left: 0,
                 }}
@@ -183,7 +183,7 @@ export default function ActivityHeatmap() {
         {/* Legend */}
         <div
           className="flex items-center gap-1.5 mt-4 text-[10px]"
-          style={{ color: '#55556a' }}
+          style={{ color: '#8888a0' }}
         >
           <span>Less</span>
           {[0, 3, 10, 20, 35].map((v) => (

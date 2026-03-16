@@ -78,7 +78,7 @@ function StartScreen({ dueCardIds, onStart }: StartScreenProps) {
       {dueCount > 0 && (
         <div
           className="flex items-center gap-2 mb-8 text-sm"
-          style={{ color: '#6b6b80' }}
+          style={{ color: '#8888a0' }}
         >
           <Clock size={14} strokeWidth={2.2} />
           <span>~{estimatedMinutes} min estimated</span>
@@ -90,7 +90,7 @@ function StartScreen({ dueCardIds, onStart }: StartScreenProps) {
         <div className="w-full max-w-sm mb-10">
           <p
             className="text-[11px] uppercase tracking-widest font-semibold mb-3 text-center"
-            style={{ color: '#6b6b80' }}
+            style={{ color: '#8888a0' }}
           >
             Categories
           </p>
@@ -270,7 +270,7 @@ export function FlashcardSession() {
         <div className="flex items-center justify-between mb-2">
           <span
             className="text-[11px] font-semibold tracking-wide uppercase"
-            style={{ color: '#6b6b80' }}
+            style={{ color: '#8888a0' }}
           >
             Progress
           </span>
@@ -279,7 +279,7 @@ export function FlashcardSession() {
             style={{ color: '#9999b0' }}
           >
             {currentCardIndex + 1}
-            <span style={{ color: '#55556a' }}> / </span>
+            <span style={{ color: '#8888a0' }}> / </span>
             {total}
           </span>
         </div>
@@ -388,7 +388,7 @@ export function FlashcardSession() {
         onClick={endSession}
         className="mt-8 text-xs font-medium flex items-center gap-1 group"
         style={{
-          color: '#55556a',
+          color: '#8888a0',
           background: 'none',
           border: 'none',
           cursor: 'pointer',

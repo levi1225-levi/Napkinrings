@@ -344,7 +344,7 @@ export function SessionComplete() {
             >
               {animAccuracy}%
             </div>
-            <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: '#6b6b80' }}>
+            <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: '#9999b0' }}>
               Accuracy
             </div>
           </div>
@@ -384,7 +384,7 @@ export function SessionComplete() {
                 {stat.value}
               </span>
             </div>
-            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#6b6b80' }}>
+            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#9999b0' }}>
               {stat.label}
             </span>
           </motion.div>
@@ -446,7 +446,7 @@ export function SessionComplete() {
       {stats.nextReview && (
         <motion.div
           className="flex items-center gap-2 mb-8 text-sm"
-          style={{ color: '#6b6b80' }}
+          style={{ color: '#9999b0' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.15 }}

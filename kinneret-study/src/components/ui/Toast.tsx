@@ -90,7 +90,7 @@ function ToastItem({
       <button
         onClick={() => removeToast(id)}
         className="shrink-0 transition-opacity hover:opacity-80"
-        style={{ color: '#55556a', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
+        style={{ color: '#8888a0', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
         aria-label="Dismiss notification"
       >
         <XCircle size={16} />

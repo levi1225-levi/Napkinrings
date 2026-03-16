@@ -67,7 +67,7 @@ export default function QuizQuestion({
         return {
           bg: 'rgba(255,255,255,0.02)',
           border: 'rgba(255,255,255,0.04)',
-          text: '#55556a',
+          text: '#8888a0',
           shadow: 'none',
         };
       default:
@@ -178,7 +178,7 @@ export default function QuizQuestion({
         </span>
         <span
           style={{
-            color: '#55556a',
+            color: '#8888a0',
             fontSize: '12px',
             fontFamily: "'DM Sans', sans-serif",
             marginLeft: 'auto',

@@ -212,7 +212,7 @@ export default function StudyHub() {
                     </div>
                     <div
                       className="shrink-0"
-                      style={{ color: '#55556a' }}
+                      style={{ color: '#8888a0' }}
                     >
                       <ChevronRight size={20} />
                     </div>

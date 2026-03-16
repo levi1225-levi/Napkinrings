@@ -188,7 +188,7 @@ export default function CardStatsTable() {
                 onClick={() => handleSort(col.key)}
                 className="cursor-pointer select-none px-4 py-3 text-xs font-semibold tracking-wide"
                 style={{
-                  color: '#55556a',
+                  color: '#8888a0',
                   textAlign: col.align,
                   borderBottom: '1px solid rgba(255,255,255,0.06)',
                 }}
@@ -255,7 +255,7 @@ function RowGroup({
             animate={{ rotate: expanded ? 90 : 0 }}
             transition={{ duration: 0.15 }}
           >
-            <ChevronRight size={14} color="#55556a" />
+            <ChevronRight size={14} color="#8888a0" />
           </motion.div>
         </td>
 
@@ -301,7 +301,7 @@ function RowGroup({
         {/* Accuracy */}
         <td
           className="px-4 py-2.5 text-sm text-right tabular-nums"
-          style={{ color: row.reviews > 0 ? accuracyColor(row.accuracy) : '#55556a' }}
+          style={{ color: row.reviews > 0 ? accuracyColor(row.accuracy) : '#8888a0' }}
         >
           {row.reviews > 0 ? `${row.accuracy.toFixed(1)}%` : '\u2014'}
         </td>
@@ -359,7 +359,7 @@ function RowGroup({
                       <div>
                         <span
                           className="text-xs font-semibold uppercase tracking-wide"
-                          style={{ color: '#55556a' }}
+                          style={{ color: '#8888a0' }}
                         >
                           Mnemonic
                         </span>
@@ -399,7 +399,7 @@ function RowGroup({
                     <div>
                       <span
                         className="text-xs font-semibold uppercase tracking-wide"
-                        style={{ color: '#55556a' }}
+                        style={{ color: '#8888a0' }}
                       >
                         Response Times (last {row.responseTimeSamples.length})
                       </span>
@@ -456,7 +456,7 @@ function MiniStat({
     <div className="flex flex-col">
       <span
         className="text-xs uppercase tracking-wide"
-        style={{ color: '#55556a' }}
+        style={{ color: '#8888a0' }}
       >
         {label}
       </span>

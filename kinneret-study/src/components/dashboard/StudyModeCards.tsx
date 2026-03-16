@@ -155,7 +155,7 @@ export default function StudyModeCards() {
             {/* Detail */}
             <span
               style={{
-                color: 'var(--text-tertiary)',
+                color: 'var(--text-secondary)',
                 fontSize: '12px',
                 fontWeight: 500,
                 marginBottom: '20px',

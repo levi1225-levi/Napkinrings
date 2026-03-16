@@ -133,7 +133,7 @@ export function RatingButtons({ onRate, disabled }: RatingButtonsProps) {
           </span>
           <span
             className="text-[10px] leading-tight mt-0.5"
-            style={{ color: '#6b6b80' }}
+            style={{ color: '#8888a0' }}
           >
             {r.desc}
           </span>

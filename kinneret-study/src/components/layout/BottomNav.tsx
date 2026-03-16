@@ -66,7 +66,7 @@ export default function BottomNav() {
               <Icon
                 size={20}
                 style={{
-                  color: isActive ? '#4f8ef7' : '#55556a',
+                  color: isActive ? '#4f8ef7' : '#8888a0',
                   position: 'relative',
                   zIndex: 1,
                   transition: 'color 0.2s',
@@ -75,7 +75,7 @@ export default function BottomNav() {
               <span
                 className="text-[10px] font-medium relative z-10"
                 style={{
-                  color: isActive ? '#4f8ef7' : '#55556a',
+                  color: isActive ? '#4f8ef7' : '#8888a0',
                   transition: 'color 0.2s',
                 }}
               >

@@ -47,7 +47,7 @@ const COLORS = {
   bgOverlay: '#1a1a24',
   textPrimary: '#f0f0f5',
   textSecondary: '#9999b0',
-  textTertiary: '#55556a',
+  textTertiary: '#8888a0',
   accentBlue: '#4f8ef7',
   accentGreen: '#34c759',
   accentRed: '#ff453a',

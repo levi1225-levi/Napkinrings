@@ -28,7 +28,7 @@ const variantConfig: Record<string, { dot: string; text: string; bg: string }> =
     bg: 'rgba(52,199,89,0.12)',
   },
   default: {
-    dot: '#55556a',
+    dot: '#8888a0',
     text: '#9999b0',
     bg: 'rgba(85,85,106,0.12)',
   },

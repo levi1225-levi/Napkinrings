@@ -418,7 +418,7 @@ function CountdownTile({
       <span className="text-xl font-bold tabular-nums" style={{ color }}>
         {value}
       </span>
-      <span className="text-[10px] mt-1" style={{ color: '#55556a' }}>
+      <span className="text-[10px] mt-1" style={{ color: '#8888a0' }}>
         {label}
       </span>
     </div>

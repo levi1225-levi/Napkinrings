@@ -234,7 +234,7 @@ export default function QuizResults({
                 >
                   {pct}%
                 </p>
-                <p style={{ color: '#55556a', fontSize: '12px', margin: 0 }}>
+                <p style={{ color: '#8888a0', fontSize: '12px', margin: 0 }}>
                   {data.correct}/{data.total}
                 </p>
               </div>
