@@ -83,8 +83,8 @@ export function FlashcardDisplay({
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
-            background: '#111118',
-            border: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--bg-border)',
             boxShadow:
               '0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset',
           }}
@@ -101,7 +101,7 @@ export function FlashcardDisplay({
           {showTimer && (
             <span
               className="absolute top-4 left-4 flex items-center gap-1.5 text-[11px] tabular-nums"
-              style={{ color: '#8888a0' }}
+              style={{ color: 'var(--text-tertiary)' }}
             >
               <Clock size={12} strokeWidth={2.2} />
               {formatTime(elapsedTime)}
@@ -125,7 +125,7 @@ export function FlashcardDisplay({
               style={{
                 fontFamily: '"Frank Ruhl Libre", serif',
                 fontWeight: 700,
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 textShadow: '0 0 40px rgba(79,142,247,0.12)',
               }}
             >
@@ -136,7 +136,7 @@ export function FlashcardDisplay({
           {/* Transliteration */}
           <span
             className="text-sm tracking-wide mb-1"
-            style={{ color: '#9999b0' }}
+            style={{ color: 'var(--text-secondary)' }}
           >
             {card.transliteration}
           </span>
@@ -144,7 +144,7 @@ export function FlashcardDisplay({
           {/* Term */}
           <span
             className="text-xl font-semibold text-center leading-snug px-2"
-            style={{ color: '#f0f0f5' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             {card.term}
           </span>
@@ -152,7 +152,7 @@ export function FlashcardDisplay({
           {/* Tap hint */}
           <motion.span
             className="absolute bottom-5 left-0 right-0 text-center text-[11px] tracking-wide"
-            style={{ color: '#8888a0' }}
+            style={{ color: 'var(--text-tertiary)' }}
             animate={{ opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           >
@@ -167,8 +167,8 @@ export function FlashcardDisplay({
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
-            background: '#111118',
-            border: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--bg-elevated)',
+            border: '1px solid var(--bg-border)',
             boxShadow:
               '0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset',
           }}
@@ -184,7 +184,7 @@ export function FlashcardDisplay({
           {/* Definition */}
           <p
             className="text-[15px] leading-relaxed mb-5 flex-shrink-0"
-            style={{ color: '#f0f0f5', lineHeight: 1.7 }}
+            style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}
           >
             {card.definition}
           </p>
@@ -196,7 +196,7 @@ export function FlashcardDisplay({
                 onClick={toggleNotes}
                 className="flex items-center gap-1.5 text-[13px] font-medium mb-2 group"
                 style={{
-                  color: '#9999b0',
+                  color: 'var(--text-secondary)',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
@@ -227,7 +227,7 @@ export function FlashcardDisplay({
                     <p
                       className="text-[13px] leading-relaxed pl-4 border-l-2 py-1"
                       style={{
-                        color: '#9999b0',
+                        color: 'var(--text-secondary)',
                         borderColor: 'rgba(255,255,255,0.08)',
                       }}
                     >
@@ -252,7 +252,7 @@ export function FlashcardDisplay({
               />
               <p
                 className="text-[13px] italic leading-relaxed"
-                style={{ color: '#9999b0' }}
+                style={{ color: 'var(--text-secondary)' }}
               >
                 {card.mnemonicHint}
               </p>
@@ -265,7 +265,7 @@ export function FlashcardDisplay({
               <Link2
                 size={12}
                 strokeWidth={2.4}
-                style={{ color: '#8888a0', marginRight: 2 }}
+                style={{ color: 'var(--text-tertiary)', marginRight: 2 }}
               />
               {card.relatedCards.slice(0, 5).map((rcId) => {
                 const rc = getCardById(rcId);
@@ -275,7 +275,7 @@ export function FlashcardDisplay({
                     className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px]"
                     style={{
                       background: 'rgba(255,255,255,0.04)',
-                      color: '#8888a0',
+                      color: 'var(--text-tertiary)',
                       border: '1px solid rgba(255,255,255,0.04)',
                     }}
                     title={rc?.term ?? rcId}

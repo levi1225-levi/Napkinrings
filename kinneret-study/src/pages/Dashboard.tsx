@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Calendar } from 'lucide-react';
+import { Play, Calendar, GraduationCap } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { CARDS } from '../data/cards';
 import { isCardDue } from '../lib/sm2';
@@ -161,6 +161,67 @@ export default function Dashboard() {
       <motion.div variants={sectionVariants}>
         <DailyStatus />
       </motion.div>
+
+      {/* Test Countdown */}
+      {(() => {
+        const testDate = data.settings.testDate;
+        if (!testDate) return null;
+        const daysUntil = Math.max(0, Math.ceil((new Date(testDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+        if (daysUntil <= 0 || daysUntil > 60) return null;
+        return (
+          <motion.div variants={sectionVariants}>
+            <div
+              className="flex items-center gap-4"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                borderRadius: '16px',
+                border: daysUntil <= 7
+                  ? '1px solid rgba(255,159,10,0.3)'
+                  : '1px solid var(--bg-border)',
+                padding: '16px 20px',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              <div
+                className="flex items-center justify-center shrink-0"
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: '12px',
+                  backgroundColor: daysUntil <= 7 ? 'var(--accent-orange-dim)' : 'var(--accent-purple-dim)',
+                }}
+              >
+                <GraduationCap size={22} style={{ color: daysUntil <= 7 ? 'var(--accent-orange)' : 'var(--accent-purple)' }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 600, margin: 0, fontFamily: "'DM Sans', sans-serif" }}>
+                  {daysUntil} day{daysUntil !== 1 ? 's' : ''} until your test
+                </p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: '2px 0 0', fontFamily: "'DM Sans', sans-serif" }}>
+                  {daysUntil <= 7 ? 'Focus on your weakest areas!' : 'Keep up the great work!'}
+                </p>
+              </div>
+              {daysUntil <= 7 && (
+                <span
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    padding: '4px 10px',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255,159,10,0.15)',
+                    color: 'var(--accent-orange)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.04em',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Soon
+                </span>
+              )}
+            </div>
+          </motion.div>
+        );
+      })()}
 
       {/* Study Modes Section */}
       <motion.div variants={sectionVariants}>

@@ -239,7 +239,7 @@ export default function SpeedRound() {
 
           <h1
             style={{
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               fontSize: '32px',
               fontWeight: 700,
               margin: 0,
@@ -250,7 +250,7 @@ export default function SpeedRound() {
           </h1>
           <p
             style={{
-              color: '#9999b0',
+              color: 'var(--text-secondary)',
               fontSize: '15px',
               textAlign: 'center',
               margin: 0,
@@ -264,9 +264,9 @@ export default function SpeedRound() {
         {/* High score */}
         <div
           style={{
-            backgroundColor: '#111118',
+            backgroundColor: 'var(--bg-elevated)',
             borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.06)',
+            border: '1px solid var(--bg-border)',
             padding: '20px',
             width: '100%',
             textAlign: 'center',
@@ -274,7 +274,7 @@ export default function SpeedRound() {
         >
           <div className="flex items-center justify-center gap-2 mb-2">
             <Trophy size={18} color="#ffd60a" />
-            <span style={{ color: '#9999b0', fontSize: '13px', fontWeight: 500 }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '13px', fontWeight: 500 }}>
               High Score
             </span>
           </div>
@@ -295,14 +295,14 @@ export default function SpeedRound() {
         {storedHistory.length > 0 && (
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '16px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px 20px',
               width: '100%',
             }}
           >
-            <p style={{ color: '#9999b0', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}>
               Recent Rounds
             </p>
             <div className="flex items-end gap-2" style={{ height: '48px' }}>
@@ -322,7 +322,7 @@ export default function SpeedRound() {
                         minHeight: '4px',
                       }}
                     />
-                    <span style={{ color: '#8888a0', fontSize: '10px' }}>{score}</span>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: '10px' }}>{score}</span>
                   </div>
                 );
               })}
@@ -388,10 +388,10 @@ export default function SpeedRound() {
           transition={{ type: 'spring', stiffness: 200, damping: 18, delay: 0.2 }}
           className="flex flex-col items-center gap-2"
         >
-          <span style={{ color: '#9999b0', fontSize: '14px', fontWeight: 500 }}>Final Score</span>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '14px', fontWeight: 500 }}>Final Score</span>
           <div
             style={{
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               fontSize: '64px',
               fontWeight: 700,
               lineHeight: 1,
@@ -411,9 +411,9 @@ export default function SpeedRound() {
         >
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -421,7 +421,7 @@ export default function SpeedRound() {
             <Flame size={18} color="#ff9f0a" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '20px',
                 fontWeight: 700,
                 margin: 0,
@@ -430,13 +430,13 @@ export default function SpeedRound() {
             >
               x{finalComboMax}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Max Combo</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>Max Combo</p>
           </div>
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -444,7 +444,7 @@ export default function SpeedRound() {
             <Check size={18} color="#34c759" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '20px',
                 fontWeight: 700,
                 margin: 0,
@@ -453,13 +453,13 @@ export default function SpeedRound() {
             >
               {currentSession?.correctCount ?? 0}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Correct</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>Correct</p>
           </div>
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -467,7 +467,7 @@ export default function SpeedRound() {
             <Zap size={18} color="#4f8ef7" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '20px',
                 fontWeight: 700,
                 margin: 0,
@@ -476,7 +476,7 @@ export default function SpeedRound() {
             >
               +{xpEarned}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>XP Earned</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>XP Earned</p>
           </div>
         </motion.div>
 
@@ -487,15 +487,15 @@ export default function SpeedRound() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '16px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px 20px',
               width: '100%',
             }}
           >
             <p
-              style={{ color: '#9999b0', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}
+              style={{ color: 'var(--text-secondary)', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}
             >
               Score History
             </p>
@@ -639,7 +639,7 @@ export default function SpeedRound() {
               {Math.ceil(timeLeft)}
             </span>
           </div>
-          <span style={{ color: '#8888a0', fontSize: '13px' }}>seconds</span>
+          <span style={{ color: 'var(--text-tertiary)', fontSize: '13px' }}>seconds</span>
         </div>
 
         {/* Score */}
@@ -672,7 +672,7 @@ export default function SpeedRound() {
               animate={{ scale: 1 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '28px',
                 fontWeight: 700,
                 margin: 0,
@@ -682,7 +682,7 @@ export default function SpeedRound() {
             >
               {speedScore}
             </motion.p>
-            <p style={{ color: '#8888a0', fontSize: '11px', margin: 0 }}>score</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '11px', margin: 0 }}>score</p>
           </div>
         </div>
       </div>
@@ -698,9 +698,9 @@ export default function SpeedRound() {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="w-full"
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '32px 24px',
               boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
             }}
@@ -723,7 +723,7 @@ export default function SpeedRound() {
             {/* Term */}
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '20px',
                 fontWeight: 600,
                 textAlign: 'center',
@@ -758,7 +758,7 @@ export default function SpeedRound() {
             {/* Prompt */}
             <p
               style={{
-                color: '#8888a0',
+                color: 'var(--text-tertiary)',
                 fontSize: '13px',
                 textAlign: 'center',
                 margin: '16px 0 0',

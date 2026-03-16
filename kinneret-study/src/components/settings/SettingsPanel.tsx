@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Download,
+  Upload,
   Trash2,
   AlertTriangle,
 } from 'lucide-react';
@@ -117,13 +118,16 @@ function SettingRow({
   label,
   description,
   children,
+  id,
 }: {
   label: string;
   description?: string;
   children: React.ReactNode;
+  id?: string;
 }) {
+  const descId = id ? `${id}-desc` : undefined;
   return (
-    <div className="flex items-center justify-between gap-4 py-3">
+    <div className="flex items-center justify-between gap-4 py-3" role="group" aria-label={label}>
       <div className="flex-1 min-w-0">
         <p
           className="text-sm font-medium"
@@ -132,12 +136,12 @@ function SettingRow({
           {label}
         </p>
         {description && (
-          <p className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
+          <p id={descId} className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
             {description}
           </p>
         )}
       </div>
-      <div className="shrink-0">{children}</div>
+      <div className="shrink-0" aria-describedby={descId}>{children}</div>
     </div>
   );
 }
@@ -185,11 +189,29 @@ function Section({
  * ──────────────────────────────────────────── */
 
 export default function SettingsPanel() {
-  const { data, updateSettings, resetProgress, exportData } = useAppStore();
+  const { data, updateSettings, resetProgress, exportData, importData } = useAppStore();
   const settings = data.settings;
 
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetConfirmText, setResetConfirmText] = useState('');
+
+  const handleImport = useCallback(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          importData(reader.result);
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  }, [importData]);
 
   const handleExport = useCallback(() => {
     const json = exportData();
@@ -267,7 +289,7 @@ export default function SettingsPanel() {
           />
         </SettingRow>
 
-        <SettingRow label="Timer display" description="Show countdown timer during sessions">
+        <SettingRow label="Timer display" description="Show countdown timer during sessions" id="timer-display">
           <Toggle
             checked={settings.showTimer}
             onChange={(v) => updateSettings({ showTimer: v })}
@@ -277,6 +299,7 @@ export default function SettingsPanel() {
         <SettingRow
           label="Auto-advance after grading"
           description="Automatically move to next card"
+          id="auto-advance"
         >
           <Toggle
             checked={settings.autoAdvance}
@@ -417,6 +440,7 @@ export default function SettingsPanel() {
         <SettingRow
           label="Show extended notes"
           description="Display additional notes on flashcards by default"
+          id="extended-notes"
         >
           <Toggle
             checked={settings.showExtendedNotes}
@@ -427,6 +451,7 @@ export default function SettingsPanel() {
         <SettingRow
           label="Show mnemonic hints"
           description="Display memory aids on flashcards by default"
+          id="mnemonic-hints"
         >
           <Toggle
             checked={settings.showMnemonicHints}
@@ -438,20 +463,36 @@ export default function SettingsPanel() {
       {/* ── Data ── */}
       <Section title="Data">
         <div className="flex flex-col gap-3 py-3">
-          <button
-            onClick={handleExport}
-            className="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium transition-colors duration-150"
-            style={{
-              backgroundColor: 'var(--bg-base)',
-              color: 'var(--accent-blue)',
-              borderRadius: '12px',
-              border: '1px solid var(--bg-border-strong)',
-              cursor: 'pointer',
-            }}
-          >
-            <Download size={16} />
-            Export Progress
-          </button>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={handleExport}
+              className="flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors duration-150"
+              style={{
+                backgroundColor: 'var(--bg-base)',
+                color: 'var(--accent-blue)',
+                borderRadius: '12px',
+                border: '1px solid var(--bg-border-strong)',
+                cursor: 'pointer',
+              }}
+            >
+              <Download size={16} />
+              Export
+            </button>
+            <button
+              onClick={handleImport}
+              className="flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors duration-150"
+              style={{
+                backgroundColor: 'var(--bg-base)',
+                color: 'var(--accent-green)',
+                borderRadius: '12px',
+                border: '1px solid var(--bg-border-strong)',
+                cursor: 'pointer',
+              }}
+            >
+              <Upload size={16} />
+              Import
+            </button>
+          </div>
 
           <button
             onClick={() => setShowResetModal(true)}

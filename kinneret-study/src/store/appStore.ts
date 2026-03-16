@@ -79,6 +79,7 @@ interface AppStore {
   updateProfile: (profile: Partial<AppData['profile']>) => void;
   resetProgress: () => void;
   exportData: () => string;
+  importData: (json: string) => boolean;
 
   toggleAITutor: () => void;
   sendAITutorMessage: (message: string) => void;
@@ -115,6 +116,38 @@ function isYesterdayStr(dateStr: string): boolean {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   return dateStr.slice(0, 10) === yesterday.toISOString().split('T')[0];
+}
+
+/** Apply visual settings (font size, animation speed, theme) to the DOM */
+function applyVisualSettings(settings: UserSettings): void {
+  const root = document.documentElement;
+
+  // Theme
+  if (settings.darkMode) {
+    root.classList.remove('light');
+  } else {
+    root.classList.add('light');
+  }
+
+  // Font scale
+  const fontScales: Record<string, string> = { small: '0.875', medium: '1', large: '1.125' };
+  root.style.setProperty('--font-scale', fontScales[settings.fontSize] ?? '1');
+
+  // Hebrew font scale
+  const hebrewScales: Record<string, string> = { small: '0.85', medium: '1', large: '1.2' };
+  root.style.setProperty('--hebrew-scale', hebrewScales[settings.hebrewFontSize] ?? '1');
+
+  // Animation speed
+  if (settings.animationSpeed === 'none') {
+    root.style.setProperty('--anim-duration', '0.01ms');
+    root.classList.add('reduce-motion');
+  } else if (settings.animationSpeed === 'reduced') {
+    root.style.setProperty('--anim-duration', '0.15s');
+    root.classList.add('reduce-motion');
+  } else {
+    root.style.removeProperty('--anim-duration');
+    root.classList.remove('reduce-motion');
+  }
 }
 
 function createEmptySession(mode: StudySession['mode']): StudySession {
@@ -185,12 +218,8 @@ export const useAppStore = create<AppStore>((set, get) => ({
       }
     }
 
-    // Apply dark mode setting
-    if (!data.settings.darkMode) {
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-    }
+    // Apply all visual settings (theme, font size, animation speed)
+    applyVisualSettings(data.settings);
 
     // Load persisted speed high score from sessions
     const speedSessions = data.sessions.filter((s) => s.mode === 'speed');
@@ -452,29 +481,44 @@ export const useAppStore = create<AppStore>((set, get) => ({
   },
 
   speedAnswer: (correct) => {
-    const { speedScore, speedCombo, speedHighScore, currentSession } = get();
+    const { speedScore, speedCombo, speedHighScore, currentSession, data } = get();
     if (!currentSession) return;
 
     let newScore = speedScore;
     let newCombo = speedCombo;
+    let xpEarned = 0;
 
     if (correct) {
       newScore += 1 * speedCombo;
       newCombo = Math.min(speedCombo + 1, 3);
+      xpEarned = 2 * speedCombo; // XP scales with combo
     } else {
       newCombo = 1;
     }
 
     const newHighScore = Math.max(speedHighScore, newScore);
 
+    // Award XP to profile
+    const newProfile = {
+      ...data.profile,
+      xp: data.profile.xp + xpEarned,
+      lastStudyDate: new Date().toISOString(),
+    };
+
+    const newData: AppData = { ...data, profile: newProfile };
+
     const updatedSession: StudySession = {
       ...currentSession,
       cardsStudied: [...currentSession.cardsStudied, `speed-${Date.now()}`],
       correctCount: currentSession.correctCount + (correct ? 1 : 0),
       incorrectCount: currentSession.incorrectCount + (correct ? 0 : 1),
+      xpEarned: currentSession.xpEarned + xpEarned,
     };
 
+    saveAppData(newData);
+
     set({
+      data: newData,
       speedScore: newScore,
       speedCombo: newCombo,
       speedHighScore: newHighScore,
@@ -491,16 +535,18 @@ export const useAppStore = create<AppStore>((set, get) => ({
     const newSettings = { ...data.settings, ...settings };
     const newData: AppData = { ...data, settings: newSettings };
 
-    if (settings.darkMode !== undefined) {
-      if (settings.darkMode) {
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.add('light');
-      }
-    }
-
+    applyVisualSettings(newSettings);
     saveAppData(newData);
     set({ data: newData });
+
+    // Show toast for meaningful changes
+    if (settings.darkMode !== undefined) {
+      get().addToast({ message: settings.darkMode ? 'Dark mode enabled' : 'Light mode enabled', type: 'success' });
+    } else if (settings.fontSize !== undefined) {
+      get().addToast({ message: `Font size: ${settings.fontSize}`, type: 'success' });
+    } else if (settings.animationSpeed !== undefined) {
+      get().addToast({ message: `Animations: ${settings.animationSpeed}`, type: 'success' });
+    }
   },
 
   updateProfile: (profile) => {
@@ -534,6 +580,33 @@ export const useAppStore = create<AppStore>((set, get) => ({
   },
 
   exportData: () => JSON.stringify(get().data, null, 2),
+
+  importData: (json: string) => {
+    try {
+      const parsed = JSON.parse(json) as AppData;
+      if (parsed.version !== 1 || !parsed.cardStates || !parsed.settings) {
+        get().addToast({ message: 'Invalid backup file', type: 'error' });
+        return false;
+      }
+      // Ensure all card IDs exist
+      for (const card of CARDS) {
+        if (!parsed.cardStates[card.id]) {
+          parsed.cardStates[card.id] = createInitialCardState(card.id);
+        }
+      }
+      parsed.settings = { ...getDefaultSettings(), ...parsed.settings };
+      parsed.profile = { ...getDefaultProfile(), ...parsed.profile };
+
+      saveAppData(parsed);
+      applyVisualSettings(parsed.settings);
+      set({ data: parsed });
+      get().addToast({ message: 'Progress restored from backup', type: 'success' });
+      return true;
+    } catch {
+      get().addToast({ message: 'Failed to parse backup file', type: 'error' });
+      return false;
+    }
+  },
 
   // === AI ===
 

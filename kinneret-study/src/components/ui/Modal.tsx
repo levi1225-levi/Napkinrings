@@ -105,7 +105,7 @@ export default function Modal({
             style={{
               maxWidth: sizeStyles[size],
               maxHeight: '85vh',
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '16px',
               border: '1px solid rgba(255,255,255,0.08)',
               boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
@@ -127,7 +127,7 @@ export default function Modal({
               >
                 <h2
                   className="text-lg font-semibold"
-                  style={{ color: '#f0f0f5', margin: 0 }}
+                  style={{ color: 'var(--text-primary)', margin: 0 }}
                 >
                   {title}
                 </h2>
@@ -141,7 +141,7 @@ export default function Modal({
                     backgroundColor: 'rgba(255,255,255,0.06)',
                     border: 'none',
                     cursor: 'pointer',
-                    color: '#9999b0',
+                    color: 'var(--text-secondary)',
                   }}
                   aria-label="Close dialog"
                 >

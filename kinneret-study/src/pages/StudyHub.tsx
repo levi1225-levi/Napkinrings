@@ -108,7 +108,7 @@ export default function StudyHub() {
                   style={{
                     fontSize: '22px',
                     fontWeight: 700,
-                    color: '#f0f0f5',
+                    color: 'var(--text-primary)',
                     margin: 0,
                     fontFamily: "'DM Sans', sans-serif",
                   }}
@@ -118,7 +118,7 @@ export default function StudyHub() {
                 <p
                   style={{
                     fontSize: '14px',
-                    color: '#9999b0',
+                    color: 'var(--text-secondary)',
                     margin: 0,
                   }}
                 >
@@ -144,7 +144,7 @@ export default function StudyHub() {
                     onClick={() => setStudyMode(mode.id)}
                     className="flex items-center gap-4 w-full text-left"
                     style={{
-                      background: '#111118',
+                      background: 'var(--bg-elevated)',
                       borderRadius: '16px',
                       border: `1px solid rgba(255,255,255,0.06)`,
                       padding: '18px 20px',
@@ -176,7 +176,7 @@ export default function StudyHub() {
                           style={{
                             fontSize: '16px',
                             fontWeight: 600,
-                            color: '#f0f0f5',
+                            color: 'var(--text-primary)',
                             margin: 0,
                             fontFamily: "'DM Sans', sans-serif",
                           }}
@@ -203,7 +203,7 @@ export default function StudyHub() {
                       <p
                         style={{
                           fontSize: '13px',
-                          color: '#9999b0',
+                          color: 'var(--text-secondary)',
                           margin: 0,
                         }}
                       >
@@ -212,7 +212,7 @@ export default function StudyHub() {
                     </div>
                     <div
                       className="shrink-0"
-                      style={{ color: '#8888a0' }}
+                      style={{ color: 'var(--text-tertiary)' }}
                     >
                       <ChevronRight size={20} />
                     </div>

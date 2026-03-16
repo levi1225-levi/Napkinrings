@@ -64,11 +64,11 @@ function StartScreen({ dueCardIds, onStart }: StartScreenProps) {
         <Layers size={36} strokeWidth={1.6} style={{ color: '#4f8ef7' }} />
       </motion.div>
 
-      <h2 className="text-2xl font-bold mb-2" style={{ color: '#f0f0f5' }}>
+      <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
         Flashcard Session
       </h2>
 
-      <p className="text-base mb-2" style={{ color: '#9999b0' }}>
+      <p className="text-base mb-2" style={{ color: 'var(--text-secondary)' }}>
         {dueCount === 0
           ? 'No cards due right now. Check back later!'
           : `${dueCount} card${dueCount !== 1 ? 's' : ''} due for review`}
@@ -78,7 +78,7 @@ function StartScreen({ dueCardIds, onStart }: StartScreenProps) {
       {dueCount > 0 && (
         <div
           className="flex items-center gap-2 mb-8 text-sm"
-          style={{ color: '#8888a0' }}
+          style={{ color: 'var(--text-tertiary)' }}
         >
           <Clock size={14} strokeWidth={2.2} />
           <span>~{estimatedMinutes} min estimated</span>
@@ -90,7 +90,7 @@ function StartScreen({ dueCardIds, onStart }: StartScreenProps) {
         <div className="w-full max-w-sm mb-10">
           <p
             className="text-[11px] uppercase tracking-widest font-semibold mb-3 text-center"
-            style={{ color: '#8888a0' }}
+            style={{ color: 'var(--text-tertiary)' }}
           >
             Categories
           </p>
@@ -258,7 +258,7 @@ export function FlashcardSession() {
         className="flex items-center justify-center min-h-[50vh]"
         role="status"
       >
-        <p style={{ color: '#9999b0' }}>Loading card...</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Loading card...</p>
       </div>
     );
   }
@@ -270,16 +270,16 @@ export function FlashcardSession() {
         <div className="flex items-center justify-between mb-2">
           <span
             className="text-[11px] font-semibold tracking-wide uppercase"
-            style={{ color: '#8888a0' }}
+            style={{ color: 'var(--text-tertiary)' }}
           >
             Progress
           </span>
           <span
             className="text-xs font-semibold tabular-nums"
-            style={{ color: '#9999b0' }}
+            style={{ color: 'var(--text-secondary)' }}
           >
             {currentCardIndex + 1}
-            <span style={{ color: '#8888a0' }}> / </span>
+            <span style={{ color: 'var(--text-tertiary)' }}> / </span>
             {total}
           </span>
         </div>
@@ -388,13 +388,13 @@ export function FlashcardSession() {
         onClick={endSession}
         className="mt-8 text-xs font-medium flex items-center gap-1 group"
         style={{
-          color: '#8888a0',
+          color: 'var(--text-tertiary)',
           background: 'none',
           border: 'none',
           cursor: 'pointer',
           padding: '8px 14px',
         }}
-        whileHover={{ color: '#9999b0' }}
+        whileHover={{ color: 'var(--text-secondary)' }}
         aria-label="End session early"
       >
         End session

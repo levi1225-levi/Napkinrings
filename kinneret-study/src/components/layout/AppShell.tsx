@@ -39,8 +39,8 @@ function PageLoader() {
         style={{
           width: '32px',
           height: '32px',
-          border: '3px solid rgba(255,255,255,0.08)',
-          borderTopColor: '#4f8ef7',
+          border: '3px solid var(--bg-border-strong)',
+          borderTopColor: 'var(--accent-blue)',
           borderRadius: '50%',
         }}
         role="status"
@@ -155,7 +155,7 @@ function LevelUpOverlay() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
           className="text-3xl font-bold"
-          style={{ color: '#f0f0f5', margin: 0 }}
+          style={{ color: 'var(--text-primary)', margin: 0 }}
         >
           {title}
         </motion.h2>
@@ -183,8 +183,8 @@ export default function AppShell() {
     <div
       className="relative flex flex-col"
       style={{
-        backgroundColor: '#0a0a0f',
-        color: '#f0f0f5',
+        backgroundColor: 'var(--bg-base)',
+        color: 'var(--text-primary)',
         fontFamily: "'DM Sans', sans-serif",
         height: '100%',
         overflow: 'hidden',

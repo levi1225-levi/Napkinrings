@@ -15,27 +15,27 @@ interface ButtonProps {
 
 const variantStyles: Record<string, { bg: string; text: string; hover: string; border: string }> = {
   primary: {
-    bg: '#4f8ef7',
+    bg: 'var(--accent-blue)',
     text: '#ffffff',
     hover: '#6ba0ff',
     border: 'transparent',
   },
   secondary: {
-    bg: '#111118',
-    text: '#f0f0f5',
-    hover: '#1a1a24',
-    border: '#2a2a3a',
+    bg: 'var(--bg-elevated)',
+    text: 'var(--text-primary)',
+    hover: 'var(--bg-overlay)',
+    border: 'var(--bg-border-strong)',
   },
   danger: {
-    bg: '#ff453a',
+    bg: 'var(--accent-red)',
     text: '#ffffff',
     hover: '#ff6961',
     border: 'transparent',
   },
   ghost: {
     bg: 'transparent',
-    text: '#9999b0',
-    hover: 'rgba(255,255,255,0.05)',
+    text: 'var(--text-secondary)',
+    hover: 'var(--bg-overlay)',
     border: 'transparent',
   },
 };

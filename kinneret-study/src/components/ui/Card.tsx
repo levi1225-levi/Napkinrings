@@ -31,9 +31,9 @@ export default function Card({
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={`${className}`}
       style={{
-        backgroundColor: '#111118',
+        backgroundColor: 'var(--bg-elevated)',
         borderRadius: '16px',
-        border: '1px solid rgba(255,255,255,0.06)',
+        border: '1px solid var(--bg-border)',
         padding: padding ? '20px' : '0',
         boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
         cursor: onClick ? 'pointer' : 'default',

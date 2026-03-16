@@ -198,7 +198,7 @@ export default function QuizSession() {
           </motion.div>
           <h1
             style={{
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               fontSize: '28px',
               fontWeight: 700,
               margin: 0,
@@ -207,7 +207,7 @@ export default function QuizSession() {
           >
             Quiz Mode
           </h1>
-          <p style={{ color: '#9999b0', fontSize: '15px', textAlign: 'center', margin: 0 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '15px', textAlign: 'center', margin: 0 }}>
             Test your knowledge of the Kinneret study material
           </p>
         </div>
@@ -216,9 +216,9 @@ export default function QuizSession() {
         <div className="grid grid-cols-3 gap-3 w-full">
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -226,7 +226,7 @@ export default function QuizSession() {
             <Layers size={18} color="#4f8ef7" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '22px',
                 fontWeight: 700,
                 margin: 0,
@@ -235,13 +235,13 @@ export default function QuizSession() {
             >
               {totalQuestions}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Questions</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>Questions</p>
           </div>
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -249,7 +249,7 @@ export default function QuizSession() {
             <Zap size={18} color="#ff9f0a" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '22px',
                 fontWeight: 700,
                 margin: 0,
@@ -258,13 +258,13 @@ export default function QuizSession() {
             >
               {difficultyBreakdown.hard}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Hard</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>Hard</p>
           </div>
           <div
             style={{
-              backgroundColor: '#111118',
+              backgroundColor: 'var(--bg-elevated)',
               borderRadius: '14px',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               padding: '16px',
               textAlign: 'center',
             }}
@@ -272,7 +272,7 @@ export default function QuizSession() {
             <Brain size={18} color="#34c759" style={{ margin: '0 auto 8px' }} />
             <p
               style={{
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 fontSize: '22px',
                 fontWeight: 700,
                 margin: 0,
@@ -281,7 +281,7 @@ export default function QuizSession() {
             >
               {categoryBreakdown.length}
             </p>
-            <p style={{ color: '#8888a0', fontSize: '12px', margin: '4px 0 0' }}>Topics</p>
+            <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: '4px 0 0' }}>Topics</p>
           </div>
         </div>
 
@@ -289,13 +289,13 @@ export default function QuizSession() {
         <div
           className="w-full"
           style={{
-            backgroundColor: '#111118',
+            backgroundColor: 'var(--bg-elevated)',
             borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.06)',
+            border: '1px solid var(--bg-border)',
             padding: '16px',
           }}
         >
-          <p style={{ color: '#9999b0', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '13px', fontWeight: 500, margin: '0 0 12px' }}>
             Topics covered
           </p>
           <div className="flex flex-wrap gap-2">

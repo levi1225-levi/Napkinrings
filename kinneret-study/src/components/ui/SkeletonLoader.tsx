@@ -28,7 +28,7 @@ function SkeletonItem({
         width: width ?? defaults.width,
         height: height ?? defaults.height,
         borderRadius: defaults.borderRadius,
-        background: 'linear-gradient(90deg, #1a1a24 25%, #222233 50%, #1a1a24 75%)',
+        background: 'linear-gradient(90deg, var(--bg-overlay) 25%, var(--bg-elevated) 50%, var(--bg-overlay) 75%)',
         backgroundSize: '200% 100%',
         animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
       }}

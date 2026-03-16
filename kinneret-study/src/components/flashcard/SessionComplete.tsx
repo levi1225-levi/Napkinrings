@@ -316,7 +316,7 @@ export function SessionComplete() {
       {/* ── Title ─────────────────────────────────────────────── */}
       <motion.h2
         className="text-2xl font-bold mb-8"
-        style={{ color: '#f0f0f5' }}
+        style={{ color: 'var(--text-primary)' }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
@@ -340,11 +340,11 @@ export function SessionComplete() {
           <div className="text-center">
             <div
               className="text-4xl font-bold tabular-nums"
-              style={{ color: '#f0f0f5' }}
+              style={{ color: 'var(--text-primary)' }}
             >
               {animAccuracy}%
             </div>
-            <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: '#9999b0' }}>
+            <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: 'var(--text-secondary)' }}>
               Accuracy
             </div>
           </div>
@@ -369,8 +369,8 @@ export function SessionComplete() {
             variants={itemFadeUp}
             className="p-4 rounded-xl text-center"
             style={{
-              background: '#111118',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: 'var(--bg-elevated)',
+              border: '1px solid var(--bg-border)',
             }}
           >
             <div className="flex items-center justify-center gap-1.5 mb-1">
@@ -384,7 +384,7 @@ export function SessionComplete() {
                 {stat.value}
               </span>
             </div>
-            <span className="text-[11px] uppercase tracking-wider" style={{ color: '#9999b0' }}>
+            <span className="text-[11px] uppercase tracking-wider" style={{ color: 'var(--text-secondary)' }}>
               {stat.label}
             </span>
           </motion.div>
@@ -446,7 +446,7 @@ export function SessionComplete() {
       {stats.nextReview && (
         <motion.div
           className="flex items-center gap-2 mb-8 text-sm"
-          style={{ color: '#9999b0' }}
+          style={{ color: 'var(--text-secondary)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.15 }}
@@ -454,7 +454,7 @@ export function SessionComplete() {
           <CalendarClock size={14} strokeWidth={2} />
           <span>
             Next session:{' '}
-            <span style={{ color: '#9999b0' }}>
+            <span style={{ color: 'var(--text-secondary)' }}>
               {new Date(stats.nextReview).toLocaleDateString(undefined, {
                 weekday: 'short',
                 month: 'short',

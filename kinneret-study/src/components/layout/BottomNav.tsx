@@ -25,10 +25,10 @@ export default function BottomNav() {
     <nav
       className="fixed bottom-0 left-0 right-0 z-40"
       style={{
-        backgroundColor: 'rgba(10,10,15,0.92)',
+        backgroundColor: 'color-mix(in srgb, var(--bg-base) 92%, transparent)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid rgba(255,255,255,0.08)',
+        borderTop: '1px solid var(--bg-border)',
         fontFamily: "'DM Sans', sans-serif",
       }}
       role="tablist"

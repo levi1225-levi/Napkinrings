@@ -171,7 +171,7 @@ export default function CardStatsTable() {
     <div
       className="w-full overflow-x-auto"
       style={{
-        background: '#111118',
+        background: 'var(--bg-elevated)',
         borderRadius: '16px',
         border: '1px solid rgba(255,255,255,0.04)',
       }}
@@ -188,7 +188,7 @@ export default function CardStatsTable() {
                 onClick={() => handleSort(col.key)}
                 className="cursor-pointer select-none px-4 py-3 text-xs font-semibold tracking-wide"
                 style={{
-                  color: '#8888a0',
+                  color: 'var(--text-tertiary)',
                   textAlign: col.align,
                   borderBottom: '1px solid rgba(255,255,255,0.06)',
                 }}
@@ -262,7 +262,7 @@ function RowGroup({
         {/* Term */}
         <td
           className="px-4 py-2.5 text-sm font-medium"
-          style={{ color: '#f0f0f5' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           {row.term}
         </td>
@@ -285,7 +285,7 @@ function RowGroup({
         {/* Interval */}
         <td
           className="px-4 py-2.5 text-sm text-right tabular-nums"
-          style={{ color: '#9999b0' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           {row.interval}d
         </td>
@@ -293,7 +293,7 @@ function RowGroup({
         {/* Reviews */}
         <td
           className="px-4 py-2.5 text-sm text-right tabular-nums"
-          style={{ color: '#9999b0' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           {row.reviews}
         </td>
@@ -309,7 +309,7 @@ function RowGroup({
         {/* Next Review */}
         <td
           className="px-4 py-2.5 text-sm text-right tabular-nums"
-          style={{ color: '#9999b0' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           {row.nextReview
             ? format(new Date(row.nextReview), 'MMM d')
@@ -343,14 +343,14 @@ function RowGroup({
                       <span
                         className="block text-2xl mb-1"
                         style={{
-                          color: '#f0f0f5',
+                          color: 'var(--text-primary)',
                           fontFamily: "'Noto Sans Hebrew', sans-serif",
                           direction: 'rtl',
                         }}
                       >
                         {row.hebrew}
                       </span>
-                      <span className="text-sm" style={{ color: '#9999b0' }}>
+                      <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {row.definition}
                       </span>
                     </div>
@@ -359,11 +359,11 @@ function RowGroup({
                       <div>
                         <span
                           className="text-xs font-semibold uppercase tracking-wide"
-                          style={{ color: '#8888a0' }}
+                          style={{ color: 'var(--text-tertiary)' }}
                         >
                           Mnemonic
                         </span>
-                        <p className="text-sm mt-1" style={{ color: '#9999b0' }}>
+                        <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
                           {row.mnemonic}
                         </p>
                       </div>
@@ -399,7 +399,7 @@ function RowGroup({
                     <div>
                       <span
                         className="text-xs font-semibold uppercase tracking-wide"
-                        style={{ color: '#8888a0' }}
+                        style={{ color: 'var(--text-tertiary)' }}
                       >
                         Response Times (last {row.responseTimeSamples.length})
                       </span>
@@ -456,7 +456,7 @@ function MiniStat({
     <div className="flex flex-col">
       <span
         className="text-xs uppercase tracking-wide"
-        style={{ color: '#8888a0' }}
+        style={{ color: 'var(--text-tertiary)' }}
       >
         {label}
       </span>

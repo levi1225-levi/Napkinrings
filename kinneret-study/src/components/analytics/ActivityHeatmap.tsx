@@ -15,7 +15,7 @@ function countCards(cs: number | string[] | undefined): number {
 
 /** Map card-count to a green opacity level */
 function intensityColor(count: number): string {
-  if (count === 0) return '#1a1a24';
+  if (count === 0) return 'var(--bg-overlay)';
   if (count <= 5) return 'rgba(52,199,89,0.20)';
   if (count <= 15) return 'rgba(52,199,89,0.40)';
   if (count <= 30) return 'rgba(52,199,89,0.70)';
@@ -100,7 +100,7 @@ export default function ActivityHeatmap() {
     <div
       className="w-full overflow-x-auto"
       style={{
-        background: '#111118',
+        background: 'var(--bg-elevated)',
         borderRadius: '16px',
         border: '1px solid rgba(255,255,255,0.04)',
         padding: '24px',
@@ -108,7 +108,7 @@ export default function ActivityHeatmap() {
     >
       <h3
         className="text-sm font-semibold mb-4"
-        style={{ color: '#f0f0f5' }}
+        style={{ color: 'var(--text-primary)' }}
       >
         Study Activity
       </h3>
@@ -117,7 +117,7 @@ export default function ActivityHeatmap() {
         {/* Month labels */}
         <div
           className="flex text-[10px] mb-1"
-          style={{ color: '#8888a0', paddingLeft: LEFT_PAD }}
+          style={{ color: 'var(--text-tertiary)', paddingLeft: LEFT_PAD }}
         >
           {monthLabels.map((ml, i) => (
             <span
@@ -142,7 +142,7 @@ export default function ActivityHeatmap() {
                 key={row}
                 className="absolute text-[10px]"
                 style={{
-                  color: '#8888a0',
+                  color: 'var(--text-tertiary)',
                   top: row * (CELL + GAP) + 1,
                   left: 0,
                 }}
@@ -183,7 +183,7 @@ export default function ActivityHeatmap() {
         {/* Legend */}
         <div
           className="flex items-center gap-1.5 mt-4 text-[10px]"
-          style={{ color: '#8888a0' }}
+          style={{ color: 'var(--text-tertiary)' }}
         >
           <span>Less</span>
           {[0, 3, 10, 20, 35].map((v) => (

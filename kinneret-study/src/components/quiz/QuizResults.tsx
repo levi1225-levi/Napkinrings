@@ -130,7 +130,7 @@ export default function QuizResults({
               style={{
                 fontSize: '36px',
                 fontWeight: 700,
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 lineHeight: 1,
               }}
             >
@@ -142,7 +142,7 @@ export default function QuizResults({
         <div className="text-center">
           <p
             style={{
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               fontSize: '20px',
               fontWeight: 600,
               margin: 0,
@@ -152,7 +152,7 @@ export default function QuizResults({
           </p>
           <p
             style={{
-              color: '#9999b0',
+              color: 'var(--text-secondary)',
               fontSize: '14px',
               marginTop: '4px',
             }}
@@ -183,7 +183,7 @@ export default function QuizResults({
       <motion.div variants={stagger.item} className="w-full">
         <h3
           style={{
-            color: '#f0f0f5',
+            color: 'var(--text-primary)',
             fontSize: '16px',
             fontWeight: 600,
             marginBottom: '12px',
@@ -201,9 +201,9 @@ export default function QuizResults({
               <div
                 key={diff}
                 style={{
-                  backgroundColor: '#111118',
+                  backgroundColor: 'var(--bg-elevated)',
                   borderRadius: '14px',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid var(--bg-border)',
                   padding: '16px',
                   textAlign: 'center',
                 }}
@@ -225,7 +225,7 @@ export default function QuizResults({
                 </span>
                 <p
                   style={{
-                    color: '#f0f0f5',
+                    color: 'var(--text-primary)',
                     fontSize: '24px',
                     fontWeight: 700,
                     margin: '8px 0 2px',
@@ -234,7 +234,7 @@ export default function QuizResults({
                 >
                   {pct}%
                 </p>
-                <p style={{ color: '#8888a0', fontSize: '12px', margin: 0 }}>
+                <p style={{ color: 'var(--text-tertiary)', fontSize: '12px', margin: 0 }}>
                   {data.correct}/{data.total}
                 </p>
               </div>
@@ -247,7 +247,7 @@ export default function QuizResults({
       <motion.div variants={stagger.item} className="w-full">
         <h3
           style={{
-            color: '#f0f0f5',
+            color: 'var(--text-primary)',
             fontSize: '16px',
             fontWeight: 600,
             marginBottom: '12px',
@@ -271,17 +271,17 @@ export default function QuizResults({
                 <div
                   key={category}
                   style={{
-                    backgroundColor: '#111118',
+                    backgroundColor: 'var(--bg-elevated)',
                     borderRadius: '12px',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    border: '1px solid var(--bg-border)',
                     padding: '12px 16px',
                   }}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span style={{ color: '#f0f0f5', fontSize: '14px', fontWeight: 500 }}>
+                    <span style={{ color: 'var(--text-primary)', fontSize: '14px', fontWeight: 500 }}>
                       {category}
                     </span>
-                    <span style={{ color: '#9999b0', fontSize: '13px' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
                       {data.correct}/{data.total}
                     </span>
                   </div>
@@ -315,7 +315,7 @@ export default function QuizResults({
         <motion.div variants={stagger.item} className="w-full">
           <h3
             style={{
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               fontSize: '16px',
               fontWeight: 600,
               marginBottom: '12px',
@@ -331,15 +331,15 @@ export default function QuizResults({
                 <div
                   key={question.id}
                   style={{
-                    backgroundColor: '#111118',
+                    backgroundColor: 'var(--bg-elevated)',
                     borderRadius: '14px',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    border: '1px solid var(--bg-border)',
                     padding: '16px',
                   }}
                 >
                   <p
                     style={{
-                      color: '#f0f0f5',
+                      color: 'var(--text-primary)',
                       fontSize: '14px',
                       fontWeight: 500,
                       margin: '0 0 8px',
@@ -418,7 +418,7 @@ export default function QuizResults({
             <p style={{ color: '#ffd60a', fontSize: '15px', fontWeight: 600, margin: 0 }}>
               Perfect Score!
             </p>
-            <p style={{ color: '#9999b0', fontSize: '13px', margin: 0 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: 0 }}>
               You nailed every question. Outstanding work.
             </p>
           </div>

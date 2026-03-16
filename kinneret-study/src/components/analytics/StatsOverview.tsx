@@ -141,7 +141,7 @@ export default function StatsOverview() {
             variants={card}
             className="min-w-[160px] flex-1 flex flex-col items-center gap-2.5 px-5 py-5"
             style={{
-              background: '#111118',
+              background: 'var(--bg-elevated)',
               borderRadius: '16px',
               border: '1px solid rgba(255,255,255,0.04)',
             }}
@@ -163,7 +163,7 @@ export default function StatsOverview() {
             {s.display ? (
               <span
                 className="text-xl font-bold"
-                style={{ color: '#f0f0f5', fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif" }}
               >
                 {s.display}
               </span>
@@ -179,7 +179,7 @@ export default function StatsOverview() {
             {/* Label */}
             <span
               className="text-xs font-medium whitespace-nowrap"
-              style={{ color: '#9999b0' }}
+              style={{ color: 'var(--text-secondary)' }}
             >
               {s.label}
             </span>

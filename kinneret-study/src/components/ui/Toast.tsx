@@ -60,7 +60,7 @@ function ToastItem({
       aria-live="polite"
       className="flex items-center gap-3 pointer-events-auto"
       style={{
-        backgroundColor: '#1a1a24',
+        backgroundColor: 'var(--bg-overlay)',
         border: `1px solid ${config.color}33`,
         borderRadius: '12px',
         padding: '12px 16px',
@@ -83,14 +83,14 @@ function ToastItem({
       </div>
       <p
         className="flex-1 text-sm font-medium"
-        style={{ color: '#f0f0f5' }}
+        style={{ color: 'var(--text-primary)' }}
       >
         {message}
       </p>
       <button
         onClick={() => removeToast(id)}
         className="shrink-0 transition-opacity hover:opacity-80"
-        style={{ color: '#8888a0', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
+        style={{ color: 'var(--text-tertiary)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
         aria-label="Dismiss notification"
       >
         <XCircle size={16} />

@@ -42,9 +42,9 @@ const AIInsights = React.lazy(
 /* -------------------------------------------------------------------------- */
 
 const COLORS = {
-  bgBase: '#0a0a0f',
-  bgElevated: '#111118',
-  bgOverlay: '#1a1a24',
+  bgBase: 'var(--bg-base)',
+  bgElevated: 'var(--bg-elevated)',
+  bgOverlay: 'var(--bg-overlay)',
   textPrimary: '#f0f0f5',
   textSecondary: '#9999b0',
   textTertiary: '#8888a0',

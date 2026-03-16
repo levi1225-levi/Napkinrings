@@ -75,7 +75,7 @@ export default function Settings() {
               color: '#fff',
             }}
           >
-            L
+            {(profile.name || 'S').charAt(0).toUpperCase()}
           </div>
 
           {/* Info */}
@@ -84,10 +84,10 @@ export default function Settings() {
               className="text-base font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
-              Levi
+              {profile.name || 'Student'}
             </h2>
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              TanenbaumCHAT &bull; Grade 10
+              {profile.school || 'School'} {profile.grade ? `\u2022 ${profile.grade}` : ''}
             </p>
 
             {/* Level badge */}

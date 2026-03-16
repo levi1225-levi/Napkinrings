@@ -261,7 +261,7 @@ export default function AIInsights() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
       style={{
-        background: '#111118',
+        background: 'var(--bg-elevated)',
         borderRadius: '16px',
         border: '1px solid rgba(191,90,242,0.15)',
         overflow: 'hidden',
@@ -287,7 +287,7 @@ export default function AIInsights() {
         >
           <Sparkles size={16} color="#bf5af2" />
         </div>
-        <h3 className="text-sm font-semibold" style={{ color: '#f0f0f5' }}>
+        <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
           AI Insights
         </h3>
       </div>
@@ -312,7 +312,7 @@ export default function AIInsights() {
               <Skeleton w="70%" h={14} />
             </div>
           ) : (
-            <p className="text-sm leading-relaxed" style={{ color: '#9999b0' }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               {aiInsight || localInsightText}
             </p>
           )}
@@ -382,7 +382,7 @@ export default function AIInsights() {
               animate={{ opacity: 1, height: 'auto' }}
               className="mt-3"
             >
-              <p className="text-sm leading-relaxed" style={{ color: '#9999b0' }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 {prediction || localPredictionText}
               </p>
             </motion.div>
@@ -418,7 +418,7 @@ function CountdownTile({
       <span className="text-xl font-bold tabular-nums" style={{ color }}>
         {value}
       </span>
-      <span className="text-[10px] mt-1" style={{ color: '#8888a0' }}>
+      <span className="text-[10px] mt-1" style={{ color: 'var(--text-tertiary)' }}>
         {label}
       </span>
     </div>

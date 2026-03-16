@@ -276,14 +276,14 @@ export default function GuidedSession() {
             style={{
               fontSize: 32,
               fontWeight: 700,
-              color: '#f0f0f5',
+              color: 'var(--text-primary)',
               margin: '16px 0 8px',
               fontFamily: baseFont,
             }}
           >
             Guided Study
           </h1>
-          <p style={{ color: '#9999b0', fontSize: 16, maxWidth: 400, margin: '0 auto' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 16, maxWidth: 400, margin: '0 auto' }}>
             Learn new terms step by step, then test your knowledge with quizzes.
           </p>
         </motion.div>
@@ -338,10 +338,10 @@ export default function GuidedSession() {
                   <Icon size={24} color={opt.color} />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#f0f0f5' }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)' }}>
                     {opt.minutes} min
                   </div>
-                  <div style={{ fontSize: 13, color: '#9999b0', marginTop: 2 }}>
+                  <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>
                     {opt.label} &middot; ~{opt.cards} cards
                   </div>
                 </div>
@@ -401,7 +401,7 @@ export default function GuidedSession() {
             style={{
               background: 'none',
               border: 'none',
-              color: '#9999b0',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               fontSize: 14,
               fontFamily: baseFont,
@@ -411,12 +411,12 @@ export default function GuidedSession() {
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <BookOpen size={16} color="#4f8ef7" />
-            <span style={{ color: '#9999b0', fontSize: 13 }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>
               Learning &middot; {learnedCards.length + 1}/{sessionCards.length}
             </span>
           </div>
           <ProgressRing progress={overallProgress} size={36} strokeWidth={3} color="#4f8ef7">
-            <span style={{ fontSize: 10, color: '#9999b0' }}>{overallProgress}%</span>
+            <span style={{ fontSize: 10, color: 'var(--text-secondary)' }}>{overallProgress}%</span>
           </ProgressRing>
         </div>
 
@@ -459,7 +459,7 @@ export default function GuidedSession() {
             transition={{ duration: 0.5, ease: springEase }}
             style={{
               background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 24,
               padding: '40px 32px',
               width: '100%',
@@ -494,7 +494,7 @@ export default function GuidedSession() {
                 style={{
                   fontSize: 48,
                   fontFamily: hebrewFont,
-                  color: '#f0f0f5',
+                  color: 'var(--text-primary)',
                   marginBottom: 8,
                   lineHeight: 1.3,
                 }}
@@ -504,7 +504,7 @@ export default function GuidedSession() {
             )}
 
             {/* Transliteration */}
-            <div style={{ fontSize: 14, color: '#9999b0', marginBottom: 4 }}>
+            <div style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 4 }}>
               {currentTeachCard.transliteration}
             </div>
 
@@ -516,7 +516,7 @@ export default function GuidedSession() {
               style={{
                 fontSize: 24,
                 fontWeight: 700,
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 margin: '16px 0 20px',
                 fontFamily: baseFont,
               }}
@@ -557,7 +557,7 @@ export default function GuidedSession() {
                 style={{
                   fontSize: 11,
                   fontWeight: 600,
-                  color: '#9999b0',
+                  color: 'var(--text-secondary)',
                   textTransform: 'uppercase' as const,
                   letterSpacing: 1,
                   marginBottom: 8,
@@ -645,7 +645,7 @@ export default function GuidedSession() {
             style={{
               background: 'none',
               border: 'none',
-              color: '#9999b0',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               fontSize: 14,
               fontFamily: baseFont,
@@ -655,12 +655,12 @@ export default function GuidedSession() {
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Brain size={16} color="#a78bfa" />
-            <span style={{ color: '#9999b0', fontSize: 13 }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>
               Quiz &middot; {quizIndex + 1}/{quizItems.length}
             </span>
           </div>
           <ProgressRing progress={overallProgress} size={36} strokeWidth={3} color="#a78bfa">
-            <span style={{ fontSize: 10, color: '#9999b0' }}>{overallProgress}%</span>
+            <span style={{ fontSize: 10, color: 'var(--text-secondary)' }}>{overallProgress}%</span>
           </ProgressRing>
         </div>
 
@@ -707,7 +707,7 @@ export default function GuidedSession() {
               style={{
                 fontSize: 22,
                 fontWeight: 600,
-                color: '#f0f0f5',
+                color: 'var(--text-primary)',
                 lineHeight: 1.5,
                 margin: 0,
               }}
@@ -889,7 +889,7 @@ export default function GuidedSession() {
           style={{
             fontSize: 28,
             fontWeight: 700,
-            color: '#f0f0f5',
+            color: 'var(--text-primary)',
             margin: '0 0 8px',
           }}
         >
@@ -901,7 +901,7 @@ export default function GuidedSession() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.45, ease: cubicEase }}
           style={{
-            color: '#9999b0',
+            color: 'var(--text-secondary)',
             fontSize: 15,
             textAlign: 'center',
             maxWidth: 380,
@@ -930,68 +930,68 @@ export default function GuidedSession() {
           <div
             style={{
               background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
               textAlign: 'center',
             }}
           >
             <BookOpen size={20} color="#4f8ef7" style={{ marginBottom: 8 }} />
-            <div style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f5' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--text-primary)' }}>
               {sessionResult.cardsLearned.length}
             </div>
-            <div style={{ fontSize: 12, color: '#9999b0', marginTop: 4 }}>Cards Learned</div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>Cards Learned</div>
           </div>
 
           {/* Accuracy */}
           <div
             style={{
               background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
               textAlign: 'center',
             }}
           >
             <Brain size={20} color="#a78bfa" style={{ marginBottom: 8 }} />
-            <div style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f5' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--text-primary)' }}>
               {accuracyPct}%
             </div>
-            <div style={{ fontSize: 12, color: '#9999b0', marginTop: 4 }}>Quiz Accuracy</div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>Quiz Accuracy</div>
           </div>
 
           {/* XP earned */}
           <div
             style={{
               background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
               textAlign: 'center',
             }}
           >
             <Star size={20} color="#f59e0b" style={{ marginBottom: 8 }} />
-            <div style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f5' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--text-primary)' }}>
               {sessionResult.xpEarned}
             </div>
-            <div style={{ fontSize: 12, color: '#9999b0', marginTop: 4 }}>XP Earned</div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>XP Earned</div>
           </div>
 
           {/* Duration */}
           <div
             style={{
               background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px 16px',
               textAlign: 'center',
             }}
           >
             <Clock size={20} color="#34d399" style={{ marginBottom: 8 }} />
-            <div style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f5' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: 'var(--text-primary)' }}>
               {minutes}:{seconds.toString().padStart(2, '0')}
             </div>
-            <div style={{ fontSize: 12, color: '#9999b0', marginTop: 4 }}>Duration</div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>Duration</div>
           </div>
         </motion.div>
 
@@ -1005,7 +1005,7 @@ export default function GuidedSession() {
               maxWidth: 400,
               width: '100%',
               background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--bg-border)',
               borderRadius: 16,
               padding: '20px',
               marginBottom: 32,
@@ -1015,7 +1015,7 @@ export default function GuidedSession() {
               style={{
                 fontSize: 12,
                 fontWeight: 600,
-                color: '#9999b0',
+                color: 'var(--text-secondary)',
                 textTransform: 'uppercase' as const,
                 letterSpacing: 1,
                 marginBottom: 14,
@@ -1044,7 +1044,7 @@ export default function GuidedSession() {
                       style={{
                         fontSize: 14,
                         fontFamily: hebrewFont,
-                        color: '#9999b0',
+                        color: 'var(--text-secondary)',
                       }}
                     >
                       {card.hebrew}

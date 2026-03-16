@@ -72,7 +72,7 @@ export default function QuizQuestion({
         };
       default:
         return {
-          bg: '#111118',
+          bg: 'var(--bg-elevated)',
           border: 'rgba(255,255,255,0.06)',
           text: '#f0f0f5',
           shadow: '0 2px 12px rgba(0,0,0,0.2)',
@@ -131,10 +131,10 @@ export default function QuizQuestion({
           className="flex items-center justify-between mt-2"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          <span style={{ color: '#9999b0', fontSize: '13px' }}>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
             {questionNumber} of {totalQuestions}
           </span>
-          <span style={{ color: '#9999b0', fontSize: '13px' }}>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
             {Math.round(progress)}%
           </span>
         </div>
@@ -145,7 +145,7 @@ export default function QuizQuestion({
         <span
           className="font-semibold"
           style={{
-            color: '#f0f0f5',
+            color: 'var(--text-primary)',
             fontSize: '14px',
             fontFamily: "'DM Sans', sans-serif",
           }}
@@ -178,7 +178,7 @@ export default function QuizQuestion({
         </span>
         <span
           style={{
-            color: '#8888a0',
+            color: 'var(--text-tertiary)',
             fontSize: '12px',
             fontFamily: "'DM Sans', sans-serif",
             marginLeft: 'auto',
@@ -194,7 +194,7 @@ export default function QuizQuestion({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
         style={{
-          color: '#f0f0f5',
+          color: 'var(--text-primary)',
           fontSize: '22px',
           fontWeight: 600,
           lineHeight: 1.4,
