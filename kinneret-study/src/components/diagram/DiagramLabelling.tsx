@@ -41,19 +41,19 @@ export const DIGESTIVE_SYSTEM: DiagramData = {
   title: 'Digestive System',
   system: 'digestive',
   labels: [
-    { number: 1, correct: 'Oral cavity', x: 50, y: 5 },
-    { number: 2, correct: 'Salivary glands', x: 72, y: 8 },
-    { number: 3, correct: 'Pharynx', x: 50, y: 13 },
-    { number: 4, correct: 'Esophagus', x: 50, y: 22 },
-    { number: 5, correct: 'Liver', x: 35, y: 35 },
-    { number: 6, correct: 'Stomach', x: 62, y: 40 },
-    { number: 7, correct: 'Gallbladder', x: 30, y: 42 },
-    { number: 8, correct: 'Pancreas', x: 62, y: 50 },
-    { number: 9, correct: 'Small intestine', x: 50, y: 60 },
-    { number: 10, correct: 'Large intestine', x: 30, y: 55 },
-    { number: 11, correct: 'Appendix', x: 25, y: 70 },
-    { number: 12, correct: 'Rectum', x: 50, y: 80 },
-    { number: 13, correct: 'Anus', x: 50, y: 88 },
+    { number: 1, correct: 'Oral cavity', x: 50, y: 7 },
+    { number: 2, correct: 'Salivary glands', x: 30, y: 10 },
+    { number: 3, correct: 'Pharynx', x: 50, y: 14 },
+    { number: 4, correct: 'Esophagus', x: 56, y: 22 },
+    { number: 5, correct: 'Liver', x: 35, y: 38 },
+    { number: 6, correct: 'Stomach', x: 65, y: 42 },
+    { number: 7, correct: 'Gallbladder', x: 33, y: 48 },
+    { number: 8, correct: 'Pancreas', x: 68, y: 52 },
+    { number: 9, correct: 'Small intestine', x: 50, y: 68 },
+    { number: 10, correct: 'Large intestine', x: 28, y: 60 },
+    { number: 11, correct: 'Appendix', x: 25, y: 84 },
+    { number: 12, correct: 'Rectum', x: 50, y: 90 },
+    { number: 13, correct: 'Anus', x: 50, y: 95 },
   ],
   wordBank: [
     'Oral cavity', 'Salivary glands', 'Pharynx', 'Esophagus', 'Liver',
@@ -67,19 +67,19 @@ export const RESPIRATORY_SYSTEM: DiagramData = {
   title: 'Respiratory System',
   system: 'respiratory',
   labels: [
-    { number: 1, correct: 'Nasal cavity', x: 48, y: 5 },
-    { number: 2, correct: 'Epiglottis', x: 52, y: 14 },
-    { number: 3, correct: 'Trachea', x: 50, y: 25 },
-    { number: 4, correct: 'Right lung', x: 28, y: 48 },
-    { number: 5, correct: 'Right bronchus', x: 35, y: 35 },
-    { number: 6, correct: 'Sternum', x: 50, y: 42 },
-    { number: 7, correct: 'Diaphragm', x: 50, y: 80 },
-    { number: 8, correct: 'Pharynx', x: 52, y: 10 },
-    { number: 9, correct: 'Larynx', x: 50, y: 19 },
-    { number: 10, correct: 'Bronchiole', x: 68, y: 50 },
-    { number: 11, correct: 'Alveoli', x: 72, y: 60 },
-    { number: 12, correct: 'Left lung', x: 72, y: 48 },
-    { number: 13, correct: 'Left bronchus', x: 65, y: 35 },
+    { number: 1, correct: 'Nasal cavity', x: 38, y: 6 },
+    { number: 2, correct: 'Epiglottis', x: 55, y: 19 },
+    { number: 3, correct: 'Trachea', x: 55, y: 32 },
+    { number: 4, correct: 'Right lung', x: 22, y: 55 },
+    { number: 5, correct: 'Right bronchus', x: 28, y: 42 },
+    { number: 6, correct: 'Sternum', x: 50, y: 48 },
+    { number: 7, correct: 'Diaphragm', x: 50, y: 84 },
+    { number: 8, correct: 'Pharynx', x: 55, y: 14 },
+    { number: 9, correct: 'Larynx', x: 55, y: 22 },
+    { number: 10, correct: 'Bronchiole', x: 72, y: 53 },
+    { number: 11, correct: 'Alveoli', x: 75, y: 68 },
+    { number: 12, correct: 'Left lung', x: 78, y: 55 },
+    { number: 13, correct: 'Left bronchus', x: 72, y: 42 },
   ],
   wordBank: [
     'Nasal cavity', 'Epiglottis', 'Trachea', 'Right lung', 'Right bronchus',
@@ -93,17 +93,17 @@ export const CIRCULATORY_SYSTEM: DiagramData = {
   title: 'Circulatory System / Heart',
   system: 'circulatory',
   labels: [
-    { number: 1, correct: 'Superior vena cava', x: 30, y: 12 },
-    { number: 2, correct: 'Ascending aorta', x: 55, y: 8 },
-    { number: 3, correct: 'Pulmonary artery', x: 50, y: 18 },
-    { number: 4, correct: 'Pulmonary veins', x: 72, y: 30 },
-    { number: 5, correct: 'Right atrium', x: 28, y: 35 },
-    { number: 6, correct: 'Left atrium', x: 72, y: 38 },
-    { number: 7, correct: 'Right ventricle', x: 35, y: 60 },
-    { number: 8, correct: 'Left ventricle', x: 65, y: 60 },
-    { number: 9, correct: 'Inferior vena cava', x: 28, y: 82 },
-    { number: 10, correct: 'Descending aorta', x: 72, y: 82 },
-    { number: 11, correct: 'Septum', x: 50, y: 55 },
+    { number: 1, correct: 'Superior vena cava', x: 32, y: 25 },
+    { number: 2, correct: 'Ascending aorta', x: 62, y: 25 },
+    { number: 3, correct: 'Pulmonary artery', x: 27, y: 35 },
+    { number: 4, correct: 'Pulmonary veins', x: 73, y: 42 },
+    { number: 5, correct: 'Right atrium', x: 35, y: 40 },
+    { number: 6, correct: 'Left atrium', x: 65, y: 40 },
+    { number: 7, correct: 'Right ventricle', x: 38, y: 50 },
+    { number: 8, correct: 'Left ventricle', x: 62, y: 50 },
+    { number: 9, correct: 'Inferior vena cava', x: 35, y: 70 },
+    { number: 10, correct: 'Descending aorta', x: 62, y: 70 },
+    { number: 11, correct: 'Septum', x: 50, y: 45 },
   ],
   wordBank: [
     'Superior vena cava', 'Ascending aorta', 'Pulmonary artery',
@@ -122,141 +122,372 @@ export const DIAGRAM_DATA: DiagramData[] = [
 
 function DigestiveSVG() {
   return (
-    <svg viewBox="0 0 300 400" width="100%" height="100%" style={{ maxHeight: '100%' }}>
-      {/* Head outline */}
-      <ellipse cx="150" cy="30" rx="35" ry="25" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" opacity={0.4} />
+    <svg viewBox="0 0 400 520" width="100%" height="100%" style={{ maxHeight: '100%' }}>
+      <defs>
+        <linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5d0b0" />
+          <stop offset="100%" stopColor="#e8c4a0" />
+        </linearGradient>
+        <linearGradient id="liverGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#8b3a3a" />
+          <stop offset="100%" stopColor="#6b2020" />
+        </linearGradient>
+        <linearGradient id="stomachGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#e8a0a0" />
+          <stop offset="100%" stopColor="#d08080" />
+        </linearGradient>
+      </defs>
+
+      {/* Body silhouette */}
+      <path d="M200 10 Q170 10 160 30 Q150 50 155 70 L155 75 Q140 80 130 95 Q115 115 110 140 L105 180 Q100 220 100 260 L95 340 Q92 400 95 460 Q97 490 110 510 L290 510 Q303 490 305 460 Q308 400 305 340 L300 260 Q300 220 295 180 L290 140 Q285 115 270 95 Q260 80 245 75 L245 70 Q250 50 240 30 Q230 10 200 10Z"
+        fill="url(#skinGrad)" stroke="#d4a882" strokeWidth="1.5" opacity={0.6} />
+
+      {/* Head cross-section area */}
+      <path d="M175 20 Q165 25 162 40 Q160 55 165 68 L235 68 Q240 55 238 40 Q235 25 225 20Z"
+        fill="#f0c8a8" stroke="#d4a882" strokeWidth="1" opacity={0.8} />
+
       {/* Oral cavity */}
-      <ellipse cx="150" cy="28" rx="18" ry="10" fill="#e8455822" stroke="#e84558" strokeWidth="1.2" />
+      <ellipse cx="200" cy="38" rx="22" ry="14" fill="#cc4455" stroke="#aa2233" strokeWidth="1.5" />
+      <ellipse cx="200" cy="36" rx="16" ry="8" fill="#dd6677" stroke="none" opacity={0.5} />
+      {/* Teeth hint */}
+      <path d="M184 33 Q192 30 200 31 Q208 30 216 33" fill="none" stroke="#fff" strokeWidth="1" opacity={0.4} />
+      <path d="M184 43 Q192 46 200 45 Q208 46 216 43" fill="none" stroke="#fff" strokeWidth="1" opacity={0.4} />
+      {/* Tongue */}
+      <ellipse cx="200" cy="42" rx="12" ry="5" fill="#cc5566" stroke="#aa3344" strokeWidth="0.8" />
+
       {/* Salivary glands */}
-      <circle cx="125" cy="35" r="6" fill="#a78bfa22" stroke="#a78bfa" strokeWidth="1" />
-      <circle cx="175" cy="35" r="6" fill="#a78bfa22" stroke="#a78bfa" strokeWidth="1" />
+      <ellipse cx="172" cy="52" rx="8" ry="6" fill="#e8b090" stroke="#c89070" strokeWidth="1" />
+      <ellipse cx="228" cy="52" rx="8" ry="6" fill="#e8b090" stroke="#c89070" strokeWidth="1" />
+      <ellipse cx="168" cy="42" rx="5" ry="4" fill="#e8b090" stroke="#c89070" strokeWidth="0.8" />
+
       {/* Pharynx */}
-      <rect x="143" y="45" width="14" height="14" rx="4" fill="#f59e0b22" stroke="#f59e0b" strokeWidth="1.2" />
-      {/* Esophagus - tube */}
-      <path d="M150 59 L150 130" fill="none" stroke="#f59e0b" strokeWidth="6" strokeLinecap="round" opacity={0.5} />
-      <path d="M150 59 L150 130" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-      {/* Torso outline */}
-      <path d="M90 70 Q80 180 85 320 Q90 350 150 360 Q210 350 215 320 Q220 180 210 70" fill="none" stroke="var(--text-muted)" strokeWidth="1" opacity={0.2} />
+      <path d="M192 55 Q188 65 190 75 L210 75 Q212 65 208 55Z" fill="#d88888" stroke="#b06666" strokeWidth="1.2" />
+
+      {/* Esophagus */}
+      <path d="M195 75 Q193 100 194 120 Q195 140 196 165" fill="none" stroke="#d08888" strokeWidth="8" strokeLinecap="round" opacity={0.4} />
+      <path d="M205 75 Q207 100 206 120 Q205 140 204 165" fill="none" stroke="#d08888" strokeWidth="8" strokeLinecap="round" opacity={0.4} />
+      <path d="M195 75 Q193 100 194 120 Q195 140 196 165" fill="none" stroke="#c07070" strokeWidth="1.5" />
+      <path d="M205 75 Q207 100 206 120 Q205 140 204 165" fill="none" stroke="#c07070" strokeWidth="1.5" />
+
       {/* Liver */}
-      <path d="M95 130 Q90 140 95 155 Q110 165 140 155 Q145 145 140 130 Q120 120 95 130Z" fill="#4f8ef722" stroke="#4f8ef7" strokeWidth="1.5" />
-      {/* Stomach */}
-      <path d="M155 135 Q175 130 190 145 Q195 165 185 180 Q170 190 155 180 Q145 165 150 145Z" fill="#e8455822" stroke="#e84558" strokeWidth="1.5" />
+      <path d="M135 170 Q125 175 120 190 Q118 210 125 225 Q140 235 170 232 Q195 228 210 218 Q218 205 215 190 Q210 175 195 168 Q170 160 135 170Z"
+        fill="url(#liverGrad)" stroke="#5a1818" strokeWidth="1.5" opacity={0.85} />
+      {/* Liver lobes detail */}
+      <path d="M170 172 Q172 195 168 225" fill="none" stroke="#4a1515" strokeWidth="0.8" opacity={0.4} />
+
       {/* Gallbladder */}
-      <ellipse cx="100" cy="170" rx="10" ry="14" fill="#34d39922" stroke="#34d399" strokeWidth="1.2" />
+      <path d="M165 228 Q160 238 162 248 Q165 255 170 252 Q175 245 172 235 Q170 228 165 228Z"
+        fill="#5a8a50" stroke="#3a6a30" strokeWidth="1.2" />
+
+      {/* Stomach */}
+      <path d="M210 175 Q235 170 250 185 Q260 205 255 230 Q248 250 230 260 Q210 265 200 255 Q190 240 195 215 Q198 195 210 175Z"
+        fill="url(#stomachGrad)" stroke="#a06060" strokeWidth="1.5" />
+      {/* Stomach folds */}
+      <path d="M215 200 Q225 210 220 225 M225 195 Q235 210 230 230 M208 210 Q215 225 212 240"
+        fill="none" stroke="#b07070" strokeWidth="0.8" opacity={0.5} />
+
       {/* Pancreas */}
-      <path d="M155 195 Q175 190 195 195 Q200 200 195 205 Q175 210 155 205 Q150 200 155 195Z" fill="#f59e0b22" stroke="#f59e0b" strokeWidth="1.2" />
-      {/* Small intestine - coiled */}
-      <path d="M140 215 Q120 225 130 240 Q150 250 170 240 Q180 225 160 220 Q140 225 135 240 Q140 260 160 265 Q175 260 170 245" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" opacity={0.6} />
-      <path d="M140 215 Q120 225 130 240 Q150 250 170 240 Q180 225 160 220 Q140 225 135 240 Q140 260 160 265 Q175 260 170 245" fill="none" stroke="#a78bfa" strokeWidth="1" strokeLinecap="round" />
-      {/* Large intestine - frame */}
-      <path d="M90 215 L90 180 Q90 170 100 170 L100 170 Q105 195 100 220 L90 215Z" fill="none" stroke="#4f8ef7" strokeWidth="1" opacity={0.3} />
-      <path d="M85 270 L85 200 Q85 185 95 185 L95 185 Q100 200 95 280 Q95 290 105 295 L190 295 Q200 290 200 280 L200 200 Q200 185 190 185" fill="none" stroke="#4f8ef7" strokeWidth="2.5" strokeLinecap="round" opacity={0.5} />
-      <path d="M85 270 L85 200 Q85 185 95 185 Q100 200 95 280 Q95 290 105 295 L190 295 Q200 290 200 280 L200 200 Q200 185 190 185" fill="none" stroke="#4f8ef7" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M218 265 Q240 258 260 262 Q275 268 278 278 Q275 285 260 282 Q240 278 218 282 Q210 278 212 270 Q215 265 218 265Z"
+        fill="#e8d070" stroke="#c8a840" strokeWidth="1.2" opacity={0.85} />
+
+      {/* Duodenum connection */}
+      <path d="M200 258 Q195 268 198 280 Q202 290 210 288" fill="none" stroke="#c89898" strokeWidth="3" opacity={0.4} />
+
+      {/* Large intestine (ascending, transverse, descending, sigmoid) */}
+      <path d="M130 420 L130 320 Q130 295 145 295 L255 295 Q270 295 270 310 L270 420 Q270 440 255 445 Q240 448 220 445 Q200 455 180 455 Q160 458 150 448 Q135 440 130 420Z"
+        fill="#d8a8a0" stroke="#b08080" strokeWidth="2" opacity={0.7} />
+      {/* Haustra markings */}
+      <path d="M130 330 Q125 330 130 340 M130 350 Q125 350 130 360 M130 370 Q125 370 130 380 M130 390 Q125 390 130 400"
+        fill="none" stroke="#b08080" strokeWidth="1" opacity={0.5} />
+      <path d="M270 330 Q275 330 270 340 M270 350 Q275 350 270 360 M270 370 Q275 370 270 380 M270 390 Q275 390 270 400"
+        fill="none" stroke="#b08080" strokeWidth="1" opacity={0.5} />
+      <path d="M155 295 Q155 290 165 295 M185 295 Q185 290 195 295 M215 295 Q215 290 225 295 M245 295 Q245 290 255 295"
+        fill="none" stroke="#b08080" strokeWidth="1" opacity={0.5} />
+
+      {/* Small intestine (coiled inside large intestine) */}
+      <path d="M160 310 Q150 320 155 335 Q165 345 180 340 Q195 335 205 345 Q215 355 200 365 Q185 370 170 365 Q155 358 150 370 Q148 385 165 390 Q185 392 200 385 Q215 380 225 390 Q235 400 220 410 Q200 418 180 415 Q160 410 155 400 Q150 390 165 385"
+        fill="none" stroke="#d09898" strokeWidth="5" strokeLinecap="round" opacity={0.5} />
+      <path d="M160 310 Q150 320 155 335 Q165 345 180 340 Q195 335 205 345 Q215 355 200 365 Q185 370 170 365 Q155 358 150 370 Q148 385 165 390 Q185 392 200 385 Q215 380 225 390 Q235 400 220 410 Q200 418 180 415 Q160 410 155 400 Q150 390 165 385"
+        fill="none" stroke="#c08080" strokeWidth="1.5" strokeLinecap="round" />
+
       {/* Appendix */}
-      <path d="M88 280 Q75 290 78 300" fill="none" stroke="#34d399" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="78" cy="302" r="3" fill="#34d399" opacity={0.6} />
+      <path d="M130 415 Q118 425 115 440 Q114 448 118 450" fill="none" stroke="#c89090" strokeWidth="3" strokeLinecap="round" opacity={0.6} />
+      <circle cx="118" cy="452" r="3" fill="#c89090" />
+
       {/* Rectum */}
-      <path d="M150 300 L150 330" fill="none" stroke="#e84558" strokeWidth="4" strokeLinecap="round" opacity={0.4} />
-      <path d="M150 300 L150 330" fill="none" stroke="#e84558" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M195 448 Q200 460 200 475 Q200 485 198 492" fill="none" stroke="#c88888" strokeWidth="6" strokeLinecap="round" opacity={0.4} />
+      <path d="M195 448 Q200 460 200 475 Q200 485 198 492" fill="none" stroke="#b07070" strokeWidth="1.5" />
+
       {/* Anus */}
-      <ellipse cx="150" cy="345" rx="8" ry="5" fill="#e8455822" stroke="#e84558" strokeWidth="1.2" />
+      <ellipse cx="198" cy="498" rx="6" ry="4" fill="#b07070" stroke="#904848" strokeWidth="1.2" />
     </svg>
   );
 }
 
 function RespiratorySVG() {
   return (
-    <svg viewBox="0 0 300 380" width="100%" height="100%" style={{ maxHeight: '100%' }}>
-      {/* Head/nose outline */}
-      <path d="M140 10 Q135 25 138 40 Q142 45 150 45 Q158 45 162 40 Q165 25 160 10" fill="none" stroke="var(--text-muted)" strokeWidth="1" opacity={0.3} />
-      {/* Nasal cavity */}
-      <path d="M142 15 Q140 28 143 38 Q150 42 157 38 Q160 28 158 15" fill="#a78bfa22" stroke="#a78bfa" strokeWidth="1.5" />
+    <svg viewBox="0 0 400 480" width="100%" height="100%" style={{ maxHeight: '100%' }}>
+      <defs>
+        <linearGradient id="lungGradL" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#e8a0a0" />
+          <stop offset="100%" stopColor="#d88888" />
+        </linearGradient>
+        <linearGradient id="lungGradR" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#e8a0a0" />
+          <stop offset="100%" stopColor="#d88888" />
+        </linearGradient>
+        <linearGradient id="skinGradR" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5d0b0" />
+          <stop offset="100%" stopColor="#e8c4a0" />
+        </linearGradient>
+      </defs>
+
+      {/* Body silhouette */}
+      <path d="M200 5 Q170 5 160 25 Q150 45 155 75 L155 80 Q130 90 110 110 Q85 140 75 180 L70 250 Q65 320 70 380 Q72 420 85 460 L315 460 Q328 420 330 380 Q335 320 330 250 L325 180 Q315 140 290 110 Q270 90 245 80 L245 75 Q250 45 240 25 Q230 5 200 5Z"
+        fill="url(#skinGradR)" stroke="#d4a882" strokeWidth="1.5" opacity={0.5} />
+
+      {/* Head cross-section */}
+      <path d="M175 10 Q160 18 155 40 Q152 60 155 80 L200 80 L245 80 Q248 60 245 40 Q240 18 225 10Z"
+        fill="#f0c8a8" stroke="#d4a882" strokeWidth="1" opacity={0.7} />
+
+      {/* Nasal cavity - cross section */}
+      <path d="M178 15 Q172 22 170 35 Q168 50 172 60 L195 60 Q195 45 192 30 Q190 18 178 15Z"
+        fill="#e8a0a8" stroke="#c07078" strokeWidth="1.2" />
+      {/* Nasal passages/turbinates */}
+      <path d="M175 25 Q185 28 190 25" fill="none" stroke="#b06068" strokeWidth="1" opacity={0.6} />
+      <path d="M173 33 Q183 36 190 33" fill="none" stroke="#b06068" strokeWidth="1" opacity={0.6} />
+      <path d="M172 41 Q182 44 190 41" fill="none" stroke="#b06068" strokeWidth="1" opacity={0.6} />
+      {/* Sinuses */}
+      <path d="M175 18 Q168 12 175 8 Q185 6 188 14" fill="none" stroke="#c88090" strokeWidth="0.8" opacity={0.5} />
+
+      {/* Oral cavity */}
+      <path d="M178 62 Q175 68 178 74 L195 74 Q198 68 195 62Z" fill="#cc5566" stroke="#aa3344" strokeWidth="1" />
+
       {/* Pharynx */}
-      <rect x="144" y="46" width="12" height="12" rx="3" fill="#f59e0b22" stroke="#f59e0b" strokeWidth="1.2" />
+      <path d="M188 60 Q185 68 186 78 Q187 85 190 90 L198 90 Q201 85 202 78 Q203 68 200 60Z"
+        fill="#d89090" stroke="#b07070" strokeWidth="1.2" />
+
       {/* Epiglottis */}
-      <path d="M146 58 Q150 63 154 58" fill="none" stroke="#e84558" strokeWidth="2" strokeLinecap="round" />
+      <path d="M190 88 Q194 95 198 88" fill="#d08080" stroke="#a06060" strokeWidth="1.5" />
+
       {/* Larynx */}
-      <path d="M143 68 L157 68 L155 80 L145 80 Z" fill="#34d39922" stroke="#34d399" strokeWidth="1.2" />
+      <path d="M186 96 L202 96 Q205 100 204 108 Q202 115 200 118 L188 118 Q186 115 184 108 Q183 100 186 96Z"
+        fill="#d8a0a0" stroke="#b08080" strokeWidth="1.2" />
+      {/* Vocal cords hint */}
+      <path d="M189 106 Q194 109 199 106" fill="none" stroke="#a07070" strokeWidth="0.8" />
+
       {/* Trachea */}
-      <path d="M148 80 L148 135 M152 80 L152 135" fill="none" stroke="#4f8ef7" strokeWidth="1.5" />
-      {/* Trachea rings */}
-      {[88, 96, 104, 112, 120, 128].map((y) => (
-        <line key={y} x1="147" y1={y} x2="153" y2={y} stroke="#4f8ef7" strokeWidth="1" opacity={0.6} />
+      <path d="M190 118 L190 200 Q190 205 194 205 L194 118" fill="#c8d8e8" stroke="#8899aa" strokeWidth="1" opacity={0.8} />
+      <path d="M194 118 L194 200 Q194 205 198 205 L198 118" fill="#c8d8e8" stroke="#8899aa" strokeWidth="1" opacity={0.8} />
+      {/* Trachea cartilage rings */}
+      {[125, 133, 141, 149, 157, 165, 173, 181, 189, 197].map((y) => (
+        <path key={y} d={`M190 ${y} Q194 ${y + 3} 198 ${y}`} fill="none" stroke="#8899aa" strokeWidth="1.2" opacity={0.7} />
       ))}
-      {/* Bronchi split */}
-      <path d="M150 135 Q130 150 105 155" fill="none" stroke="#4f8ef7" strokeWidth="2" />
-      <path d="M150 135 Q170 150 195 155" fill="none" stroke="#4f8ef7" strokeWidth="2" />
+
+      {/* Right main bronchus */}
+      <path d="M190 200 Q175 215 148 225 Q130 232 115 238" fill="none" stroke="#8899aa" strokeWidth="3.5" opacity={0.5} />
+      <path d="M190 200 Q175 215 148 225 Q130 232 115 238" fill="none" stroke="#8899aa" strokeWidth="1.2" />
+
+      {/* Left main bronchus */}
+      <path d="M198 200 Q213 215 240 225 Q258 232 273 238" fill="none" stroke="#8899aa" strokeWidth="3.5" opacity={0.5} />
+      <path d="M198 200 Q213 215 240 225 Q258 232 273 238" fill="none" stroke="#8899aa" strokeWidth="1.2" />
+
       {/* Right lung */}
-      <path d="M60 130 Q55 160 58 230 Q60 270 80 290 Q110 305 125 285 Q135 260 130 155 Q128 130 110 125 Q85 122 60 130Z" fill="#4f8ef722" stroke="#4f8ef7" strokeWidth="1.8" />
+      <path d="M80 170 Q70 200 68 260 Q68 320 85 360 Q105 390 140 395 Q158 393 165 378 Q175 350 172 260 Q170 200 160 180 Q150 165 130 160 Q105 158 80 170Z"
+        fill="url(#lungGradL)" stroke="#b07070" strokeWidth="1.8" opacity={0.8} />
+
       {/* Left lung */}
-      <path d="M240 130 Q245 160 242 230 Q240 270 220 290 Q190 305 175 285 Q165 260 170 155 Q172 130 190 125 Q215 122 240 130Z" fill="#4f8ef722" stroke="#4f8ef7" strokeWidth="1.8" />
-      {/* Bronchioles in right lung */}
-      <path d="M105 155 Q95 165 90 180 M105 155 Q100 175 105 195 M105 155 Q90 170 85 200" fill="none" stroke="#a78bfa" strokeWidth="1" opacity={0.6} />
-      {/* Bronchioles in left lung */}
-      <path d="M195 155 Q205 165 210 180 M195 155 Q200 175 195 195 M195 155 Q210 170 215 200" fill="none" stroke="#a78bfa" strokeWidth="1" opacity={0.6} />
-      {/* Alveoli clusters */}
+      <path d="M310 170 Q320 200 322 260 Q322 320 305 360 Q285 390 250 395 Q232 393 225 378 Q215 350 218 260 Q220 200 230 180 Q240 165 260 160 Q285 158 310 170Z"
+        fill="url(#lungGradR)" stroke="#b07070" strokeWidth="1.8" opacity={0.8} />
+
+      {/* Bronchioles in right lung - branching tree */}
+      <path d="M115 238 Q105 248 95 265" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M115 238 Q110 255 115 275" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M115 238 Q120 255 130 270" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M95 265 Q88 280 85 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M95 265 Q100 280 95 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M115 275 Q108 290 105 310" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M115 275 Q120 290 118 310" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M130 270 Q135 285 140 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+
+      {/* Bronchioles in left lung - branching tree */}
+      <path d="M273 238 Q283 248 293 265" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M273 238 Q278 255 273 275" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M273 238 Q268 255 258 270" fill="none" stroke="#7788aa" strokeWidth="1.5" opacity={0.6} />
+      <path d="M293 265 Q300 280 303 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M293 265 Q288 280 293 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M273 275 Q280 290 283 310" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M273 275 Q268 290 270 310" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+      <path d="M258 270 Q253 285 248 300" fill="none" stroke="#7788aa" strokeWidth="1" opacity={0.4} />
+
+      {/* Alveoli clusters - right lung */}
       {[
-        [88, 220], [78, 235], [98, 240], [85, 255],
-        [212, 220], [222, 235], [202, 240], [215, 255],
+        [88, 320], [95, 335], [82, 340], [105, 345], [115, 330], [140, 315],
+        [92, 355], [108, 358], [120, 348],
       ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="5" fill="#a78bfa22" stroke="#a78bfa" strokeWidth="0.8" />
+        <g key={`r${i}`}>
+          <circle cx={cx} cy={cy} r="6" fill="#e0a8a8" stroke="#c08888" strokeWidth="0.6" opacity={0.5} />
+          <circle cx={Number(cx) - 2} cy={Number(cy) - 2} r="2.5" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+          <circle cx={Number(cx) + 2} cy={Number(cy) + 1} r="2.5" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+          <circle cx={Number(cx) - 1} cy={Number(cy) + 3} r="2" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+        </g>
       ))}
+
+      {/* Alveoli clusters - left lung */}
+      {[
+        [300, 320], [293, 335], [308, 340], [283, 345], [273, 330], [248, 315],
+        [296, 355], [280, 358], [268, 348],
+      ].map(([cx, cy], i) => (
+        <g key={`l${i}`}>
+          <circle cx={cx} cy={cy} r="6" fill="#e0a8a8" stroke="#c08888" strokeWidth="0.6" opacity={0.5} />
+          <circle cx={Number(cx) - 2} cy={Number(cy) - 2} r="2.5" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+          <circle cx={Number(cx) + 2} cy={Number(cy) + 1} r="2.5" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+          <circle cx={Number(cx) - 1} cy={Number(cy) + 3} r="2" fill="#d09898" stroke="#b08080" strokeWidth="0.4" opacity={0.6} />
+        </g>
+      ))}
+
       {/* Sternum */}
-      <rect x="146" y="150" width="8" height="80" rx="3" fill="#f59e0b15" stroke="#f59e0b" strokeWidth="1" opacity={0.7} />
+      <path d="M194 155 Q192 160 192 170 L192 300 Q192 310 194 315 Q196 310 196 300 L196 170 Q196 160 194 155Z"
+        fill="#e8d8c8" stroke="#c8b8a8" strokeWidth="1" opacity={0.6} />
+
+      {/* Ribs hint */}
+      {[185, 210, 235, 260, 285, 310].map((y) => (
+        <g key={y}>
+          <path d={`M192 ${y} Q160 ${y - 8} 100 ${y + 5}`} fill="none" stroke="#d4c4b4" strokeWidth="1.5" opacity={0.25} />
+          <path d={`M196 ${y} Q228 ${y - 8} 288 ${y + 5}`} fill="none" stroke="#d4c4b4" strokeWidth="1.5" opacity={0.25} />
+        </g>
+      ))}
+
       {/* Diaphragm */}
-      <path d="M55 300 Q100 280 150 310 Q200 280 245 300" fill="none" stroke="#e84558" strokeWidth="2.5" strokeLinecap="round" opacity={0.6} />
-      <path d="M55 300 Q100 280 150 310 Q200 280 245 300" fill="#e8455811" stroke="none" />
+      <path d="M65 395 Q110 370 150 390 Q194 410 238 390 Q278 370 325 395"
+        fill="none" stroke="#c87070" strokeWidth="3" strokeLinecap="round" opacity={0.7} />
+      <path d="M65 395 Q110 370 150 390 Q194 410 238 390 Q278 370 325 395 L325 420 Q280 400 238 420 Q194 440 150 420 Q110 400 65 420Z"
+        fill="#d8a0a0" stroke="none" opacity={0.2} />
     </svg>
   );
 }
 
 function CirculatorySVG() {
   return (
-    <svg viewBox="0 0 300 380" width="100%" height="100%" style={{ maxHeight: '100%' }}>
-      {/* Heart outline */}
-      <path
-        d="M150 45 Q100 20 75 60 Q55 100 65 150 Q75 200 100 240 Q130 280 150 310 Q170 280 200 240 Q225 200 235 150 Q245 100 225 60 Q200 20 150 45Z"
-        fill="#e8455812"
-        stroke="#e84558"
-        strokeWidth="2"
-      />
+    <svg viewBox="0 0 400 520" width="100%" height="100%" style={{ maxHeight: '100%' }}>
+      <defs>
+        <linearGradient id="skinGradC" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f5d0b0" />
+          <stop offset="100%" stopColor="#e8c4a0" />
+        </linearGradient>
+        <linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#c84040" />
+          <stop offset="100%" stopColor="#8b2020" />
+        </linearGradient>
+      </defs>
+
+      {/* Body silhouette */}
+      <path d="M200 10 Q170 10 160 30 Q150 50 155 70 L155 78 Q130 88 108 110 Q85 140 80 175 L75 220 Q72 260 75 300 L78 350 Q80 400 85 440 Q88 470 95 500 L110 510 L155 510 L160 500 Q158 460 157 420 Q155 380 158 350 L160 310 Q195 315 200 310 Q205 315 240 310 L242 350 Q245 380 243 420 Q242 460 240 500 L245 510 L290 510 L305 500 Q312 470 315 440 Q320 400 322 350 L325 300 Q328 260 325 220 L320 175 Q315 140 292 110 Q270 88 245 78 L245 70 Q250 50 240 30 Q230 10 200 10Z"
+        fill="url(#skinGradC)" stroke="#d4a882" strokeWidth="1" opacity={0.45} />
+
+      {/* Head */}
+      <ellipse cx="200" cy="25" rx="32" ry="25" fill="url(#skinGradC)" stroke="#d4a882" strokeWidth="1" opacity={0.45} />
+
+      {/* Arms silhouette */}
+      <path d="M80 175 Q60 180 45 200 Q30 230 25 270 Q22 300 20 340 Q18 370 15 400 L30 400 Q32 370 35 340 Q38 310 42 280 Q48 250 55 230 Q62 210 75 200Z"
+        fill="url(#skinGradC)" stroke="#d4a882" strokeWidth="1" opacity={0.35} />
+      <path d="M320 175 Q340 180 355 200 Q370 230 375 270 Q378 300 380 340 Q382 370 385 400 L370 400 Q368 370 365 340 Q362 310 358 280 Q352 250 345 230 Q338 210 325 200Z"
+        fill="url(#skinGradC)" stroke="#d4a882" strokeWidth="1" opacity={0.35} />
+
+      {/* ── VEINS (blue) ── */}
+
+      {/* Jugular veins */}
+      <path d="M182 50 Q180 60 178 78 Q176 95 175 110" fill="none" stroke="#4477cc" strokeWidth="4" opacity={0.6} />
+      <path d="M218 50 Q220 60 222 78 Q224 95 225 110" fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.5} />
+
       {/* Superior vena cava */}
-      <path d="M95 25 L95 60 Q95 80 105 90 L105 130" fill="none" stroke="#4f8ef7" strokeWidth="4" opacity={0.5} />
-      <path d="M95 25 L95 60 Q95 80 105 90 L105 130" fill="none" stroke="#4f8ef7" strokeWidth="1.5" />
-      {/* Ascending aorta */}
-      <path d="M180 30 Q175 40 170 55 Q168 70 175 85" fill="none" stroke="#e84558" strokeWidth="4" opacity={0.5} />
-      <path d="M180 30 Q175 40 170 55 Q168 70 175 85" fill="none" stroke="#e84558" strokeWidth="1.5" />
-      {/* Aortic arch */}
-      <path d="M180 30 Q200 15 210 30 Q215 45 210 60" fill="none" stroke="#e84558" strokeWidth="3" opacity={0.4} />
-      {/* Pulmonary artery */}
-      <path d="M145 65 Q140 50 130 45 Q120 42 110 50 M160 65 Q165 50 175 45 Q185 42 195 50" fill="none" stroke="#a78bfa" strokeWidth="2.5" opacity={0.5} />
-      <path d="M145 65 Q140 50 130 45 Q120 42 110 50 M160 65 Q165 50 175 45 Q185 42 195 50" fill="none" stroke="#a78bfa" strokeWidth="1.2" />
-      {/* Pulmonary veins */}
-      <path d="M220 100 Q210 110 195 115 M225 120 Q210 125 195 125" fill="none" stroke="#e84558" strokeWidth="1.5" opacity={0.6} />
-      {/* Septum - vertical divider */}
-      <path d="M150 80 L150 250" fill="none" stroke="var(--text-muted)" strokeWidth="3" strokeDasharray="4 4" opacity={0.4} />
-      {/* Right atrium */}
-      <path d="M100 100 Q80 110 80 135 Q80 155 100 160 Q120 155 125 135 Q125 110 100 100Z" fill="#4f8ef722" stroke="#4f8ef7" strokeWidth="1.5" />
-      <text x="100" y="135" textAnchor="middle" fill="#4f8ef7" fontSize="10" fontWeight="600" opacity={0.5}>RA</text>
-      {/* Left atrium */}
-      <path d="M200 105 Q220 115 220 140 Q220 160 200 165 Q180 160 175 140 Q175 115 200 105Z" fill="#e8455822" stroke="#e84558" strokeWidth="1.5" />
-      <text x="200" y="140" textAnchor="middle" fill="#e84558" fontSize="10" fontWeight="600" opacity={0.5}>LA</text>
-      {/* Tricuspid valve */}
-      <path d="M95 160 Q105 170 115 160" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" />
-      {/* Mitral valve */}
-      <path d="M185 165 Q195 175 205 165" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" />
-      {/* Right ventricle */}
-      <path d="M85 170 Q70 200 80 240 Q95 270 130 280 Q140 275 145 250 L145 180 Q140 170 125 170 Z" fill="#4f8ef715" stroke="#4f8ef7" strokeWidth="1.5" />
-      <text x="110" y="230" textAnchor="middle" fill="#4f8ef7" fontSize="10" fontWeight="600" opacity={0.5}>RV</text>
-      {/* Left ventricle */}
-      <path d="M215 170 Q230 200 220 240 Q205 270 170 280 Q160 275 155 250 L155 180 Q160 170 175 170 Z" fill="#e8455815" stroke="#e84558" strokeWidth="1.5" />
-      <text x="190" y="230" textAnchor="middle" fill="#e84558" fontSize="10" fontWeight="600" opacity={0.5}>LV</text>
+      <path d="M185 110 Q183 130 184 150 Q185 165 188 178" fill="none" stroke="#3366bb" strokeWidth="7" opacity={0.6} />
+      <path d="M185 110 Q183 130 184 150 Q185 165 188 178" fill="none" stroke="#4477cc" strokeWidth="2" />
+
       {/* Inferior vena cava */}
-      <path d="M100 280 Q95 300 90 320" fill="none" stroke="#4f8ef7" strokeWidth="4" opacity={0.5} />
-      <path d="M100 280 Q95 300 90 320" fill="none" stroke="#4f8ef7" strokeWidth="1.5" />
+      <path d="M192 270 Q190 300 189 330 Q188 360 190 400 Q192 430 195 460" fill="none" stroke="#3366bb" strokeWidth="7" opacity={0.5} />
+      <path d="M192 270 Q190 300 189 330 Q188 360 190 400 Q192 430 195 460" fill="none" stroke="#4477cc" strokeWidth="2" />
+
+      {/* Iliac veins */}
+      <path d="M192 390 Q175 410 165 440 Q158 460 155 490" fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.5} />
+      <path d="M192 390 Q205 410 215 440 Q222 460 225 490" fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.5} />
+
+      {/* Subclavian veins */}
+      <path d="M185 115 Q160 112 135 118 Q110 125 88 140" fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.5} />
+      <path d="M225 115 Q250 112 275 118 Q300 125 318 140" fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.5} />
+
+      {/* Arm veins */}
+      <path d="M88 140 Q68 170 55 210 Q42 260 35 310 Q30 350 28 380" fill="none" stroke="#4477cc" strokeWidth="2" opacity={0.4} />
+      <path d="M318 140 Q338 170 350 210 Q362 260 368 310 Q372 350 375 380" fill="none" stroke="#4477cc" strokeWidth="2" opacity={0.4} />
+
+      {/* ── ARTERIES (red) ── */}
+
+      {/* Carotid arteries */}
+      <path d="M195 50 Q196 65 198 85 Q200 100 200 110" fill="none" stroke="#cc3333" strokeWidth="3" opacity={0.6} />
+
+      {/* Aortic arch */}
+      <path d="M210 185 Q215 170 220 155 Q228 138 235 128 Q245 118 248 125 Q240 140 232 158 Q225 175 215 185"
+        fill="none" stroke="#cc3333" strokeWidth="6" opacity={0.5} />
+      <path d="M210 185 Q215 170 220 155 Q228 138 235 128 Q245 118 248 125 Q240 140 232 158 Q225 175 215 185"
+        fill="none" stroke="#dd4444" strokeWidth="2" />
+
+      {/* Ascending aorta */}
+      <path d="M210 185 Q208 168 207 155 Q206 140 208 125 Q210 115 215 110"
+        fill="none" stroke="#cc3333" strokeWidth="6" opacity={0.5} />
+      <path d="M210 185 Q208 168 207 155 Q206 140 208 125 Q210 115 215 110"
+        fill="none" stroke="#dd4444" strokeWidth="2" />
+
       {/* Descending aorta */}
-      <path d="M200 280 Q205 300 210 320" fill="none" stroke="#e84558" strokeWidth="4" opacity={0.5} />
-      <path d="M200 280 Q205 300 210 320" fill="none" stroke="#e84558" strokeWidth="1.5" />
+      <path d="M212 270 Q210 300 209 330 Q208 360 210 400 Q212 430 215 460"
+        fill="none" stroke="#cc3333" strokeWidth="6" opacity={0.5} />
+      <path d="M212 270 Q210 300 209 330 Q208 360 210 400 Q212 430 215 460"
+        fill="none" stroke="#dd4444" strokeWidth="2" />
+
+      {/* Iliac arteries */}
+      <path d="M210 400 Q220 420 230 445 Q238 465 242 490" fill="none" stroke="#cc3333" strokeWidth="3" opacity={0.5} />
+      <path d="M210 400 Q200 420 190 445 Q182 465 178 490" fill="none" stroke="#cc3333" strokeWidth="3" opacity={0.5} />
+
+      {/* Subclavian arteries */}
+      <path d="M230 130 Q255 125 280 130 Q305 138 320 150" fill="none" stroke="#cc3333" strokeWidth="3" opacity={0.5} />
+      <path d="M210 115 Q185 110 160 115 Q135 122 112 135" fill="none" stroke="#cc3333" strokeWidth="3" opacity={0.5} />
+
+      {/* Arm arteries */}
+      <path d="M112 135 Q90 160 72 200 Q58 245 48 295 Q40 340 35 375" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.4} />
+      <path d="M320 150 Q340 175 352 215 Q362 255 368 305 Q372 340 375 375" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.4} />
+
+      {/* Renal arteries/veins */}
+      <path d="M209 330 Q190 325 170 328" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.5} />
+      <path d="M209 330 Q225 325 240 328" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.5} />
+      <path d="M190 335 Q175 332 165 335" fill="none" stroke="#4477cc" strokeWidth="2" opacity={0.5} />
+      <path d="M190 335 Q210 332 230 335" fill="none" stroke="#4477cc" strokeWidth="2" opacity={0.5} />
+
+      {/* Kidneys hint */}
+      <ellipse cx="165" cy="332" rx="12" ry="16" fill="#cc886644" stroke="#cc8866" strokeWidth="1" opacity={0.4} />
+      <ellipse cx="243" cy="332" rx="12" ry="16" fill="#cc886644" stroke="#cc8866" strokeWidth="1" opacity={0.4} />
+
+      {/* ── HEART ── */}
+      <path d="M200 178 Q170 160 158 180 Q148 200 155 225 Q162 250 180 268 Q195 282 200 290 Q205 282 220 268 Q238 250 245 225 Q252 200 242 180 Q230 160 200 178Z"
+        fill="url(#heartGrad)" stroke="#6b1515" strokeWidth="2" />
+
+      {/* Heart chambers separation */}
+      <path d="M200 180 L200 280" fill="none" stroke="#5a1010" strokeWidth="1.5" opacity={0.5} />
+      <path d="M160 215 L240 215" fill="none" stroke="#5a1010" strokeWidth="1" opacity={0.4} />
+
+      {/* Pulmonary arteries */}
+      <path d="M195 190 Q180 178 165 175 Q150 174 140 180 Q132 188 130 200"
+        fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.6} />
+      <path d="M205 190 Q220 178 235 175 Q250 174 260 180 Q268 188 270 200"
+        fill="none" stroke="#4477cc" strokeWidth="3" opacity={0.6} />
+
+      {/* Pulmonary veins */}
+      <path d="M130 220 Q142 225 155 222 Q165 218 170 210" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.5} />
+      <path d="M270 220 Q258 225 245 222 Q235 218 230 210" fill="none" stroke="#cc3333" strokeWidth="2" opacity={0.5} />
+
+      {/* Lung outlines (small, behind heart) */}
+      <path d="M100 170 Q90 200 92 240 Q95 270 110 290 Q125 300 140 290 Q152 275 150 230 Q148 195 140 180 Q130 168 115 165 Q105 165 100 170Z"
+        fill="#e8a0a044" stroke="#c08888" strokeWidth="1" opacity={0.5} />
+      <path d="M300 170 Q310 200 308 240 Q305 270 290 290 Q275 300 260 290 Q248 275 250 230 Q252 195 260 180 Q270 168 285 165 Q295 165 300 170Z"
+        fill="#e8a0a044" stroke="#c08888" strokeWidth="1" opacity={0.5} />
     </svg>
   );
 }
