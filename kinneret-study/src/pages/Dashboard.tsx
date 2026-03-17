@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { lazy, Suspense, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Calendar, GraduationCap } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
@@ -10,6 +10,8 @@ import WeakCardsWidget from '../components/dashboard/WeakCardsWidget';
 import ProgressRing from '../components/ui/ProgressRing';
 import AnimatedNumber from '../components/ui/AnimatedNumber';
 import Button from '../components/ui/Button';
+
+const StudyScheduler = lazy(() => import('../components/scheduler/StudyScheduler'));
 
 const pageVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -526,6 +528,31 @@ export default function Dashboard() {
       {/* Weak Cards Widget */}
       <motion.div variants={sectionVariants}>
         <WeakCardsWidget />
+      </motion.div>
+
+      {/* Study Scheduler */}
+      <motion.div variants={sectionVariants}>
+        <h2
+          style={{
+            color: 'var(--text-primary)',
+            fontSize: '20px',
+            fontWeight: 700,
+            fontFamily: 'var(--font-ui)',
+            marginBottom: '16px',
+            letterSpacing: '-0.01em',
+          }}
+        >
+          Study Planner
+        </h2>
+        <Suspense fallback={<div className="flex items-center justify-center" style={{ minHeight: '120px' }}><div className="animate-spin" style={{ width: 28, height: 28, border: '3px solid var(--bg-border-strong)', borderTopColor: '#4f8ef7', borderRadius: '50%' }} /></div>}>
+          <StudyScheduler
+            onStartSession={(mode) => {
+              setStudyMode(mode);
+              setActiveTab('study');
+            }}
+            testDate={data.profile.testDate}
+          />
+        </Suspense>
       </motion.div>
 
       {/* Next Review Info */}

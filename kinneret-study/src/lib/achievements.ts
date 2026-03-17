@@ -72,7 +72,7 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: 'talmid-chacham',
-    title: 'Talmid Chacham',
+    title: 'Biology Expert',
     description: 'Master all cards in the study set',
     icon: '👑',
     condition: (data) => {
@@ -139,14 +139,14 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: 'streak-30',
-    title: 'Dedicated Scholar',
+    title: 'Dedicated Scientist',
     description: 'Maintain a 30-day study streak',
     icon: '📚',
     condition: (data) => (data.profile.streak ?? 0) >= 30,
   },
   {
     id: 'streak-100',
-    title: 'Torah Champion',
+    title: 'Science Champion',
     description: 'Maintain a 100-day study streak',
     icon: '🏆',
     condition: (data) => (data.profile.streak ?? 0) >= 100,

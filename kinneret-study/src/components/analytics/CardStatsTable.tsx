@@ -25,7 +25,7 @@ type SortDir = 'asc' | 'desc';
 interface RowData {
   id: string;
   term: string;
-  hebrew: string;
+  hebrew?: string;
   definition: string;
   mnemonic: string;
   category: string;

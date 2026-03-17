@@ -22,7 +22,6 @@ const ROUND_DURATION = 60; // seconds
 
 interface SpeedCard {
   cardId: string;
-  hebrew: string;
   term: string;
   definition: string;
   isCorrectMatch: boolean;
@@ -41,7 +40,6 @@ function generateSpeedCard(): SpeedCard {
   if (isCorrectMatch) {
     return {
       cardId: card.id,
-      hebrew: card.hebrew ?? '',
       term: card.term,
       definition: card.definition,
       isCorrectMatch: true,
@@ -56,7 +54,6 @@ function generateSpeedCard(): SpeedCard {
 
   return {
     cardId: card.id,
-    hebrew: card.hebrew ?? '',
     term: card.term,
     definition: other.definition,
     isCorrectMatch: false,
@@ -705,21 +702,6 @@ export default function SpeedRound() {
               boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
             }}
           >
-            {/* Hebrew */}
-            <p
-              style={{
-                color: '#4f8ef7',
-                fontSize: '36px',
-                fontWeight: 600,
-                textAlign: 'center',
-                margin: '0 0 4px',
-                lineHeight: 1.3,
-              }}
-              dir="rtl"
-            >
-              {currentCard.hebrew}
-            </p>
-
             {/* Term */}
             <p
               style={{

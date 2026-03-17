@@ -27,7 +27,7 @@
   --shadow-glow-green: 0 0 24px rgba(52,199,89,0.3);
   --shadow-glow-red: 0 0 24px rgba(255,69,58,0.3);
   --font-ui: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-hebrew: 'Frank Ruhl Libre', serif;
+  --font-hebrew: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-scale: 1;
   --hebrew-scale: 1;
 }

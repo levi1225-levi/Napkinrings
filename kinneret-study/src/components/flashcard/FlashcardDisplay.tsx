@@ -65,15 +65,15 @@ export function FlashcardDisplay({
 
   return (
     <div
-      className="w-full max-w-[400px] mx-auto select-none"
-      style={{ perspective: '1200px', minHeight: 400 }}
+      className="w-full max-w-[440px] mx-auto select-none"
+      style={{ perspective: '1200px', minHeight: 360 }}
       role="region"
       aria-label="Flashcard"
     >
       {/* ── Flip wrapper ────────────────────────────────────────── */}
       <motion.div
         className="relative w-full cursor-pointer"
-        style={{ minHeight: 400, transformStyle: 'preserve-3d' }}
+        style={{ minHeight: 360, transformStyle: 'preserve-3d' }}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={flipSpring}
         onClick={!isFlipped ? onFlip : undefined}
@@ -81,33 +81,36 @@ export function FlashcardDisplay({
       >
         {/* ── FRONT FACE ────────────────────────────────────────── */}
         <div
-          className="absolute inset-0 rounded-2xl p-8 flex flex-col items-center justify-center gap-1"
+          className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             background: 'var(--bg-elevated)',
             border: '1px solid var(--bg-border)',
             boxShadow: 'var(--shadow-lg)',
+            padding: '24px 28px 40px',
           }}
         >
-          {/* Category chip */}
-          <span
-            className="absolute top-4 right-4 px-3 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase"
-            style={{ background: catColor + '18', color: catColor }}
-          >
-            {card.category}
-          </span>
-
-          {/* Timer */}
-          {showTimer && (
+          {/* Top bar: Timer + Category */}
+          <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-4 pt-4">
+            {showTimer ? (
+              <span
+                className="flex items-center gap-1.5 text-[11px] tabular-nums"
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                <Clock size={12} strokeWidth={2.2} />
+                {formatTime(elapsedTime)}
+              </span>
+            ) : (
+              <span />
+            )}
             <span
-              className="absolute top-4 left-4 flex items-center gap-1.5 text-[11px] tabular-nums"
-              style={{ color: 'var(--text-tertiary)' }}
+              className="px-3 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase"
+              style={{ background: catColor + '18', color: catColor }}
             >
-              <Clock size={12} strokeWidth={2.2} />
-              {formatTime(elapsedTime)}
+              {card.category}
             </span>
-          )}
+          </div>
 
           {/* Difficulty badge */}
           <span
@@ -117,62 +120,25 @@ export function FlashcardDisplay({
             {diff.label}
           </span>
 
-          {/* Hebrew */}
-          {card.hebrew && (
-            <div className="flex items-center gap-2 mb-3">
-              <span
-                lang="he"
-                dir="rtl"
-                className="text-[3rem] leading-tight font-bold"
-                style={{
-                  fontFamily: '"Frank Ruhl Libre", serif',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  textShadow: '0 0 40px rgba(79,142,247,0.12)',
-                }}
-              >
-                {card.hebrew}
-              </span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  speak(card.hebrew);
-                }}
-                aria-label="Pronounce Hebrew"
-                style={{
-                  background: 'rgba(79,142,247,0.12)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 36,
-                  height: 36,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.2s',
-                }}
-              >
-                <Volume2
-                  size={18}
-                  strokeWidth={2.2}
-                  style={{ color: isSpeaking ? '#34c759' : '#4f8ef7' }}
-                />
-              </button>
-            </div>
+          {/* Subcategory */}
+          {card.subcategory && (
+            <span
+              className="text-[12px] font-medium tracking-wide mb-2 uppercase"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
+              {card.subcategory}
+            </span>
           )}
 
-          {/* Transliteration */}
+          {/* Term — the question */}
           <span
-            className="text-sm tracking-wide mb-1"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            {card.transliteration}
-          </span>
-
-          {/* Term */}
-          <span
-            className="text-xl font-semibold text-center leading-snug px-2"
-            style={{ color: 'var(--text-primary)' }}
+            className="text-[18px] font-semibold text-center leading-relaxed px-4"
+            style={{
+              color: 'var(--text-primary)',
+              fontFamily: 'var(--font-ui)',
+              maxWidth: '100%',
+              lineHeight: 1.5,
+            }}
           >
             {card.term}
           </span>
@@ -184,13 +150,13 @@ export function FlashcardDisplay({
             animate={{ opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           >
-            Tap to reveal
+            Tap to reveal answer
           </motion.span>
         </div>
 
         {/* ── BACK FACE ─────────────────────────────────────────── */}
         <div
-          className="absolute inset-0 rounded-2xl p-6 flex flex-col overflow-y-auto"
+          className="absolute inset-0 rounded-2xl flex flex-col overflow-y-auto"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
@@ -198,57 +164,72 @@ export function FlashcardDisplay({
             background: 'var(--bg-elevated)',
             border: '1px solid var(--bg-border)',
             boxShadow: 'var(--shadow-lg)',
+            padding: '20px 24px',
           }}
         >
-          {/* Term header */}
-          <div className="flex items-center gap-2 mb-4">
-            <h3
-              className="text-sm font-semibold uppercase tracking-wide"
-              style={{ color: catColor }}
-            >
-              {card.term}
-            </h3>
-            {card.transliteration && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  speak(card.transliteration!, 'en-US');
-                }}
-                aria-label="Pronounce transliteration"
-                style={{
-                  background: 'rgba(79,142,247,0.12)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 36,
-                  height: 36,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.2s',
-                  flexShrink: 0,
-                }}
+          {/* Term header with read-aloud button */}
+          <div className="flex items-start gap-2 mb-3">
+            <div className="flex-1 min-w-0">
+              <span
+                className="text-[11px] font-semibold uppercase tracking-wider"
+                style={{ color: catColor }}
               >
-                <Volume2
-                  size={16}
-                  strokeWidth={2.2}
-                  style={{ color: isSpeaking ? '#34c759' : '#4f8ef7' }}
-                />
-              </button>
-            )}
+                {card.category}
+              </span>
+              <h3
+                className="text-[15px] font-semibold mt-0.5"
+                style={{ color: 'var(--text-primary)', lineHeight: 1.4 }}
+              >
+                {card.term}
+              </h3>
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                speak(card.definition, 'en-US');
+              }}
+              aria-label="Read answer aloud"
+              style={{
+                background: 'rgba(79,142,247,0.12)',
+                border: 'none',
+                borderRadius: '50%',
+                width: 34,
+                height: 34,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s',
+                flexShrink: 0,
+              }}
+            >
+              <Volume2
+                size={16}
+                strokeWidth={2.2}
+                style={{ color: isSpeaking ? '#34c759' : '#4f8ef7' }}
+              />
+            </button>
           </div>
 
-          {/* Definition */}
-          <p
-            className="text-[15px] leading-relaxed mb-5 flex-shrink-0"
-            style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}
+          {/* Answer/Definition */}
+          <div
+            className="rounded-xl p-4 mb-4"
+            style={{
+              background: `${catColor}08`,
+              border: `1px solid ${catColor}20`,
+            }}
           >
-            {card.definition}
-          </p>
+            <p
+              className="text-[15px] leading-relaxed"
+              style={{ color: 'var(--text-primary)', lineHeight: 1.7 }}
+            >
+              {card.definition}
+            </p>
+          </div>
 
           {/* Extended notes (collapsible) */}
           {card.extendedNotes && (
-            <div className="mb-4">
+            <div className="mb-3">
               <button
                 onClick={toggleNotes}
                 className="flex items-center gap-1.5 text-[13px] font-medium mb-2 group"
@@ -267,7 +248,7 @@ export function FlashcardDisplay({
                 ) : (
                   <ChevronDown size={14} strokeWidth={2.4} />
                 )}
-                <span className="group-hover:underline">Extended Notes</span>
+                <span className="group-hover:underline">More Details</span>
               </button>
 
               <AnimatePresence initial={false}>
@@ -285,7 +266,7 @@ export function FlashcardDisplay({
                       className="text-[13px] leading-relaxed pl-4 border-l-2 py-1"
                       style={{
                         color: 'var(--text-secondary)',
-                        borderColor: 'var(--bg-border)',
+                        borderColor: catColor + '40',
                       }}
                     >
                       {card.extendedNotes}
@@ -299,16 +280,16 @@ export function FlashcardDisplay({
           {/* Mnemonic hint */}
           {card.mnemonicHint && (
             <div
-              className="flex items-start gap-2.5 p-3.5 rounded-xl mb-4"
+              className="flex items-start gap-2.5 p-3 rounded-xl mb-3"
               style={{ background: 'rgba(255,214,10,0.06)' }}
             >
               <Lightbulb
-                size={16}
+                size={15}
                 strokeWidth={2.2}
                 style={{ color: '#ffd60a', flexShrink: 0, marginTop: 2 }}
               />
               <p
-                className="text-[13px] italic leading-relaxed"
+                className="text-[12px] italic leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 {card.mnemonicHint}
@@ -318,7 +299,7 @@ export function FlashcardDisplay({
 
           {/* Related cards — clickable navigation chips */}
           {card.relatedCards && card.relatedCards.length > 0 && (
-            <div className="flex items-center flex-wrap gap-1.5 mt-auto pt-4">
+            <div className="flex items-center flex-wrap gap-1.5 mt-auto pt-3">
               <Link2
                 size={12}
                 strokeWidth={2.4}
@@ -331,10 +312,9 @@ export function FlashcardDisplay({
                     key={rcId}
                     onClick={(e) => {
                       e.stopPropagation();
-                      // Dispatch custom event to navigate to this card
                       window.dispatchEvent(new CustomEvent('kinneret-navigate-card', { detail: rcId }));
                     }}
-                    className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px] transition-colors"
+                    className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[140px] transition-colors"
                     style={{
                       background: 'var(--bg-overlay)',
                       color: 'var(--accent-blue)',

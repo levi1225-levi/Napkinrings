@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Flame,
   Clock,
+  Image,
 } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { FlashcardSession } from '../components/flashcard/FlashcardSession';
@@ -17,10 +18,11 @@ import QuizSession from '../components/quiz/QuizSession';
 import PracticeTest from '../components/quiz/PracticeTest';
 import SpeedRound from '../components/speed/SpeedRound';
 import ChallengeMode from '../components/quiz/ChallengeMode';
+import DiagramLabelling, { DIAGRAM_DATA } from '../components/diagram/DiagramLabelling';
 
 const GuidedSession = lazy(() => import('../components/guided/GuidedSession'));
 
-type StudyModeId = 'flashcard' | 'quiz' | 'speed' | 'guided' | 'cram' | 'practice-test';
+type StudyModeId = 'flashcard' | 'quiz' | 'speed' | 'guided' | 'cram' | 'practice-test' | 'diagram';
 
 const MODES: {
   id: StudyModeId;
@@ -51,6 +53,14 @@ const MODES: {
     description: 'Test your knowledge with multiple choice',
     icon: HelpCircle,
     accentColor: '#34c759',
+  },
+  {
+    id: 'diagram',
+    label: 'Diagram Labelling',
+    description: 'Label body system diagrams interactively',
+    icon: Image,
+    accentColor: '#64d2ff',
+    badge: 'New',
   },
   {
     id: 'practice-test',
@@ -85,17 +95,79 @@ const pageVariants = {
 
 export default function StudyHub() {
   const { studyMode, setStudyMode, startCramSession } = useAppStore();
+  const [diagramIndex, setDiagramIndex] = useState(0);
+  const [showDiagram, setShowDiagram] = useState(false);
 
   const handleModeSelect = (modeId: StudyModeId) => {
     if (modeId === 'cram') {
       startCramSession();
-      setStudyMode('flashcard'); // Cram uses flashcard UI with all cards loaded
+      setStudyMode('flashcard');
+    } else if (modeId === 'diagram') {
+      setShowDiagram(true);
     } else if (modeId === 'practice-test') {
       setStudyMode('practice-test');
     } else {
       setStudyMode(modeId as 'flashcard' | 'quiz' | 'speed' | 'guided');
     }
   };
+
+  // Diagram labelling mode (handled separately from Zustand studyMode)
+  if (showDiagram) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        className="flex flex-col gap-4"
+        style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}
+      >
+        {/* Back button */}
+        <button
+          onClick={() => setShowDiagram(false)}
+          className="flex items-center gap-2 self-start transition-opacity hover:opacity-70"
+          style={{
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            color: '#4f8ef7',
+            fontSize: '14px',
+            fontWeight: 500,
+            fontFamily: 'var(--font-ui)',
+            padding: '4px 0',
+          }}
+        >
+          <ArrowLeft size={16} />
+          <span>Back to Study Hub</span>
+        </button>
+
+        {/* Diagram selector */}
+        <div className="flex gap-2 flex-wrap">
+          {DIAGRAM_DATA.map((d, i) => (
+            <button
+              key={d.id}
+              onClick={() => setDiagramIndex(i)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                fontSize: '13px',
+                fontWeight: diagramIndex === i ? 600 : 500,
+                fontFamily: 'var(--font-ui)',
+                cursor: 'pointer',
+                border: diagramIndex === i ? '1.5px solid var(--accent-blue)' : '1.5px solid var(--bg-border-strong)',
+                backgroundColor: diagramIndex === i ? 'var(--accent-blue)' : 'var(--bg-overlay)',
+                color: diagramIndex === i ? '#fff' : 'var(--text-secondary)',
+              }}
+            >
+              {d.title}
+            </button>
+          ))}
+        </div>
+
+        <DiagramLabelling diagram={DIAGRAM_DATA[diagramIndex]} />
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -126,7 +198,7 @@ export default function StudyHub() {
                   height: '44px',
                   borderRadius: '14px',
                   background:
-                    'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(191,90,242,0.15))',
+                    'linear-gradient(135deg, rgba(79,142,247,0.15), rgba(52,199,89,0.15))',
                 }}
               >
                 <BookOpen

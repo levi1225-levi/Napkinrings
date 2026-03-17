@@ -467,18 +467,6 @@ export default function SettingsPanel() {
           />
         </SettingRow>
 
-        <SettingRow label="Hebrew text size">
-          <ChipSelect
-            value={settings.hebrewFontSize}
-            onChange={(v) => updateSettings({ hebrewFontSize: v })}
-            options={[
-              { label: 'Small', value: 'small' as const },
-              { label: 'Medium', value: 'medium' as const },
-              { label: 'Large', value: 'large' as const },
-            ]}
-          />
-        </SettingRow>
-
         <SettingRow label="Animation speed">
           <ChipSelect
             value={settings.animationSpeed}

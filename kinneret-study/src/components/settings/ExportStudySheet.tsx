@@ -68,8 +68,7 @@ export default function ExportStudySheet() {
           .map(
             (c) => `
           <tr>
-            <td><strong>${c.term}</strong>${c.transliteration ? `<br><span class="stats">${c.transliteration}</span>` : ''}</td>
-            <td class="hebrew">${c.hebrew || ''}</td>
+            <td><strong>${c.term}</strong>${c.subcategory ? `<br><span class="stats">${c.subcategory}</span>` : ''}</td>
             <td>${c.definition}</td>
             <td class="stats">${c.state.difficulty} (ease: ${c.state.easeFactor.toFixed(1)})</td>
           </tr>`,

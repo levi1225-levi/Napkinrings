@@ -34,10 +34,10 @@ export default function Sources() {
             className="text-xl font-bold"
             style={{ color: 'var(--text-primary)' }}
           >
-            {tab === 'sources' ? 'Primary Sources' : 'Card Browser'}
+            {tab === 'sources' ? 'Key Concepts' : 'Card Browser'}
           </h1>
           <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-            {tab === 'sources' ? 'Key texts from your studies' : 'Search and browse all study cards'}
+            {tab === 'sources' ? 'Review key biology concepts' : 'Search and browse all study cards'}
           </p>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function Sources() {
         }}
       >
         {([
-          { id: 'sources' as const, label: 'Sources', icon: BookOpen },
+          { id: 'sources' as const, label: 'Key Concepts', icon: BookOpen },
           { id: 'cards' as const, label: 'Cards', icon: Search },
         ]).map(({ id, label, icon: Icon }) => {
           const isActive = tab === id;

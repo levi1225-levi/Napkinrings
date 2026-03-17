@@ -390,7 +390,7 @@ export default function QuizResults({
                     >
                       <BookOpen size={14} color="#4f8ef7" />
                       <span style={{ color: '#4f8ef7', fontSize: '12px', fontWeight: 500 }}>
-                        Study: {relatedCard.hebrew} — {relatedCard.term}
+                        Study: {relatedCard.term}
                       </span>
                     </div>
                   )}

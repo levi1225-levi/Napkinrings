@@ -58,14 +58,14 @@ function App() {
             style={{
               fontSize: 48,
               fontWeight: 700,
-              background: 'linear-gradient(135deg, #ffd60a, #ff9f0a)',
+              background: 'linear-gradient(135deg, #4f8ef7, #34c759)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               marginBottom: 12,
-              fontFamily: 'var(--font-hebrew)',
+              fontFamily: 'var(--font-ui)',
             }}
           >
-            כִּנֶּרֶת
+            SNC2D
           </div>
           <div
             style={{
@@ -75,7 +75,7 @@ function App() {
               color: 'var(--text-primary)',
             }}
           >
-            Kinneret Study
+            Biology Study
           </div>
           <div
             style={{

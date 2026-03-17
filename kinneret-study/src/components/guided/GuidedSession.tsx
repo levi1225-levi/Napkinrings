@@ -64,7 +64,6 @@ const cubicEase = [0.4, 0, 0.2, 1] as [number, number, number, number];
 const springEase = [0.34, 1.56, 0.64, 1] as [number, number, number, number];
 
 const baseFont = "'DM Sans', sans-serif";
-const hebrewFont = "'Frank Ruhl Libre', serif";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -193,7 +192,7 @@ function buildPracticeItems(batchCards: Card[]): PracticeItem[] {
     const qText = q.question.toLowerCase();
     for (const card of batchCards) {
       if (qText.includes(card.term.toLowerCase())) score += 3;
-      if (card.hebrew && qText.includes(card.hebrew)) score += 2;
+      if (card.category && qText.includes(card.category.toLowerCase())) score += 2;
       if (qText.includes(card.id.replace(/-/g, ' '))) score += 1;
     }
     if (q.onMainTest) score += 1;
@@ -974,28 +973,13 @@ export default function GuidedSession() {
               {currentTeachCard.category}
             </div>
 
-            {/* Hebrew */}
-            {currentTeachCard.hebrew && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.1, ease: cubicEase }}
-                style={{
-                  fontSize: 48,
-                  fontFamily: hebrewFont,
-                  color: 'var(--text-primary)',
-                  marginBottom: 8,
-                  lineHeight: 1.3,
-                }}
-              >
-                {currentTeachCard.hebrew}
-              </motion.div>
-            )}
 
-            {/* Transliteration */}
-            <div style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 4 }}>
-              {currentTeachCard.transliteration}
-            </div>
+            {/* Subcategory */}
+            {currentTeachCard.subcategory && (
+              <div style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 4 }}>
+                {currentTeachCard.subcategory}
+              </div>
+            )}
 
             {/* English term */}
             <motion.h2
@@ -1858,15 +1842,14 @@ export default function GuidedSession() {
                   <span style={{ fontSize: 14, color: '#c8c8d8', flex: 1 }}>
                     {card.term}
                   </span>
-                  {card.hebrew && (
+                  {card.subcategory && (
                     <span
                       style={{
-                        fontSize: 14,
-                        fontFamily: hebrewFont,
-                        color: 'var(--text-secondary)',
+                        fontSize: 12,
+                        color: 'var(--text-tertiary)',
                       }}
                     >
-                      {card.hebrew}
+                      {card.subcategory}
                     </span>
                   )}
                 </div>

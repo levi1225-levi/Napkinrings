@@ -61,7 +61,6 @@ export default function WeakCardsWidget() {
       const card = CARDS.find((c) => c.id === state.cardId);
       return {
         id: state.cardId,
-        hebrew: card?.hebrew ?? '',
         term: card?.term ?? state.cardId,
         easeFactor: state.easeFactor,
       };
@@ -139,22 +138,6 @@ export default function WeakCardsWidget() {
                   border: '1px solid var(--bg-border)',
                 }}
               >
-                {/* Hebrew text */}
-                <span
-                  lang="he"
-                  style={{
-                    fontFamily: "'Frank Ruhl Libre', serif",
-                    fontSize: '22px',
-                    fontWeight: 700,
-                    color: 'var(--accent-gold)',
-                    minWidth: '80px',
-                    textAlign: 'center',
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {card.hebrew}
-                </span>
-
                 {/* Info */}
                 <div className="flex flex-1 flex-col gap-1.5">
                   <span

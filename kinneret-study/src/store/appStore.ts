@@ -145,10 +145,6 @@ function applyVisualSettings(settings: UserSettings): void {
   const fontScales: Record<string, string> = { small: '0.875', medium: '1', large: '1.125' };
   root.style.setProperty('--font-scale', fontScales[settings.fontSize] ?? '1');
 
-  // Hebrew font scale
-  const hebrewScales: Record<string, string> = { small: '0.85', medium: '1', large: '1.2' };
-  root.style.setProperty('--hebrew-scale', hebrewScales[settings.hebrewFontSize] ?? '1');
-
   // Animation speed
   if (settings.animationSpeed === 'none') {
     root.style.setProperty('--anim-duration', '0.01ms');

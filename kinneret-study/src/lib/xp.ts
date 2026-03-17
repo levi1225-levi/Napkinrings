@@ -18,27 +18,27 @@ export const LEVELS: {
   minXP: number;
   maxXP: number;
 }[] = [
-  { level: 1, title: 'Talmid', subtitle: 'Student', minXP: 0, maxXP: 200 },
+  { level: 1, title: 'Lab Intern', subtitle: 'Beginner', minXP: 0, maxXP: 200 },
   {
     level: 2,
-    title: 'Talmid Chacham',
-    subtitle: 'Wise Student',
+    title: 'Lab Technician',
+    subtitle: 'Apprentice',
     minXP: 200,
     maxXP: 500,
   },
-  { level: 3, title: 'Chaver', subtitle: 'Scholar', minXP: 500, maxXP: 1000 },
-  { level: 4, title: 'Rav', subtitle: 'Teacher', minXP: 1000, maxXP: 2000 },
+  { level: 3, title: 'Researcher', subtitle: 'Intermediate', minXP: 500, maxXP: 1000 },
+  { level: 4, title: 'Scientist', subtitle: 'Advanced', minXP: 1000, maxXP: 2000 },
   {
     level: 5,
-    title: 'Rosh Yeshiva',
-    subtitle: 'Master',
+    title: 'Lead Scientist',
+    subtitle: 'Expert',
     minXP: 2000,
     maxXP: 4000,
   },
   {
     level: 6,
-    title: 'Gaon',
-    subtitle: 'Genius',
+    title: 'Nobel Laureate',
+    subtitle: 'Master',
     minXP: 4000,
     maxXP: Infinity,
   },
@@ -125,5 +125,5 @@ export function getLevelInfo(xp: number): LevelInfo {
  */
 export function getLevelTitle(level: number): string {
   const found = LEVELS.find((l) => l.level === level);
-  return found ? found.title : 'Talmid';
+  return found ? found.title : 'Lab Intern';
 }

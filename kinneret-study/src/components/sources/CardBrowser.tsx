@@ -47,9 +47,8 @@ export default function CardBrowser() {
         (c) =>
           c.term.toLowerCase().includes(q) ||
           c.definition.toLowerCase().includes(q) ||
-          (c.hebrew && c.hebrew.includes(q)) ||
-          c.transliteration.toLowerCase().includes(q) ||
-          c.category.toLowerCase().includes(q),
+          c.category.toLowerCase().includes(q) ||
+          (c.extendedNotes && c.extendedNotes.toLowerCase().includes(q)),
       );
     }
 
@@ -334,24 +333,6 @@ function CardRow({
           fontFamily: 'var(--font-ui)',
         }}
       >
-        {/* Hebrew */}
-        {card.hebrew && (
-          <span
-            lang="he"
-            style={{
-              fontFamily: '"Frank Ruhl Libre", serif',
-              fontSize: '20px',
-              fontWeight: 700,
-              color: 'var(--accent-gold)',
-              minWidth: '60px',
-              textAlign: 'center',
-              lineHeight: 1.2,
-            }}
-          >
-            {card.hebrew}
-          </span>
-        )}
-
         {/* Term + category */}
         <div className="flex-1 min-w-0">
           <p
