@@ -706,7 +706,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
   // === UNDO ===
 
   undoLastGrade: () => {
-    const { lastGradeAction, data, currentSession, studyQueue, currentCardIndex } = get();
+    const { lastGradeAction, data, currentSession, currentCardIndex } = get();
     if (!lastGradeAction || !currentSession) return;
 
     const { cardId, previousState, previousXP } = lastGradeAction;
