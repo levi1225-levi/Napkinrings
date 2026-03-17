@@ -311,7 +311,7 @@ export default function Analytics() {
   return (
     <motion.div
       className="w-full mx-auto pb-8 pt-6"
-      style={{ maxWidth: '960px', padding: '24px 24px 32px' }}
+      style={{ maxWidth: '960px', padding: '24px 24px 32px', flex: 1 }}
       variants={pageVariants}
       initial="hidden"
       animate="show"

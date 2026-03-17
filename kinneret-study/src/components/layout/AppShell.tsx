@@ -190,7 +190,7 @@ export default function AppShell() {
     >
       {/* Main scrollable area */}
       <main
-        className="flex-1 overflow-y-auto overflow-x-hidden scroll-container"
+        className="flex-1 overflow-y-auto overflow-x-hidden scroll-container flex flex-col"
         style={{
           paddingBottom: 'calc(72px + env(safe-area-inset-bottom, 0px))',
           WebkitOverflowScrolling: 'touch',
@@ -203,6 +203,7 @@ export default function AppShell() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
           >
             <Suspense fallback={<PageLoader />}>
               <ActivePage />

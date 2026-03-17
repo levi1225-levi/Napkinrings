@@ -120,7 +120,7 @@ export default function StudyHub() {
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
         className="flex flex-col gap-4"
-        style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}
+        style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%', flex: 1 }}
       >
         {/* Back button */}
         <button
@@ -176,7 +176,7 @@ export default function StudyHub() {
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       className="flex flex-col gap-6"
-      style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}
+      style={{ padding: '24px 24px 32px', maxWidth: '960px', marginLeft: 'auto', marginRight: 'auto', width: '100%', flex: 1 }}
     >
       <AnimatePresence mode="wait">
         {!studyMode ? (

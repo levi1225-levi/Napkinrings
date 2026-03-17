@@ -101,6 +101,7 @@ export default function Dashboard() {
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '100%',
+        flex: 1,
       }}
     >
       {/* Greeting */}
