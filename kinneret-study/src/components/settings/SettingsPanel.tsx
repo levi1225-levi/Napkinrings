@@ -265,7 +265,9 @@ export default function SettingsPanel() {
               padding: '6px 10px',
               outline: 'none',
               fontFamily: 'var(--font-ui)',
-              width: '160px',
+              width: '100%',
+              maxWidth: '160px',
+              minWidth: '80px',
             }}
           />
         </SettingRow>
@@ -284,7 +286,9 @@ export default function SettingsPanel() {
               padding: '6px 10px',
               outline: 'none',
               fontFamily: 'var(--font-ui)',
-              width: '160px',
+              width: '100%',
+              maxWidth: '160px',
+              minWidth: '80px',
             }}
           />
         </SettingRow>
@@ -303,7 +307,9 @@ export default function SettingsPanel() {
               padding: '6px 10px',
               outline: 'none',
               fontFamily: 'var(--font-ui)',
-              width: '120px',
+              width: '100%',
+              maxWidth: '120px',
+              minWidth: '60px',
             }}
           />
         </SettingRow>
@@ -607,9 +613,6 @@ export default function SettingsPanel() {
           </button>
         </div>
       </Section>
-
-      {/* Study Groups */}
-      <StudyGroups />
 
       {/* Reset confirmation modal */}
       <Modal

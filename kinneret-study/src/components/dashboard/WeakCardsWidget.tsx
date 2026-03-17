@@ -141,11 +141,13 @@ export default function WeakCardsWidget() {
                 {/* Info */}
                 <div className="flex flex-1 flex-col gap-1.5">
                   <span
+                    className="truncate"
                     style={{
                       color: 'var(--text-primary)',
                       fontSize: '14px',
                       fontWeight: 600,
                       fontFamily: 'var(--font-ui)',
+                      display: 'block',
                     }}
                   >
                     {card.term}

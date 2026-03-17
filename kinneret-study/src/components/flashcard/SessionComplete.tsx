@@ -306,10 +306,10 @@ export function SessionComplete() {
           className="w-20 h-20 rounded-full flex items-center justify-center"
           style={{
             background:
-              'radial-gradient(circle, rgba(255,214,10,0.18) 0%, transparent 70%)',
+              'radial-gradient(circle, var(--accent-orange-dim) 0%, transparent 70%)',
           }}
         >
-          <Trophy size={42} strokeWidth={1.6} style={{ color: '#ffd60a' }} />
+          <Trophy size={42} strokeWidth={1.6} style={{ color: 'var(--accent-gold)' }} />
         </div>
       </motion.div>
 

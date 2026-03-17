@@ -97,17 +97,17 @@ export default function QuizResults({
   }, [answers, questions]);
 
   const diffLabels: Record<string, { label: string; color: string }> = {
-    '1': { label: 'Easy', color: '#34c759' },
-    '2': { label: 'Medium', color: '#ff9f0a' },
-    '3': { label: 'Hard', color: '#ff453a' },
+    '1': { label: 'Easy', color: 'var(--accent-green)' },
+    '2': { label: 'Medium', color: 'var(--accent-orange)' },
+    '3': { label: 'Hard', color: 'var(--accent-red)' },
   };
 
   const scoreColor =
     stats.scorePercent >= 80
-      ? '#34c759'
+      ? 'var(--accent-green)'
       : stats.scorePercent >= 60
-        ? '#ff9f0a'
-        : '#ff453a';
+        ? 'var(--accent-orange)'
+        : 'var(--accent-red)';
 
   return (
     <motion.div
@@ -173,8 +173,8 @@ export default function QuizResults({
           border: '1px solid rgba(79,142,247,0.15)',
         }}
       >
-        <Zap size={18} color="#4f8ef7" />
-        <span style={{ color: '#4f8ef7', fontSize: '16px', fontWeight: 600 }}>
+        <Zap size={18} color="var(--accent-blue)" />
+        <span style={{ color: 'var(--accent-blue)', fontSize: '16px', fontWeight: 600 }}>
           +<AnimatedNumber value={totalXP} /> XP earned
         </span>
       </motion.div>
@@ -265,7 +265,7 @@ export default function QuizResults({
             .map(([category, data]) => {
               const pct = data.total > 0 ? (data.correct / data.total) * 100 : 0;
               const barColor =
-                pct >= 80 ? '#34c759' : pct >= 60 ? '#ff9f0a' : '#ff453a';
+                pct >= 80 ? 'var(--accent-green)' : pct >= 60 ? 'var(--accent-orange)' : 'var(--accent-red)';
 
               return (
                 <div
@@ -355,11 +355,11 @@ export default function QuizResults({
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          backgroundColor: '#ff453a',
+                          backgroundColor: 'var(--accent-red)',
                           flexShrink: 0,
                         }}
                       />
-                      <span style={{ color: '#ff453a', fontSize: '13px', textDecoration: 'line-through' }}>
+                      <span style={{ color: 'var(--accent-red)', fontSize: '13px', textDecoration: 'line-through' }}>
                         {question.options[answer.selectedIndex]}
                       </span>
                     </div>
@@ -369,11 +369,11 @@ export default function QuizResults({
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          backgroundColor: '#34c759',
+                          backgroundColor: 'var(--accent-green)',
                           flexShrink: 0,
                         }}
                       />
-                      <span style={{ color: '#34c759', fontSize: '13px' }}>
+                      <span style={{ color: 'var(--accent-green)', fontSize: '13px' }}>
                         {question.options[question.correctIndex]}
                       </span>
                     </div>
@@ -388,8 +388,8 @@ export default function QuizResults({
                         cursor: 'pointer',
                       }}
                     >
-                      <BookOpen size={14} color="#4f8ef7" />
-                      <span style={{ color: '#4f8ef7', fontSize: '12px', fontWeight: 500 }}>
+                      <BookOpen size={14} color="var(--accent-blue)" />
+                      <span style={{ color: 'var(--accent-blue)', fontSize: '12px', fontWeight: 500 }}>
                         Study: {relatedCard.term}
                       </span>
                     </div>
@@ -413,9 +413,9 @@ export default function QuizResults({
             border: '1px solid rgba(255,214,10,0.2)',
           }}
         >
-          <Trophy size={24} color="#ffd60a" />
+          <Trophy size={24} color="var(--accent-gold)" />
           <div>
-            <p style={{ color: '#ffd60a', fontSize: '15px', fontWeight: 600, margin: 0 }}>
+            <p style={{ color: 'var(--accent-gold)', fontSize: '15px', fontWeight: 600, margin: 0 }}>
               Perfect Score!
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: 0 }}>
