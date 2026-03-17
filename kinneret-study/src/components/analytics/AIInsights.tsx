@@ -118,6 +118,7 @@ export default function AIInsights() {
   const { data, aiInsight, setAIInsight } = useAppStore();
   const [predictionLoading, setPredictionLoading] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
+  const [hasClickedPredict, setHasClickedPredict] = useState(false);
   const [insightLoading, setInsightLoading] = useState(false);
 
   const testDate =
@@ -139,6 +140,7 @@ export default function AIInsights() {
 
     const sessions = data.sessions ?? [];
     if (sessions.length === 0) {
+      // No sessions — skip AI call, local fallback will be used
       setInsightLoading(false);
       return;
     }
@@ -175,8 +177,8 @@ export default function AIInsights() {
     getAISessionInsights(sessionData, cardStatesPayload)
       .then((result) => {
         if (!cancelled) {
-          // Check if the result indicates API unavailability
           if (result.includes('unavailable') || result.includes('failed')) {
+            // API not available — local fallback will show automatically
             setInsightLoading(false);
             return;
           }
@@ -193,8 +195,29 @@ export default function AIInsights() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /* --- Build local fallback text --- */
+  const localInsightText = useMemo(() => {
+    const top3Weak = analysis.weakCategories.slice(0, 3);
+    const weakList = top3Weak.map((c) => c.category).join(', ');
+
+    return `Based on your study data, your weakest categories are: ${weakList}. ` +
+      `You have mastered ${analysis.masteredCount} of ${analysis.totalCards} cards (${analysis.masteryPct.toFixed(0)}%). ` +
+      `Your overall accuracy is ${analysis.avgAccuracy.toFixed(0)}%. ` +
+      `Focus on the ${analysis.learningCount + analysis.newCount} remaining cards, ` +
+      `studying roughly ${analysis.cardsPerDay} cards per day to be ready by your test date.`;
+  }, [analysis]);
+
+  const localPredictionText = useMemo(() => {
+    return `Predicted score: ~${analysis.predictedScore.toFixed(0)}% | ` +
+      `Mastery: ${analysis.masteryPct.toFixed(0)}% | ` +
+      `Accuracy: ${analysis.avgAccuracy.toFixed(0)}% | ` +
+      `${analysis.daysUntilTest} days until test. ` +
+      `Study ${analysis.cardsPerDay} cards/day to cover remaining material.`;
+  }, [analysis]);
+
   /* --- Predict test score --- */
   const handlePredict = useCallback(async () => {
+    setHasClickedPredict(true);
     setPredictionLoading(true);
     try {
       const cardStatesPayload: Record<
@@ -223,37 +246,16 @@ export default function AIInsights() {
       const result = await getAITestPrediction(cardStatesPayload, testDate);
 
       if (result.includes('unavailable') || result.includes('failed')) {
-        // Use local fallback
-        setPrediction(null);
+        setPrediction(localPredictionText);
       } else {
         setPrediction(result);
       }
     } catch {
-      setPrediction(null);
+      setPrediction(localPredictionText);
     } finally {
       setPredictionLoading(false);
     }
-  }, [data.cardStates, testDate]);
-
-  /* --- Build local fallback text --- */
-  const localInsightText = useMemo(() => {
-    const top3Weak = analysis.weakCategories.slice(0, 3);
-    const weakList = top3Weak.map((c) => c.category).join(', ');
-
-    return `Based on your study data, your weakest categories are: ${weakList}. ` +
-      `You have mastered ${analysis.masteredCount} of ${analysis.totalCards} cards (${analysis.masteryPct.toFixed(0)}%). ` +
-      `Your overall accuracy is ${analysis.avgAccuracy.toFixed(0)}%. ` +
-      `Focus on the ${analysis.learningCount + analysis.newCount} remaining cards, ` +
-      `studying roughly ${analysis.cardsPerDay} cards per day to be ready by your test date.`;
-  }, [analysis]);
-
-  const localPredictionText = useMemo(() => {
-    return `Predicted score: ~${analysis.predictedScore.toFixed(0)}% | ` +
-      `Mastery: ${analysis.masteryPct.toFixed(0)}% | ` +
-      `Accuracy: ${analysis.avgAccuracy.toFixed(0)}% | ` +
-      `${analysis.daysUntilTest} days until test. ` +
-      `Study ${analysis.cardsPerDay} cards/day to cover remaining material.`;
-  }, [analysis]);
+  }, [data.cardStates, testDate, localPredictionText]);
 
   return (
     <motion.div
@@ -376,14 +378,14 @@ export default function AIInsights() {
             )}
           </button>
 
-          {(prediction || (!predictionLoading && prediction === null && localPredictionText)) && (
+          {hasClickedPredict && prediction && !predictionLoading && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               className="mt-3"
             >
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                {prediction || localPredictionText}
+                {prediction}
               </p>
             </motion.div>
           )}

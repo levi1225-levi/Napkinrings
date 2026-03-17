@@ -309,7 +309,8 @@ export default function Analytics() {
 
   return (
     <motion.div
-      className="w-full max-w-6xl mx-auto px-4 pb-8 pt-6"
+      className="w-full mx-auto pb-8 pt-6"
+      style={{ maxWidth: '960px', padding: '24px 24px 32px' }}
       variants={pageVariants}
       initial="hidden"
       animate="show"
@@ -359,14 +360,10 @@ export default function Analytics() {
         </motion.div>
       )}
 
-      {/* Charts 2x2 grid */}
-      <motion.div
-        variants={sectionVariant}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
-      >
-        {/* Line chart: cards per day */}
+      {/* Line chart: cards per day — full width */}
+      <motion.div variants={sectionVariant} className="mb-6">
         <ChartCard title="Cards Studied (Last 30 Days)">
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={280}>
             <LineChart data={lineData}>
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -375,16 +372,16 @@ export default function Analytics() {
               />
               <XAxis
                 dataKey="date"
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
                 interval="preserveStartEnd"
               />
               <YAxis
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
-                width={30}
+                width={35}
                 allowDecimals={false}
               />
               <Tooltip content={<CustomTooltip />} />
@@ -393,10 +390,10 @@ export default function Analytics() {
                 dataKey="cards"
                 name="Cards"
                 stroke={COLORS.accentBlue}
-                strokeWidth={2}
+                strokeWidth={2.5}
                 dot={false}
                 activeDot={{
-                  r: 4,
+                  r: 5,
                   fill: COLORS.accentBlue,
                   stroke: COLORS.bgElevated,
                   strokeWidth: 2,
@@ -406,10 +403,12 @@ export default function Analytics() {
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
+      </motion.div>
 
-        {/* Bar chart: accuracy by category */}
+      {/* Accuracy by category — full width */}
+      <motion.div variants={sectionVariant} className="mb-6">
         <ChartCard title="Accuracy by Category">
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={Math.max(280, categoryAccuracyData.length * 36)}>
             <BarChart data={categoryAccuracyData} layout="vertical">
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -419,7 +418,7 @@ export default function Analytics() {
               <XAxis
                 type="number"
                 domain={[0, 100]}
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={(v: number) => `${v}%`}
@@ -427,16 +426,17 @@ export default function Analytics() {
               <YAxis
                 type="category"
                 dataKey="category"
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
-                width={120}
+                width={130}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar
                 dataKey="accuracy"
                 name="Accuracy"
                 radius={[0, 6, 6, 0]}
+                barSize={20}
                 animationDuration={800}
               >
                 {categoryAccuracyData.map((entry, idx) => (
@@ -456,17 +456,23 @@ export default function Analytics() {
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
+      </motion.div>
 
+      {/* Two-column: donut + ease histogram */}
+      <motion.div
+        variants={sectionVariant}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
+      >
         {/* Donut: card status distribution */}
         <ChartCard title="Card Status Distribution">
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
                 data={statusData}
                 cx="50%"
-                cy="50%"
-                innerRadius={55}
-                outerRadius={85}
+                cy="45%"
+                innerRadius={65}
+                outerRadius={100}
                 paddingAngle={3}
                 dataKey="value"
                 stroke="none"
@@ -496,7 +502,7 @@ export default function Analytics() {
 
         {/* Histogram: ease factor distribution */}
         <ChartCard title="Ease Factor Distribution">
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={300}>
             <BarChart data={easeHistData}>
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -505,15 +511,15 @@ export default function Analytics() {
               />
               <XAxis
                 dataKey="range"
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
+                tick={{ fill: COLORS.textTertiary, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
-                width={30}
+                width={35}
                 allowDecimals={false}
               />
               <Tooltip content={<CustomTooltip />} />

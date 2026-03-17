@@ -19,6 +19,7 @@ import {
   type TFQuestion,
   type FIBQuestion,
   type MatchQuestion,
+  type SAQuestion,
 } from '../../data/questions';
 import type { Card } from '../../data/cards';
 import Button from '../ui/Button';
@@ -37,7 +38,8 @@ type PracticeItem =
   | { kind: 'mc'; q: MCQuestion }
   | { kind: 'tf'; q: TFQuestion }
   | { kind: 'fib'; q: FIBQuestion }
-  | { kind: 'match'; q: MatchQuestion };
+  | { kind: 'match'; q: MatchQuestion }
+  | { kind: 'sa'; q: SAQuestion };
 
 interface SessionResult {
   cardsLearned: Card[];
@@ -75,22 +77,115 @@ function shuffleArray<T>(arr: T[]): T[] {
   return shuffled;
 }
 
+/**
+ * Fuzzy text comparison for grading written answers.
+ * Returns a score 0-1 indicating how well the answer matches.
+ */
+function fuzzyMatch(userAnswer: string, accepted: string): number {
+  const a = userAnswer.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+  const b = accepted.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
+  if (a === b) return 1;
+  if (a.length === 0) return 0;
+  // Check substring containment
+  if (a.includes(b) || b.includes(a)) return 0.9;
+  // Check word overlap
+  const wordsA = new Set(a.split(/\s+/).filter(Boolean));
+  const wordsB = new Set(b.split(/\s+/).filter(Boolean));
+  const intersection = [...wordsA].filter((w) => wordsB.has(w));
+  const union = new Set([...wordsA, ...wordsB]);
+  const jaccard = union.size > 0 ? intersection.length / union.size : 0;
+  if (jaccard >= 0.6) return jaccard;
+  // Levenshtein-based similarity for short strings
+  if (a.length < 40 && b.length < 40) {
+    const maxLen = Math.max(a.length, b.length);
+    const dist = levenshtein(a, b);
+    const similarity = 1 - dist / maxLen;
+    return similarity;
+  }
+  return jaccard;
+}
+
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  const dp: number[][] = Array.from({ length: m + 1 }, (_, i) =>
+    Array.from({ length: n + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0))
+  );
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = a[i - 1] === b[j - 1]
+        ? dp[i - 1][j - 1]
+        : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+  return dp[m][n];
+}
+
+/** Check if a FIB answer is close enough to be correct (threshold: 0.7) */
+function isFuzzyCorrect(userAnswer: string, acceptedAnswers: string[]): boolean {
+  return acceptedAnswers.some((a) => fuzzyMatch(userAnswer, a) >= 0.7);
+}
+
+/**
+ * Grade a short-answer response against key points.
+ * Returns { correct: boolean, matched: number, total: number, feedback: string }
+ */
+function gradeShortAnswer(
+  userAnswer: string,
+  keyPoints: string[],
+  modelAnswer: string,
+): { correct: boolean; matched: number; total: number; feedback: string } {
+  if (!userAnswer.trim()) {
+    return { correct: false, matched: 0, total: keyPoints.length, feedback: 'No answer provided.' };
+  }
+  const answer = userAnswer.toLowerCase();
+  let matched = 0;
+  const missed: string[] = [];
+
+  for (const point of keyPoints) {
+    const pointLower = point.toLowerCase();
+    // Check if key point words appear in the answer
+    const pointWords = pointLower.split(/\s+/).filter((w) => w.length > 3);
+    const matchedWords = pointWords.filter((w) => answer.includes(w));
+    if (matchedWords.length >= Math.ceil(pointWords.length * 0.5)) {
+      matched++;
+    } else if (fuzzyMatch(answer, pointLower) >= 0.5) {
+      matched++;
+    } else {
+      missed.push(point);
+    }
+  }
+
+  const ratio = keyPoints.length > 0 ? matched / keyPoints.length : 0;
+  const correct = ratio >= 0.5; // Pass if at least half the key points are covered
+
+  let feedback = '';
+  if (correct && missed.length === 0) {
+    feedback = 'Excellent! You covered all the key points.';
+  } else if (correct) {
+    feedback = `Good answer! You could also mention: ${missed.join('; ')}`;
+  } else {
+    feedback = `The model answer includes: ${modelAnswer}`;
+  }
+
+  return { correct, matched, total: keyPoints.length, feedback };
+}
+
 /** Pick diverse practice items from the question bank for a batch of cards. */
 function buildPracticeItems(batchCards: Card[]): PracticeItem[] {
-  const usableTypes = ['mc', 'tf', 'fib', 'match'] as const;
+  const usableTypes = ['mc', 'tf', 'fib', 'match', 'sa'] as const;
   const items: PracticeItem[] = [];
   const usedIds = new Set<string>();
 
   // Try to pick questions that relate to the batch cards
   // Prefer onMainTest questions and mix types
-  const typeBudget: Record<string, number> = { mc: 0, tf: 0, fib: 0, match: 0 };
+  const typeBudget: Record<string, number> = { mc: 0, tf: 0, fib: 0, match: 0, sa: 0 };
   const targetPerCard = 2; // ~2 questions per card in batch
   const totalTarget = batchCards.length * targetPerCard;
 
   // Filter question bank to usable types
   const pool = questionBank.filter(
     (q) => usableTypes.includes(q.type as typeof usableTypes[number])
-  ) as (MCQuestion | TFQuestion | FIBQuestion | MatchQuestion)[];
+  ) as (MCQuestion | TFQuestion | FIBQuestion | MatchQuestion | SAQuestion)[];
 
   // Score each question by relevance to the batch
   const scored = pool.map((q) => {
@@ -285,6 +380,10 @@ export default function GuidedSession() {
   // FIB state
   const [fibInputs, setFibInputs] = useState<string[]>([]);
 
+  // SA (short answer) state
+  const [saInput, setSaInput] = useState('');
+  const [saGradeResult, setSaGradeResult] = useState<{ matched: number; total: number; feedback: string } | null>(null);
+
   // Match state
   const [matchSelections, setMatchSelections] = useState<Record<number, number>>({});
   const [matchLeftSelected, setMatchLeftSelected] = useState<number | null>(null);
@@ -404,6 +503,8 @@ export default function GuidedSession() {
       setSelectedAnswer(null);
       setShowFeedback(false);
       setFibInputs([]);
+      setSaInput('');
+      setSaGradeResult(null);
       setMatchSelections({});
       setMatchLeftSelected(null);
     }
@@ -430,6 +531,8 @@ export default function GuidedSession() {
       setSelectedAnswer(null);
       setShowFeedback(false);
       setFibInputs([]);
+      setSaInput('');
+      setSaGradeResult(null);
       setMatchSelections({});
       setMatchLeftSelected(null);
       setPhase('practice');
@@ -474,15 +577,15 @@ export default function GuidedSession() {
     [showFeedback, currentPractice, recordAnswer]
   );
 
-  // FIB submit
+  // FIB submit — uses fuzzy matching so close-enough answers count
   const handleFIBSubmit = useCallback(() => {
     if (showFeedback || !currentPractice || currentPractice.kind !== 'fib') return;
     const q = currentPractice.q;
     let allCorrect = true;
     for (let i = 0; i < q.blanks.length; i++) {
-      const userAnswer = (fibInputs[i] || '').trim().toLowerCase();
-      const accepted = q.acceptableAnswers[i] || [q.blanks[i].toLowerCase()];
-      if (!accepted.some((a) => a.toLowerCase() === userAnswer)) {
+      const userAnswer = (fibInputs[i] || '').trim();
+      const accepted = q.acceptableAnswers[i] || [q.blanks[i]];
+      if (!isFuzzyCorrect(userAnswer, accepted)) {
         allCorrect = false;
         break;
       }
@@ -510,6 +613,15 @@ export default function GuidedSession() {
     recordAnswer(allCorrect, q.explanation);
   }, [showFeedback, currentPractice, matchSelections, shuffledRights, recordAnswer]);
 
+  // SA (short answer) submit — grades against key points
+  const handleSASubmit = useCallback(() => {
+    if (showFeedback || !currentPractice || currentPractice.kind !== 'sa') return;
+    const q = currentPractice.q;
+    const result = gradeShortAnswer(saInput, q.keyPoints, q.modelAnswer);
+    setSaGradeResult(result);
+    recordAnswer(result.correct, result.feedback);
+  }, [showFeedback, currentPractice, saInput, recordAnswer]);
+
   const handleNextPractice = useCallback(() => {
     const nextIdx = practiceIndex + 1;
     if (nextIdx < practiceItems.length) {
@@ -517,6 +629,8 @@ export default function GuidedSession() {
       setSelectedAnswer(null);
       setShowFeedback(false);
       setFibInputs([]);
+      setSaInput('');
+      setSaGradeResult(null);
       setMatchSelections({});
       setMatchLeftSelected(null);
 
@@ -1242,9 +1356,9 @@ export default function GuidedSession() {
             {q.blanks.map((blank, idx) => {
               let borderColor = 'var(--bg-border-strong)';
               if (showFeedback) {
-                const userAnswer = (fibInputs[idx] || '').trim().toLowerCase();
-                const accepted = q.acceptableAnswers[idx] || [blank.toLowerCase()];
-                const isCorrect = accepted.some((a) => a.toLowerCase() === userAnswer);
+                const userAnswer = (fibInputs[idx] || '').trim();
+                const accepted = q.acceptableAnswers[idx] || [blank];
+                const isCorrect = isFuzzyCorrect(userAnswer, accepted);
                 borderColor = isCorrect ? '#34d399' : '#ef4444';
               }
 
@@ -1453,6 +1567,86 @@ export default function GuidedSession() {
             <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 20, textAlign: 'center' }}>
               Tap a term on the left, then tap its match on the right.
             </p>
+          )}
+
+          {showFeedback && (
+            <FeedbackBanner
+              correct={lastAnswerCorrect}
+              explanation={lastExplanation}
+              onContinue={handleNextPractice}
+            />
+          )}
+        </>
+      );
+    }
+
+    // ─── SA (Short Answer) Question ────────────────────────────────────
+    if (currentPractice.kind === 'sa') {
+      const q = currentPractice.q;
+      return contentWrapper(
+        <>
+          <QuestionHeader typeLabel="Written Answer" typeColor="#bf5af2" question={q.question} />
+
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <textarea
+              value={saInput}
+              onChange={(e) => { if (!showFeedback) setSaInput(e.target.value); }}
+              disabled={showFeedback}
+              placeholder="Type your answer here..."
+              rows={5}
+              style={{
+                width: '100%',
+                padding: '14px 16px',
+                borderRadius: 14,
+                border: `1.5px solid ${showFeedback ? (lastAnswerCorrect ? '#34d399' : '#ef4444') : 'var(--bg-border-strong)'}`,
+                background: 'var(--bg-overlay)',
+                color: 'var(--text-primary)',
+                fontSize: 15,
+                fontFamily: baseFont,
+                outline: 'none',
+                resize: 'vertical',
+                lineHeight: 1.6,
+                boxSizing: 'border-box',
+              }}
+            />
+
+            {showFeedback && saGradeResult && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{
+                  padding: '12px 16px',
+                  borderRadius: 12,
+                  backgroundColor: lastAnswerCorrect ? 'rgba(52,211,153,0.08)' : 'rgba(239,68,68,0.08)',
+                  border: `1px solid ${lastAnswerCorrect ? 'rgba(52,211,153,0.2)' : 'rgba(239,68,68,0.2)'}`,
+                }}
+              >
+                <p style={{ fontSize: 13, fontWeight: 600, color: lastAnswerCorrect ? '#34d399' : '#ef4444', margin: '0 0 4px' }}>
+                  {saGradeResult.matched}/{saGradeResult.total} key points covered
+                </p>
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                  {saGradeResult.feedback}
+                </p>
+              </motion.div>
+            )}
+          </div>
+
+          {!showFeedback && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3, ease: cubicEase }}
+              style={{ marginTop: 24 }}
+            >
+              <Button
+                variant="primary"
+                size="md"
+                onClick={handleSASubmit}
+                icon={<CheckCircle size={16} />}
+              >
+                Submit Answer
+              </Button>
+            </motion.div>
           )}
 
           {showFeedback && (
