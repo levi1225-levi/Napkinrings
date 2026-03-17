@@ -177,7 +177,7 @@ export default function DailyStatus() {
               color: todayXP >= dailyGoal
                 ? 'var(--accent-green)'
                 : 'var(--accent-blue)',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: 'var(--font-ui)',
             }}
           >
             {Math.round(xpProgress)}%

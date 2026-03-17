@@ -65,10 +65,17 @@ export default function QuizSession() {
     }
   }, []);
 
+  // Saved question order for resume (set when user resumes)
+  const [resumedQuestionIds, setResumedQuestionIds] = useState<string[] | null>(null);
+
   const handleResume = useCallback(() => {
     if (!savedProgress?.quiz) return;
     startQuizSession();
     setPhase('playing');
+    // Restore the exact question order from the saved IDs
+    if (savedProgress.quiz.questionIds) {
+      setResumedQuestionIds(savedProgress.quiz.questionIds);
+    }
     setCurrentIndex(savedProgress.quiz.currentIndex);
     setAnswered(false);
     setSelectedIndex(null);
@@ -86,20 +93,27 @@ export default function QuizSession() {
 
   // Prioritize questions: sort by weakest related cards (lowest ease factor)
   const orderedQuestions = useMemo(() => {
+    // If resuming, restore the exact question order from saved IDs
+    if (resumedQuestionIds) {
+      const byId = new Map(QUIZ_QUESTIONS.map((q) => [q.id, q]));
+      const restored = resumedQuestionIds
+        .map((id) => byId.get(id))
+        .filter((q): q is QuizQuestionType => q !== undefined);
+      if (restored.length > 0) {
+        return restored.map(shuffleOptions);
+      }
+    }
+
     const scored = QUIZ_QUESTIONS.map((q) => {
       const cardState = data.cardStates[q.relatedCardId];
       const easeFactor = cardState ? cardState.easeFactor : 2.5;
-      // Lower ease = weaker card = higher priority
       return { question: q, easeFactor };
     });
 
-    // Sort weakest first, then shuffle within similar ease ranges
     scored.sort((a, b) => a.easeFactor - b.easeFactor);
 
-    // Take a subset for the quiz session (15 questions max)
     const selected = scored.slice(0, 15);
 
-    // Lightly shuffle so it's not perfectly sorted but still weighted to weak cards
     const result: typeof selected = [];
     const chunks: (typeof selected)[] = [];
     for (let i = 0; i < selected.length; i += 5) {
@@ -110,7 +124,7 @@ export default function QuizSession() {
     }
 
     return result.map((s) => shuffleOptions(s.question));
-  }, [data.cardStates]);
+  }, [data.cardStates, resumedQuestionIds]);
 
   // Save progress whenever index or answers change during an active quiz
   useEffect(() => {
@@ -120,6 +134,7 @@ export default function QuizSession() {
         timestamp: Date.now(),
         quiz: {
           questionIndices: orderedQuestions.map((_, i) => i),
+          questionIds: orderedQuestions.map((q) => q.id),
           currentIndex,
           answers: quizAnswers as Record<string, { selectedIndex: number; correct: boolean; timeMs: number }>,
         },
@@ -178,7 +193,7 @@ export default function QuizSession() {
       setSelectedIndex(selected);
       setAnswered(true);
 
-      answerQuiz(currentIndex, selected, correct, timeMs);
+      answerQuiz(currentIndex, selected, correct, timeMs, question.relatedCardId);
 
       // Auto-advance after 1.5s
       setTimeout(() => {
@@ -236,7 +251,7 @@ export default function QuizSession() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className="flex flex-col items-center gap-8 w-full max-w-lg mx-auto py-8"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
+        style={{ fontFamily: 'var(--font-ui)' }}
       >
         {/* Resume banner */}
         {savedProgress && !resumeBannerDismissed && (

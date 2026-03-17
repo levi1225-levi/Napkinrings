@@ -88,7 +88,7 @@ function CustomTooltip({
         border: '1px solid var(--bg-border-strong)',
         borderRadius: 10,
         padding: '10px 14px',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
       }}
     >
       <p className="text-xs mb-1" style={{ color: COLORS.textTertiary }}>
@@ -227,7 +227,7 @@ export default function Analytics() {
       .map(([category, { correct, incorrect }]) => {
         const total = correct + incorrect;
         return {
-          category: category.length > 10 ? category.slice(0, 10) + '...' : category,
+          category: category.length > 16 ? category.slice(0, 14) + '\u2026' : category,
           fullCategory: category,
           accuracy: total > 0 ? (correct / total) * 100 : 0,
         };
@@ -318,7 +318,7 @@ export default function Analytics() {
       <motion.div variants={sectionVariant} className="mb-6">
         <h1
           className="text-2xl font-bold"
-          style={{ color: COLORS.textPrimary, fontFamily: "'DM Sans', sans-serif" }}
+          style={{ color: COLORS.textPrimary, fontFamily: 'var(--font-ui)' }}
         >
           Analytics
         </h1>
@@ -333,6 +333,31 @@ export default function Analytics() {
           <StatsOverview />
         </Suspense>
       </motion.div>
+
+      {/* Empty state message when no sessions exist */}
+      {(data.sessions ?? []).length === 0 && (
+        <motion.div
+          variants={sectionVariant}
+          className="mb-6"
+          style={{
+            background: COLORS.bgElevated,
+            borderRadius: 16,
+            border: '1px solid var(--bg-border)',
+            padding: '40px 24px',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{ fontSize: 32, marginBottom: 12 }} role="img" aria-label="chart">
+            📊
+          </p>
+          <p style={{ color: COLORS.textPrimary, fontSize: 16, fontWeight: 600, marginBottom: 6 }}>
+            No data yet
+          </p>
+          <p style={{ color: COLORS.textSecondary, fontSize: 14 }}>
+            Complete your first study session to see your analytics here.
+          </p>
+        </motion.div>
+      )}
 
       {/* Charts 2x2 grid */}
       <motion.div
@@ -405,7 +430,7 @@ export default function Analytics() {
                 tick={{ fill: COLORS.textTertiary, fontSize: 10 }}
                 axisLine={false}
                 tickLine={false}
-                width={90}
+                width={120}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar

@@ -75,6 +75,9 @@ export default function WeakCardsWidget() {
 
   const hasStudied = weakCards.length > 0;
 
+  // Hide entirely when there's no data
+  if (!hasStudied) return null;
+
   return (
     <motion.div
       variants={containerVariants}
@@ -106,14 +109,14 @@ export default function WeakCardsWidget() {
             color: 'var(--text-primary)',
             fontSize: '16px',
             fontWeight: 700,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
           }}
         >
           Focus Areas
         </h3>
       </div>
 
-      {hasStudied ? (
+      {hasStudied && (
         <div className="flex flex-col gap-3">
           {weakCards.map((card) => {
             const easeColor = getEaseColor(card.easeFactor);
@@ -159,7 +162,7 @@ export default function WeakCardsWidget() {
                       color: 'var(--text-primary)',
                       fontSize: '14px',
                       fontWeight: 600,
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: 'var(--font-ui)',
                     }}
                   >
                     {card.term}
@@ -215,7 +218,7 @@ export default function WeakCardsWidget() {
                     color: 'var(--accent-blue)',
                     fontSize: '13px',
                     fontWeight: 600,
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: 'var(--font-ui)',
                     cursor: 'pointer',
                     padding: '4px 8px',
                     borderRadius: '6px',
@@ -228,37 +231,6 @@ export default function WeakCardsWidget() {
             );
           })}
         </div>
-      ) : (
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col items-center justify-center"
-          style={{
-            padding: '32px 16px',
-            textAlign: 'center',
-          }}
-        >
-          <span
-            style={{
-              fontSize: '32px',
-              marginBottom: '12px',
-            }}
-            role="img"
-            aria-label="books"
-          >
-            📚
-          </span>
-          <p
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '14px',
-              fontWeight: 500,
-              fontFamily: "'DM Sans', sans-serif",
-              lineHeight: 1.5,
-            }}
-          >
-            Start studying to see your focus areas!
-          </p>
-        </motion.div>
       )}
     </motion.div>
   );

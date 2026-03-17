@@ -109,7 +109,7 @@ export default function Modal({
               borderRadius: '16px',
               border: '1px solid var(--bg-border-strong)',
               boxShadow: 'var(--shadow-lg)',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: 'var(--font-ui)',
             }}
             role="dialog"
             aria-modal="true"

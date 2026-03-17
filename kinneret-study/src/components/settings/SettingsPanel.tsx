@@ -55,8 +55,9 @@ function ChipSelect<T extends string | number>({
                 : '1.5px solid var(--bg-border-strong)',
               backgroundColor: isSelected
                 ? 'var(--accent-blue)'
-                : 'transparent',
-              color: isSelected ? '#fff' : 'var(--text-secondary)',
+                : 'var(--bg-overlay)',
+              color: isSelected ? '#fff' : 'var(--text-primary)',
+              boxShadow: isSelected ? '0 2px 8px rgba(79,142,247,0.3)' : 'none',
               transition: 'all 0.15s ease',
             }}
           >
@@ -522,11 +523,12 @@ export default function SettingsPanel() {
               onClick={handleExport}
               className="flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors duration-150"
               style={{
-                backgroundColor: 'var(--bg-base)',
+                backgroundColor: 'rgba(79,142,247,0.1)',
                 color: 'var(--accent-blue)',
                 borderRadius: '12px',
-                border: '1px solid var(--bg-border-strong)',
+                border: '1.5px solid rgba(79,142,247,0.3)',
                 cursor: 'pointer',
+                fontFamily: 'var(--font-ui)',
               }}
             >
               <Download size={16} />

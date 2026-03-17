@@ -105,7 +105,7 @@ export default function Button({
         height: s.height,
         padding: s.padding,
         fontSize: s.fontSize,
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
         border: `1px solid ${v.border}`,
         cursor: isDisabled ? 'not-allowed' : 'pointer',
         opacity: isDisabled ? 0.5 : 1,

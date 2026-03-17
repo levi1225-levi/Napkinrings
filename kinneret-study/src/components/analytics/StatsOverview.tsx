@@ -97,7 +97,9 @@ export default function StatsOverview() {
         color: '#ff9f0a',
         bg: 'rgba(255,159,10,0.12)',
         value: currentStreak,
-        display: `${currentStreak} / ${longestStreak} days`,
+        display: longestStreak > 0 && longestStreak !== currentStreak
+          ? `${currentStreak} / ${longestStreak} days`
+          : `${currentStreak} day${currentStreak !== 1 ? 's' : ''}`,
       },
       {
         label: 'Accuracy',
@@ -163,7 +165,7 @@ export default function StatsOverview() {
             {s.display ? (
               <span
                 className="text-xl font-bold"
-                style={{ color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif" }}
+                style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-ui)' }}
               >
                 {s.display}
               </span>

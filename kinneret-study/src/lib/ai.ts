@@ -67,8 +67,8 @@ export async function getAITutorResponse(
     return 'AI tutor is unavailable. Please set the VITE_ANTHROPIC_API_KEY environment variable.';
   }
 
-  const systemPrompt = `You are a helpful and encouraging study tutor for an Israeli geography and nature exam about the Kinneret (Sea of Galilee) region.
-Your student is preparing for a test and needs help understanding Hebrew vocabulary and concepts related to the Kinneret.
+  const systemPrompt = `You are a helpful and encouraging study tutor for a Jewish law and Talmud exam (the "Kinneret" study program).
+Your student is preparing for a test on the Oral Torah, Mishnah, Talmud, Halachah, and related Jewish legal concepts.
 
 Context about the current card being studied:
 ${cardContext}
@@ -128,11 +128,11 @@ export async function getAIExplanation(
   definition: string,
   extendedNotes: string
 ): Promise<string> {
-  const systemPrompt = `You are an expert tutor helping a student study for an Israeli geography exam about the Kinneret region.
+  const systemPrompt = `You are an expert tutor helping a student study for a Jewish law and Talmud exam.
 Generate a clear, memorable explanation for the following term. Include:
 1. A simple explanation in plain English
 2. A mnemonic or memory trick to remember it
-3. How it connects to the broader topic of the Kinneret/Sea of Galilee
+3. How it connects to the broader study of Oral Torah, Mishnah, Talmud, and Halachah
 Keep your response concise (under 150 words).`;
 
   const userMessage = `Term: ${term}
@@ -178,7 +178,7 @@ export async function getAISessionInsights(
     (c) => c.incorrectReviews > 3
   );
 
-  const systemPrompt = `You are a supportive study coach analyzing a student's Kinneret study session.
+  const systemPrompt = `You are a supportive study coach analyzing a student's Jewish law and Talmud study session.
 Provide brief, encouraging feedback (under 100 words) with:
 1. What went well
 2. One specific area to focus on next
@@ -245,7 +245,7 @@ export async function getAITestPrediction(
     Math.ceil((test.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
   );
 
-  const systemPrompt = `You are an encouraging study coach helping a student prepare for their Kinneret (Sea of Galilee) geography exam.
+  const systemPrompt = `You are an encouraging study coach helping a student prepare for their Jewish law and Talmud exam.
 Based on the study statistics, provide:
 1. An estimated readiness percentage
 2. A brief assessment of strengths

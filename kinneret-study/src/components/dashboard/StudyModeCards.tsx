@@ -134,7 +134,7 @@ export default function StudyModeCards() {
                 fontSize: '17px',
                 fontWeight: 700,
                 marginBottom: '4px',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
               }}
             >
               {mode.title}
@@ -178,7 +178,7 @@ export default function StudyModeCards() {
                 color: mode.iconColor,
                 fontSize: '14px',
                 fontWeight: 600,
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'color 0.15s',

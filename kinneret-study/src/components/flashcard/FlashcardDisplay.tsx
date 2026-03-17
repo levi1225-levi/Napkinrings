@@ -257,7 +257,7 @@ export function FlashcardDisplay({
             </div>
           )}
 
-          {/* Related cards */}
+          {/* Related cards — clickable navigation chips */}
           {card.relatedCards && card.relatedCards.length > 0 && (
             <div className="flex items-center flex-wrap gap-1.5 mt-auto pt-4">
               <Link2
@@ -268,18 +268,26 @@ export function FlashcardDisplay({
               {card.relatedCards.slice(0, 5).map((rcId) => {
                 const rc = getCardById(rcId);
                 return (
-                  <span
+                  <button
                     key={rcId}
-                    className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Dispatch custom event to navigate to this card
+                      window.dispatchEvent(new CustomEvent('kinneret-navigate-card', { detail: rcId }));
+                    }}
+                    className="text-[11px] px-2.5 py-1 rounded-md truncate max-w-[120px] transition-colors"
                     style={{
                       background: 'var(--bg-overlay)',
-                      color: 'var(--text-tertiary)',
-                      border: '1px solid var(--bg-border)',
+                      color: 'var(--accent-blue)',
+                      border: '1px solid rgba(79,142,247,0.2)',
+                      cursor: 'pointer',
+                      fontFamily: 'var(--font-ui)',
                     }}
                     title={rc?.term ?? rcId}
+                    aria-label={`Go to related card: ${rc?.term ?? rcId}`}
                   >
                     {rc?.term ?? rcId}
-                  </span>
+                  </button>
                 );
               })}
             </div>

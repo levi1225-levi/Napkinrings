@@ -32,6 +32,7 @@ export interface SavedStudyProgress {
   /** Quiz session state */
   quiz?: {
     questionIndices: number[];
+    questionIds: string[];
     currentIndex: number;
     answers: Record<string, { selectedIndex: number; correct: boolean; timeMs: number }>;
   };
@@ -117,6 +118,7 @@ export interface AppData {
   sessions: StudySession[];
   aiCache: Record<string, string>;
   settings: UserSettings;
+  bookmarkedCards: string[];
 }
 
 /**
@@ -190,6 +192,7 @@ function createDefaultAppData(): AppData {
     sessions: [],
     aiCache: {},
     settings: getDefaultSettings(),
+    bookmarkedCards: [],
   };
 }
 
@@ -228,6 +231,7 @@ export function loadAppData(): AppData {
     // Ensure settings has all fields (backward compat)
     parsed.settings = { ...getDefaultSettings(), ...parsed.settings };
     parsed.profile = { ...getDefaultProfile(), ...parsed.profile };
+    if (!parsed.bookmarkedCards) parsed.bookmarkedCards = [];
 
     return parsed;
   } catch (err) {

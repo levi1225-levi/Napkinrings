@@ -8,15 +8,18 @@ import {
   BookOpen,
   GraduationCap,
   ChevronRight,
+  Flame,
+  Clock,
 } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { FlashcardSession } from '../components/flashcard/FlashcardSession';
 import QuizSession from '../components/quiz/QuizSession';
+import PracticeTest from '../components/quiz/PracticeTest';
 import SpeedRound from '../components/speed/SpeedRound';
 
 const GuidedSession = lazy(() => import('../components/guided/GuidedSession'));
 
-type StudyModeId = 'flashcard' | 'quiz' | 'speed' | 'guided';
+type StudyModeId = 'flashcard' | 'quiz' | 'speed' | 'guided' | 'cram' | 'practice-test';
 
 const MODES: {
   id: StudyModeId;
@@ -49,11 +52,27 @@ const MODES: {
     accentColor: '#34c759',
   },
   {
+    id: 'practice-test',
+    label: 'Practice Test',
+    description: 'Timed test simulation with countdown',
+    icon: Clock,
+    accentColor: '#ff6b35',
+    badge: 'Timed',
+  },
+  {
     id: 'speed',
     label: 'Speed Round',
     description: 'Fast-paced true or false challenge',
     icon: Zap,
     accentColor: '#ff9f0a',
+  },
+  {
+    id: 'cram',
+    label: 'Cram Mode',
+    description: 'Intensive review of all cards, weakest first',
+    icon: Flame,
+    accentColor: '#ff453a',
+    badge: 'Last Minute',
   },
 ];
 
@@ -64,7 +83,18 @@ const pageVariants = {
 };
 
 export default function StudyHub() {
-  const { studyMode, setStudyMode } = useAppStore();
+  const { studyMode, setStudyMode, startCramSession } = useAppStore();
+
+  const handleModeSelect = (modeId: StudyModeId) => {
+    if (modeId === 'cram') {
+      startCramSession();
+      setStudyMode('flashcard'); // Cram uses flashcard UI with all cards loaded
+    } else if (modeId === 'practice-test') {
+      setStudyMode('practice-test');
+    } else {
+      setStudyMode(modeId as 'flashcard' | 'quiz' | 'speed' | 'guided');
+    }
+  };
 
   return (
     <motion.div
@@ -110,7 +140,7 @@ export default function StudyHub() {
                     fontWeight: 700,
                     color: 'var(--text-primary)',
                     margin: 0,
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: 'var(--font-ui)',
                   }}
                 >
                   Study Hub
@@ -141,7 +171,7 @@ export default function StudyHub() {
                       duration: 0.4,
                       ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                     }}
-                    onClick={() => setStudyMode(mode.id)}
+                    onClick={() => handleModeSelect(mode.id)}
                     className="flex items-center gap-4 w-full text-left"
                     style={{
                       background: 'var(--bg-elevated)',
@@ -171,14 +201,15 @@ export default function StudyHub() {
                       <Icon size={24} style={{ color: mode.accentColor }} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
+                      <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                         <h3
                           style={{
                             fontSize: '16px',
                             fontWeight: 600,
                             color: 'var(--text-primary)',
                             margin: 0,
-                            fontFamily: "'DM Sans', sans-serif",
+                            fontFamily: 'var(--font-ui)',
+                            whiteSpace: 'nowrap',
                           }}
                         >
                           {mode.label}
@@ -242,7 +273,7 @@ export default function StudyHub() {
                 color: '#4f8ef7',
                 fontSize: '14px',
                 fontWeight: 500,
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
                 padding: '4px 0',
               }}
             >
@@ -259,6 +290,7 @@ export default function StudyHub() {
               )}
               {studyMode === 'flashcard' && <FlashcardSession />}
               {studyMode === 'quiz' && <QuizSession />}
+              {studyMode === 'practice-test' && <PracticeTest />}
               {studyMode === 'speed' && <SpeedRound />}
             </div>
           </motion.div>

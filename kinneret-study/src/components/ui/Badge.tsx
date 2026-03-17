@@ -51,7 +51,7 @@ export default function Badge({
         padding: '4px 10px',
         fontSize: '12px',
         fontWeight: 500,
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
         lineHeight: 1,
       }}
     >

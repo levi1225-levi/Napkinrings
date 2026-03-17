@@ -129,7 +129,7 @@ export default function QuizQuestion({
         </div>
         <div
           className="flex items-center justify-between mt-2"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
+          style={{ fontFamily: 'var(--font-ui)' }}
         >
           <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
             {questionNumber} of {totalQuestions}
@@ -147,7 +147,7 @@ export default function QuizQuestion({
           style={{
             color: 'var(--text-primary)',
             fontSize: '14px',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
           }}
         >
           Question {questionNumber}
@@ -159,7 +159,7 @@ export default function QuizQuestion({
             borderRadius: '8px',
             fontSize: '11px',
             fontWeight: 600,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             color: diff.color,
             backgroundColor: `${diff.color}18`,
           }}
@@ -180,7 +180,7 @@ export default function QuizQuestion({
           style={{
             color: 'var(--text-tertiary)',
             fontSize: '12px',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             marginLeft: 'auto',
           }}
         >
@@ -198,7 +198,7 @@ export default function QuizQuestion({
           fontSize: '22px',
           fontWeight: 600,
           lineHeight: 1.4,
-          fontFamily: "'DM Sans', sans-serif",
+          fontFamily: 'var(--font-ui)',
           letterSpacing: '-0.01em',
         }}
       >
@@ -251,7 +251,7 @@ export default function QuizQuestion({
                 border: `1px solid ${style.border}`,
                 boxShadow: style.shadow,
                 cursor: answered ? 'default' : 'pointer',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
                 outline: 'none',
               }}
               aria-label={`Option ${optionLabels[index]}: ${option}`}
@@ -366,7 +366,7 @@ export default function QuizQuestion({
                 color: 'var(--text-secondary)',
                 fontSize: '14px',
                 lineHeight: 1.6,
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
                 margin: 0,
               }}
             >

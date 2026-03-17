@@ -31,21 +31,19 @@ const pageComponents: Record<string, React.LazyExoticComponent<() => React.React
 function PageLoader() {
   return (
     <div
-      className="flex items-center justify-center"
-      style={{ minHeight: '60vh' }}
+      style={{ padding: '24px 24px 32px', maxWidth: '960px', margin: '0 auto', width: '100%' }}
+      role="status"
+      aria-label="Loading page"
     >
-      <div
-        className="animate-spin"
-        style={{
-          width: '32px',
-          height: '32px',
-          border: '3px solid var(--bg-border-strong)',
-          borderTopColor: 'var(--accent-blue)',
-          borderRadius: '50%',
-        }}
-        role="status"
-        aria-label="Loading page"
-      />
+      {/* Skeleton greeting */}
+      <div className="skeleton skeleton-title" style={{ width: '45%', marginBottom: 8 }} />
+      <div className="skeleton skeleton-text" style={{ width: '65%', marginBottom: 24 }} />
+      {/* Skeleton CTA */}
+      <div className="skeleton" style={{ height: 52, borderRadius: 16, marginBottom: 24 }} />
+      {/* Skeleton cards */}
+      <div className="skeleton skeleton-card" />
+      <div className="skeleton skeleton-card" />
+      <div className="skeleton skeleton-card" style={{ width: '80%' }} />
     </div>
   );
 }
@@ -66,7 +64,7 @@ function LevelUpOverlay() {
       style={{
         backgroundColor: 'rgba(10,10,15,0.92)',
         backdropFilter: 'blur(12px)',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
       }}
       role="alertdialog"
       aria-label={`Level up! You reached level ${newLevel}: ${title}`}
@@ -185,7 +183,7 @@ export default function AppShell() {
       style={{
         backgroundColor: 'var(--bg-base)',
         color: 'var(--text-primary)',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
         height: '100%',
         overflow: 'hidden',
       }}

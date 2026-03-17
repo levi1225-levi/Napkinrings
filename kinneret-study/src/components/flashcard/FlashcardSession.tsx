@@ -7,6 +7,7 @@ import {
   ChevronRight,
   RotateCcw,
   X,
+  Undo2,
 } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { CARDS, CATEGORY_COLORS, getCardById } from '../../data/cards';
@@ -173,6 +174,8 @@ export function FlashcardSession() {
     endSession,
     showSessionComplete,
     getCardState,
+    undoLastGrade,
+    lastGradeAction,
   } = useAppStore();
 
   /* ── Session resume state ────────────────────────────────────── */
@@ -225,6 +228,32 @@ export function FlashcardSession() {
     clearStudyProgress();
     setSavedProgress(null);
   }, []);
+
+  /* ── Related card navigation ─────────────────────────────────── */
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const cardId = (e as CustomEvent).detail as string;
+      if (!cardId || !currentSession) return;
+      // Add the related card to the queue after current position and navigate to it
+      const idx = studyQueue.indexOf(cardId);
+      if (idx >= 0) {
+        // Card already in queue — jump to it
+        useAppStore.setState({ currentCardIndex: idx, isFlipped: false, cardStartTime: Date.now() });
+      } else {
+        // Insert after current and navigate
+        const newQueue = [...studyQueue];
+        newQueue.splice(currentCardIndex + 1, 0, cardId);
+        useAppStore.setState({
+          studyQueue: newQueue,
+          currentCardIndex: currentCardIndex + 1,
+          isFlipped: false,
+          cardStartTime: Date.now(),
+        });
+      }
+    };
+    window.addEventListener('kinneret-navigate-card', handler);
+    return () => window.removeEventListener('kinneret-navigate-card', handler);
+  }, [currentSession, studyQueue, currentCardIndex]);
 
   /* ── Elapsed time tracker ─────────────────────────────────────── */
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -455,7 +484,7 @@ export function FlashcardSession() {
         )}
       </AnimatePresence>
 
-      {/* ── Card with slide transition ────────────────────────── */}
+      {/* ── Card with slide transition + swipe gesture ─────────── */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentCardId}
@@ -464,6 +493,15 @@ export function FlashcardSession() {
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: -64, scale: 0.96 }}
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          drag={!isFlipped ? 'x' : false}
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.15}
+          onDragEnd={(_e, info) => {
+            // Swipe up to flip
+            if (!isFlipped && Math.abs(info.offset.y) > 50 && Math.abs(info.offset.x) < 30) {
+              flipCard();
+            }
+          }}
         >
           <FlashcardDisplay
             card={currentCard}
@@ -491,6 +529,29 @@ export function FlashcardSession() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Undo button ───────────────────────────────────────── */}
+      {lastGradeAction && currentCardIndex > 0 && (
+        <motion.button
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={undoLastGrade}
+          className="mt-4 flex items-center gap-1.5 text-xs font-medium"
+          style={{
+            color: 'var(--accent-orange)',
+            background: 'rgba(255,159,10,0.08)',
+            border: '1px solid rgba(255,159,10,0.2)',
+            borderRadius: '8px',
+            padding: '6px 12px',
+            cursor: 'pointer',
+          }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Undo last grade"
+        >
+          <Undo2 size={13} />
+          Undo
+        </motion.button>
+      )}
 
       {/* ── End session shortcut ──────────────────────────────── */}
       <motion.button

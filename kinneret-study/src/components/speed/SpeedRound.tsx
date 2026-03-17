@@ -193,7 +193,7 @@ export default function SpeedRound() {
   }, []);
 
   // ─── Shared styles ───
-  const fontBase: React.CSSProperties = { fontFamily: "'DM Sans', sans-serif" };
+  const fontBase: React.CSSProperties = { fontFamily: 'var(--font-ui)' };
 
   // Combo color
   function comboColor(combo: number) {
@@ -786,7 +786,7 @@ export default function SpeedRound() {
             color: '#ff453a',
             fontSize: '17px',
             fontWeight: 600,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             cursor: 'pointer',
             outline: 'none',
           }}
@@ -809,7 +809,7 @@ export default function SpeedRound() {
             color: '#34c759',
             fontSize: '17px',
             fontWeight: 600,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             cursor: 'pointer',
             outline: 'none',
           }}

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Play, Calendar, GraduationCap } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { CARDS } from '../data/cards';
-import { isCardDue } from '../lib/sm2';
+// isCardDue not needed here — due tomorrow uses direct date comparison
 import DailyStatus from '../components/dashboard/DailyStatus';
 import StudyModeCards from '../components/dashboard/StudyModeCards';
 import WeakCardsWidget from '../components/dashboard/WeakCardsWidget';
@@ -65,17 +65,20 @@ export default function Dashboard() {
     ).length;
   }, [data.cardStates]);
 
-  // Cards due tomorrow
+  // Cards due tomorrow (but NOT already due today)
   const dueTomorrow = useMemo(() => {
-    const tomorrow = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
-    const tomorrowStr = tomorrow.toISOString();
 
     return CARDS.filter((card) => {
       const cs = data.cardStates[card.id];
       if (!cs) return false;
-      return isCardDue(cs, tomorrowStr);
+      const reviewDate = new Date(cs.nextReviewDate);
+      reviewDate.setHours(0, 0, 0, 0);
+      // Due tomorrow = review date is exactly tomorrow
+      return reviewDate.getTime() === tomorrow.getTime();
     }).length;
   }, [data.cardStates]);
 
@@ -105,7 +108,7 @@ export default function Dashboard() {
             fontSize: '24px',
             fontWeight: 700,
             color: 'var(--text-primary)',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             letterSpacing: '-0.02em',
             margin: 0,
           }}
@@ -117,7 +120,7 @@ export default function Dashboard() {
             fontSize: '14px',
             color: 'var(--text-secondary)',
             marginTop: '4px',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
           }}
         >
           {dueCount > 0
@@ -222,10 +225,10 @@ export default function Dashboard() {
                 <GraduationCap size={22} style={{ color: daysUntil <= 7 ? 'var(--accent-orange)' : 'var(--accent-purple)' }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 600, margin: 0, fontFamily: "'DM Sans', sans-serif" }}>
+                <p style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 600, margin: 0, fontFamily: 'var(--font-ui)' }}>
                   {daysUntil} day{daysUntil !== 1 ? 's' : ''} until your test
                 </p>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: '2px 0 0', fontFamily: "'DM Sans', sans-serif" }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: '2px 0 0', fontFamily: 'var(--font-ui)' }}>
                   {daysUntil <= 7 ? 'Focus on your weakest areas!' : 'Keep up the great work!'}
                 </p>
               </div>
@@ -258,7 +261,7 @@ export default function Dashboard() {
             color: 'var(--text-primary)',
             fontSize: '20px',
             fontWeight: 700,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             marginBottom: '16px',
             letterSpacing: '-0.01em',
           }}
@@ -275,7 +278,7 @@ export default function Dashboard() {
             color: 'var(--text-primary)',
             fontSize: '20px',
             fontWeight: 700,
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: 'var(--font-ui)',
             marginBottom: '16px',
             letterSpacing: '-0.01em',
           }}
@@ -306,7 +309,7 @@ export default function Dashboard() {
                     fontSize: '24px',
                     fontWeight: 800,
                     color: 'var(--text-primary)',
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: 'var(--font-ui)',
                     lineHeight: 1,
                   }}
                 >
@@ -359,7 +362,7 @@ export default function Dashboard() {
                   color: 'var(--text-primary)',
                   fontSize: '28px',
                   fontWeight: 800,
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-ui)',
                   lineHeight: 1,
                 }}
               >
@@ -409,7 +412,7 @@ export default function Dashboard() {
                         : 'var(--text-primary)',
                   fontSize: '28px',
                   fontWeight: 800,
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-ui)',
                   lineHeight: 1,
                 }}
               >
@@ -454,7 +457,7 @@ export default function Dashboard() {
                   color: 'var(--accent-green)',
                   fontSize: '28px',
                   fontWeight: 800,
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-ui)',
                   lineHeight: 1,
                 }}
               >
@@ -499,7 +502,7 @@ export default function Dashboard() {
                   color: 'var(--accent-purple)',
                   fontSize: '28px',
                   fontWeight: 800,
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-ui)',
                   lineHeight: 1,
                 }}
               >
@@ -554,7 +557,7 @@ export default function Dashboard() {
                 color: 'var(--text-secondary)',
                 fontSize: '14px',
                 fontWeight: 500,
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-ui)',
               }}
             >
               You have{' '}

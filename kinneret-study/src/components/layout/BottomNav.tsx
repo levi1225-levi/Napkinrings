@@ -29,7 +29,7 @@ export default function BottomNav() {
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderTop: '1px solid var(--bg-border)',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
       }}
       role="tablist"
       aria-label="Main navigation"

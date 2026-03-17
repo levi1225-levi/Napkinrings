@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Search } from 'lucide-react';
 import SourceViewer from '../components/sources/SourceViewer';
+import CardBrowser from '../components/sources/CardBrowser';
 
 export default function Sources() {
+  const [tab, setTab] = useState<'sources' | 'cards'>('sources');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -30,16 +34,54 @@ export default function Sources() {
             className="text-xl font-bold"
             style={{ color: 'var(--text-primary)' }}
           >
-            Primary Sources
+            {tab === 'sources' ? 'Primary Sources' : 'Card Browser'}
           </h1>
           <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-            Key texts from your studies
+            {tab === 'sources' ? 'Key texts from your studies' : 'Search and browse all study cards'}
           </p>
         </div>
       </div>
 
-      {/* Source viewer */}
-      <SourceViewer />
+      {/* Tab switcher */}
+      <div
+        className="flex gap-1 p-1"
+        style={{
+          backgroundColor: 'var(--bg-overlay)',
+          borderRadius: '12px',
+          border: '1px solid var(--bg-border)',
+        }}
+      >
+        {([
+          { id: 'sources' as const, label: 'Sources', icon: BookOpen },
+          { id: 'cards' as const, label: 'Cards', icon: Search },
+        ]).map(({ id, label, icon: Icon }) => {
+          const isActive = tab === id;
+          return (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              className="flex-1 flex items-center justify-center gap-2 py-2.5"
+              style={{
+                borderRadius: '10px',
+                fontSize: '14px',
+                fontWeight: isActive ? 600 : 500,
+                fontFamily: 'var(--font-ui)',
+                backgroundColor: isActive ? 'var(--bg-elevated)' : 'transparent',
+                color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: isActive ? 'var(--shadow-sm)' : 'none',
+              }}
+            >
+              <Icon size={16} />
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Content */}
+      {tab === 'sources' ? <SourceViewer /> : <CardBrowser />}
     </motion.div>
   );
 }

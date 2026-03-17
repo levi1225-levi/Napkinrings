@@ -50,7 +50,7 @@ interface AppStore {
 
   // UI state
   activeTab: 'home' | 'study' | 'analytics' | 'sources' | 'settings';
-  studyMode: 'flashcard' | 'quiz' | 'speed' | 'guided' | null;
+  studyMode: 'flashcard' | 'quiz' | 'speed' | 'guided' | 'practice-test' | null;
   showSessionComplete: boolean;
   toasts: { id: string; message: string; type: 'success' | 'error' | 'achievement' | 'xp'; icon?: string }[];
   showAITutor: boolean;
@@ -69,7 +69,7 @@ interface AppStore {
   endSession: () => void;
 
   startQuizSession: () => void;
-  answerQuiz: (questionIndex: number, selectedIndex: number, correct: boolean, timeMs: number) => void;
+  answerQuiz: (questionIndex: number, selectedIndex: number, correct: boolean, timeMs: number, relatedCardId?: string) => void;
   endQuizSession: () => void;
 
   startSpeedRound: () => void;
@@ -91,6 +91,17 @@ interface AppStore {
   dismissLevelUp: () => void;
 
   updateStreak: () => void;
+
+  // Bookmarks
+  toggleBookmark: (cardId: string) => void;
+  isBookmarked: (cardId: string) => boolean;
+
+  // Undo
+  undoLastGrade: () => void;
+  lastGradeAction: { cardId: string; previousState: CardState; previousXP: number } | null;
+
+  // Cram mode
+  startCramSession: () => void;
 
   getDueCardCount: () => number;
   getMasteredCount: () => number;
@@ -177,6 +188,7 @@ function buildDefaultData(): AppData {
     sessions: [],
     aiCache: {},
     settings: getDefaultSettings(),
+    bookmarkedCards: [],
   };
 }
 
@@ -208,6 +220,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
   showAITutor: false,
   showLevelUp: false,
   newLevel: null,
+  lastGradeAction: null,
 
   initialize: () => {
     const data = loadAppData();
@@ -279,6 +292,10 @@ export const useAppStore = create<AppStore>((set, get) => ({
     const currentCardState = data.cardStates[cardId] || createInitialCardState(cardId);
     const responseTime = Date.now() - cardStartTime;
 
+    // Save state for undo
+    const previousState = { ...currentCardState };
+    const previousXP = data.profile.xp;
+
     const oldLevel = getLevelInfo(data.profile.xp).level;
 
     // Process grade with response time
@@ -342,7 +359,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
 
     const isLastCard = currentCardIndex >= studyQueue.length - 1;
 
-    set({ data: newData, currentSession: updatedSession, showLevelUp, newLevel });
+    set({ data: newData, currentSession: updatedSession, showLevelUp, newLevel, lastGradeAction: { cardId, previousState, previousXP } });
 
     if (isLastCard) {
       get().endSession();
@@ -423,15 +440,16 @@ export const useAppStore = create<AppStore>((set, get) => ({
     });
   },
 
-  answerQuiz: (questionIndex, selectedIndex, correct, timeMs) => {
+  answerQuiz: (questionIndex, selectedIndex, correct, timeMs, relatedCardId) => {
     const { data, currentSession } = get();
     if (!currentSession) return;
 
-    // Try to find the related card via the quiz questions data
     const questionKey = questionIndex.toString();
 
-    // Process the card state if we can find it
-    const card = CARDS[questionIndex];
+    // Use the relatedCardId passed from QuizSession, or fall back to CARDS lookup
+    const card = relatedCardId
+      ? CARDS.find((c) => c.id === relatedCardId)
+      : CARDS[questionIndex];
     if (card) {
       const cardState = data.cardStates[card.id] || createInitialCardState(card.id);
       const grade: SM2Grade = correct ? 3 : 0;
@@ -661,6 +679,95 @@ export const useAppStore = create<AppStore>((set, get) => ({
     const newData: AppData = { ...data, profile: newProfile };
     saveAppData(newData);
     set({ data: newData });
+  },
+
+  // === BOOKMARKS ===
+
+  toggleBookmark: (cardId: string) => {
+    const { data } = get();
+    const bookmarks = data.bookmarkedCards || [];
+    const isCurrentlyBookmarked = bookmarks.includes(cardId);
+    const newBookmarks = isCurrentlyBookmarked
+      ? bookmarks.filter((id) => id !== cardId)
+      : [...bookmarks, cardId];
+    const newData = { ...data, bookmarkedCards: newBookmarks };
+    saveAppData(newData);
+    set({ data: newData });
+    get().addToast({
+      message: isCurrentlyBookmarked ? 'Bookmark removed' : 'Card bookmarked',
+      type: 'success',
+    });
+  },
+
+  isBookmarked: (cardId: string) => {
+    return (get().data.bookmarkedCards || []).includes(cardId);
+  },
+
+  // === UNDO ===
+
+  undoLastGrade: () => {
+    const { lastGradeAction, data, currentSession, studyQueue, currentCardIndex } = get();
+    if (!lastGradeAction || !currentSession) return;
+
+    const { cardId, previousState, previousXP } = lastGradeAction;
+
+    // Restore card state and XP
+    const newCardStates = { ...data.cardStates, [cardId]: previousState };
+    const newProfile = { ...data.profile, xp: previousXP };
+    const newData: AppData = { ...data, cardStates: newCardStates, profile: newProfile };
+
+    // Remove the card from session's cardsStudied
+    const updatedSession: StudySession = {
+      ...currentSession,
+      cardsStudied: currentSession.cardsStudied.filter((id) => id !== cardId),
+      correctCount: Math.max(0, currentSession.correctCount - 1),
+      incorrectCount: currentSession.incorrectCount,
+    };
+
+    saveAppData(newData);
+
+    // Go back to previous card
+    set({
+      data: newData,
+      currentSession: updatedSession,
+      currentCardIndex: Math.max(0, currentCardIndex - 1),
+      isFlipped: false,
+      lastGradeAction: null,
+      showSessionComplete: false,
+      cardStartTime: Date.now(),
+    });
+
+    get().addToast({ message: 'Grade undone', type: 'success' });
+  },
+
+  // === CRAM MODE ===
+
+  startCramSession: () => {
+    // Cram mode: review ALL cards regardless of SRS schedule, weakest first
+    const { data } = get();
+    const allCardIds = CARDS.map((c) => c.id);
+
+    // Sort by ease factor (weakest first), then new cards
+    const sorted = [...allCardIds].sort((a, b) => {
+      const stateA = data.cardStates[a];
+      const stateB = data.cardStates[b];
+      const easeA = stateA?.easeFactor ?? 2.5;
+      const easeB = stateB?.easeFactor ?? 2.5;
+      return easeA - easeB;
+    });
+
+    const limit = data.settings.dailyCardLimit === 999 ? sorted.length : data.settings.dailyCardLimit;
+
+    set({
+      currentSession: createEmptySession('flashcard'),
+      studyQueue: sorted.slice(0, limit),
+      currentCardIndex: 0,
+      isFlipped: false,
+      sessionStartTime: Date.now(),
+      cardStartTime: Date.now(),
+      showSessionComplete: false,
+      lastGradeAction: null,
+    });
   },
 
   // === HELPERS ===

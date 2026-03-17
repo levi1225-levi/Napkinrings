@@ -42,7 +42,7 @@ export default function AnimatedNumber({
     <span
       ref={ref}
       className={className}
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      style={{ fontFamily: 'var(--font-ui)' }}
       aria-label={`${prefix}${value.toFixed(decimals)}${suffix}`}
     >
       {prefix}

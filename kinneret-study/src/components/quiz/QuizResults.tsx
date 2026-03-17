@@ -115,7 +115,7 @@ export default function QuizResults({
       initial="hidden"
       animate="show"
       className="flex flex-col items-center gap-8 w-full max-w-2xl mx-auto py-6"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      style={{ fontFamily: 'var(--font-ui)' }}
     >
       {/* Score ring */}
       <motion.div variants={stagger.item} className="flex flex-col items-center gap-4">

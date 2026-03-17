@@ -67,7 +67,7 @@ function ToastItem({
         minWidth: '280px',
         maxWidth: '400px',
         boxShadow: 'var(--shadow-lg)',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: 'var(--font-ui)',
       }}
     >
       <div
