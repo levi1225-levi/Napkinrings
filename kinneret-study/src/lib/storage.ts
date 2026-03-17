@@ -5,6 +5,69 @@ import { v4 as uuidv4 } from 'uuid';
 import { type CardState, createInitialCardState } from './sm2';
 
 const STORAGE_KEY = 'kinneret_study_v1';
+const PROGRESS_KEY = 'kinneret_study_progress';
+
+// ─── Session Resume Persistence ──────────────────────────────────────────────
+
+export interface SavedStudyProgress {
+  mode: 'flashcard' | 'quiz' | 'speed' | 'guided';
+  timestamp: number;
+  /** Flashcard: card IDs in queue order */
+  cardIds?: string[];
+  /** Current index within the card queue */
+  currentIndex?: number;
+  /** Guided session state */
+  guided?: {
+    phase: 'teaching' | 'practice';
+    sessionCardIds: string[];
+    learnedCardIds: string[];
+    currentBatchIndex: number;
+    teachIndex: number;
+    totalCorrect: number;
+    totalQuestions: number;
+    totalXP: number;
+    selectedMinutes: number;
+    startTime: number;
+  };
+  /** Quiz session state */
+  quiz?: {
+    questionIndices: number[];
+    currentIndex: number;
+    answers: Record<string, { selectedIndex: number; correct: boolean; timeMs: number }>;
+  };
+}
+
+export function saveStudyProgress(progress: SavedStudyProgress): void {
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+  } catch {
+    // silently fail
+  }
+}
+
+export function loadStudyProgress(): SavedStudyProgress | null {
+  try {
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as SavedStudyProgress;
+    // Expire after 2 hours
+    if (Date.now() - parsed.timestamp > 2 * 60 * 60 * 1000) {
+      clearStudyProgress();
+      return null;
+    }
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+export function clearStudyProgress(): void {
+  try {
+    localStorage.removeItem(PROGRESS_KEY);
+  } catch {
+    // silently fail
+  }
+}
 
 export interface UserSettings {
   dailyCardLimit: number;

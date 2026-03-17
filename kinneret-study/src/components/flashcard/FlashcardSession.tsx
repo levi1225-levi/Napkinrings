@@ -5,6 +5,8 @@ import {
   Clock,
   Layers,
   ChevronRight,
+  RotateCcw,
+  X,
 } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { CARDS, CATEGORY_COLORS, getCardById } from '../../data/cards';
@@ -12,6 +14,12 @@ import type { SM2Grade } from '../../lib/sm2';
 import { FlashcardDisplay } from './FlashcardDisplay';
 import { RatingButtons } from './RatingButtons';
 import { SessionComplete } from './SessionComplete';
+import {
+  saveStudyProgress,
+  loadStudyProgress,
+  clearStudyProgress,
+  type SavedStudyProgress,
+} from '../../lib/storage';
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -167,6 +175,57 @@ export function FlashcardSession() {
     getCardState,
   } = useAppStore();
 
+  /* ── Session resume state ────────────────────────────────────── */
+  const [savedProgress, setSavedProgress] = useState<SavedStudyProgress | null>(null);
+  const [resumeBannerDismissed, setResumeBannerDismissed] = useState(false);
+
+  // Check for saved progress on mount
+  useEffect(() => {
+    const progress = loadStudyProgress();
+    if (progress && progress.mode === 'flashcard' && progress.cardIds && progress.cardIds.length > 0) {
+      setSavedProgress(progress);
+    }
+  }, []);
+
+  // Save progress whenever queue or index changes during an active session
+  useEffect(() => {
+    if (currentSession && currentSession.mode === 'flashcard' && studyQueue.length > 0 && !showSessionComplete) {
+      saveStudyProgress({
+        mode: 'flashcard',
+        timestamp: Date.now(),
+        cardIds: studyQueue,
+        currentIndex: currentCardIndex,
+      });
+    }
+  }, [currentSession, studyQueue, currentCardIndex, showSessionComplete]);
+
+  // Clear saved progress when session completes
+  useEffect(() => {
+    if (showSessionComplete) {
+      clearStudyProgress();
+      setSavedProgress(null);
+    }
+  }, [showSessionComplete]);
+
+  const handleResume = useCallback(() => {
+    if (!savedProgress?.cardIds) return;
+    // Start a fresh session, then override queue & index from saved progress
+    startFlashcardSession();
+    useAppStore.setState({
+      studyQueue: savedProgress.cardIds,
+      currentCardIndex: savedProgress.currentIndex ?? 0,
+    });
+    clearStudyProgress();
+    setSavedProgress(null);
+    setResumeBannerDismissed(false);
+  }, [savedProgress, startFlashcardSession]);
+
+  const handleDismissResume = useCallback(() => {
+    setResumeBannerDismissed(true);
+    clearStudyProgress();
+    setSavedProgress(null);
+  }, []);
+
   /* ── Elapsed time tracker ─────────────────────────────────────── */
   const [elapsedTime, setElapsedTime] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -238,10 +297,60 @@ export function FlashcardSession() {
   /* ── Start screen (no active session) ─────────────────────────── */
   if (!currentSession) {
     return (
-      <StartScreen
-        dueCardIds={dueCardIds}
-        onStart={startFlashcardSession}
-      />
+      <>
+        {/* Resume banner */}
+        {savedProgress && !resumeBannerDismissed && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            className="w-full max-w-md mx-auto mb-4 px-4 py-3 rounded-xl flex items-center justify-between gap-3"
+            style={{
+              background: 'var(--bg-elevated)',
+              border: '1px solid rgba(79,142,247,0.3)',
+              boxShadow: '0 2px 12px rgba(79,142,247,0.1)',
+            }}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <RotateCcw size={16} style={{ color: '#4f8ef7', flexShrink: 0 }} />
+              <span className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>
+                Resume previous session? ({(savedProgress.cardIds?.length ?? 0) - (savedProgress.currentIndex ?? 0)} cards left)
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <button
+                onClick={handleResume}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                style={{
+                  background: '#4f8ef7',
+                  color: '#fff',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                Resume
+              </button>
+              <button
+                onClick={handleDismissResume}
+                className="p-1.5 rounded-lg"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--text-tertiary)',
+                }}
+                aria-label="Dismiss resume banner"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+        <StartScreen
+          dueCardIds={dueCardIds}
+          onStart={startFlashcardSession}
+        />
+      </>
     );
   }
 
@@ -385,7 +494,18 @@ export function FlashcardSession() {
 
       {/* ── End session shortcut ──────────────────────────────── */}
       <motion.button
-        onClick={endSession}
+        onClick={() => {
+          // Save progress before ending so it can be resumed later
+          if (studyQueue.length > 0 && currentCardIndex < studyQueue.length - 1) {
+            saveStudyProgress({
+              mode: 'flashcard',
+              timestamp: Date.now(),
+              cardIds: studyQueue,
+              currentIndex: currentCardIndex,
+            });
+          }
+          endSession();
+        }}
         className="mt-8 text-xs font-medium flex items-center gap-1 group"
         style={{
           color: 'var(--text-tertiary)',

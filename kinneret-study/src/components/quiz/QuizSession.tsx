@@ -1,12 +1,18 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Layers, Zap, ArrowRight } from 'lucide-react';
+import { Brain, Layers, Zap, ArrowRight, RotateCcw, X } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { quizQuestions as QUIZ_QUESTIONS } from '../../data/quizQuestions';
 import type { QuizQuestion as QuizQuestionType } from '../../data/quizQuestions';
 import QuizQuestion from './QuizQuestion';
 import QuizResults from './QuizResults';
 import Button from '../ui/Button';
+import {
+  saveStudyProgress,
+  loadStudyProgress,
+  clearStudyProgress,
+  type SavedStudyProgress,
+} from '../../lib/storage';
 
 type Phase = 'start' | 'playing' | 'results';
 
@@ -47,6 +53,37 @@ export default function QuizSession() {
   const [direction, setDirection] = useState(1);
   const questionStartTime = useRef(Date.now());
 
+  /* ── Session resume state ────────────────────────────────────── */
+  const [savedProgress, setSavedProgress] = useState<SavedStudyProgress | null>(null);
+  const [resumeBannerDismissed, setResumeBannerDismissed] = useState(false);
+
+  // Check for saved progress on mount
+  useEffect(() => {
+    const progress = loadStudyProgress();
+    if (progress && progress.mode === 'quiz' && progress.quiz) {
+      setSavedProgress(progress);
+    }
+  }, []);
+
+  const handleResume = useCallback(() => {
+    if (!savedProgress?.quiz) return;
+    startQuizSession();
+    setPhase('playing');
+    setCurrentIndex(savedProgress.quiz.currentIndex);
+    setAnswered(false);
+    setSelectedIndex(null);
+    questionStartTime.current = Date.now();
+    clearStudyProgress();
+    setSavedProgress(null);
+    setResumeBannerDismissed(false);
+  }, [savedProgress, startQuizSession]);
+
+  const handleDismissResume = useCallback(() => {
+    setResumeBannerDismissed(true);
+    clearStudyProgress();
+    setSavedProgress(null);
+  }, []);
+
   // Prioritize questions: sort by weakest related cards (lowest ease factor)
   const orderedQuestions = useMemo(() => {
     const scored = QUIZ_QUESTIONS.map((q) => {
@@ -74,6 +111,29 @@ export default function QuizSession() {
 
     return result.map((s) => shuffleOptions(s.question));
   }, [data.cardStates]);
+
+  // Save progress whenever index or answers change during an active quiz
+  useEffect(() => {
+    if (phase === 'playing' && orderedQuestions.length > 0) {
+      saveStudyProgress({
+        mode: 'quiz',
+        timestamp: Date.now(),
+        quiz: {
+          questionIndices: orderedQuestions.map((_, i) => i),
+          currentIndex,
+          answers: quizAnswers as Record<string, { selectedIndex: number; correct: boolean; timeMs: number }>,
+        },
+      });
+    }
+  }, [phase, currentIndex, quizAnswers, orderedQuestions]);
+
+  // Clear saved progress when results are shown
+  useEffect(() => {
+    if (phase === 'results') {
+      clearStudyProgress();
+      setSavedProgress(null);
+    }
+  }, [phase]);
 
   const totalQuestions = orderedQuestions.length;
 
@@ -178,6 +238,55 @@ export default function QuizSession() {
         className="flex flex-col items-center gap-8 w-full max-w-lg mx-auto py-8"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
+        {/* Resume banner */}
+        {savedProgress && !resumeBannerDismissed && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            className="w-full px-4 py-3 rounded-xl flex items-center justify-between gap-3"
+            style={{
+              background: 'var(--bg-elevated)',
+              border: '1px solid rgba(79,142,247,0.3)',
+              boxShadow: '0 2px 12px rgba(79,142,247,0.1)',
+            }}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <RotateCcw size={16} style={{ color: '#4f8ef7', flexShrink: 0 }} />
+              <span className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>
+                Resume previous quiz? (question {(savedProgress.quiz?.currentIndex ?? 0) + 1} of {totalQuestions})
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <button
+                onClick={handleResume}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+                style={{
+                  background: '#4f8ef7',
+                  color: '#fff',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                Resume
+              </button>
+              <button
+                onClick={handleDismissResume}
+                className="p-1.5 rounded-lg"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--text-tertiary)',
+                }}
+                aria-label="Dismiss resume banner"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+
         {/* Header */}
         <div className="flex flex-col items-center gap-3">
           <motion.div
