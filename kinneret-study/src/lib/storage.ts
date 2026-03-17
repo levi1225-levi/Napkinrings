@@ -132,7 +132,7 @@ export function getDefaultSettings(): UserSettings {
     showTimer: true,
     autoAdvance: false,
     autoAdvanceDelay: 2,
-    darkMode: false,
+    darkMode: true,
     fontSize: 'medium',
     hebrewFontSize: 'medium',
     animationSpeed: 'full',
