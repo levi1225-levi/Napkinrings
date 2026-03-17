@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
 import {
   Play,
   Clock,
@@ -301,6 +302,49 @@ export function FlashcardSession() {
     },
     [gradeCard, rated],
   );
+
+  /* ── Keyboard shortcuts ──────────────────────────────────────── */
+  const flashcardShortcuts = useMemo(
+    () => ({
+      ' ': (e: KeyboardEvent) => {
+        e.preventDefault();
+        flipCard();
+      },
+      '1': () => {
+        if (isFlipped) handleRate(0);
+      },
+      '2': () => {
+        if (isFlipped) handleRate(2);
+      },
+      '3': () => {
+        if (isFlipped) handleRate(3);
+      },
+      '4': () => {
+        if (isFlipped) handleRate(5);
+      },
+      'arrowright': () => {
+        if (currentCardIndex < studyQueue.length - 1) {
+          useAppStore.setState({
+            currentCardIndex: currentCardIndex + 1,
+            isFlipped: false,
+            cardStartTime: Date.now(),
+          });
+        }
+      },
+      'arrowleft': () => {
+        if (currentCardIndex > 0) {
+          useAppStore.setState({
+            currentCardIndex: currentCardIndex - 1,
+            isFlipped: false,
+            cardStartTime: Date.now(),
+          });
+        }
+      },
+    }),
+    [flipCard, isFlipped, handleRate, currentCardIndex, studyQueue.length],
+  );
+
+  useKeyboardShortcuts(flashcardShortcuts, !!currentSession && !showSessionComplete);
 
   /* ── Due cards (for start screen) ─────────────────────────────── */
   const dueCardIds: string[] = [];

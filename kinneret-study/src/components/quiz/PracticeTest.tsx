@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
 import {
   Clock,
   Pause,
@@ -171,6 +172,34 @@ export default function PracticeTest() {
     setAnswered(false);
     setSelectedIndex(null);
   }, []);
+
+  /* ── Keyboard shortcuts ──────────────────────────────────────── */
+  const practiceShortcuts = useMemo(
+    () => ({
+      '1': () => {
+        if (!answered && questions[currentIndex]?.options.length >= 1) handleAnswer(0);
+      },
+      '2': () => {
+        if (!answered && questions[currentIndex]?.options.length >= 2) handleAnswer(1);
+      },
+      '3': () => {
+        if (!answered && questions[currentIndex]?.options.length >= 3) handleAnswer(2);
+      },
+      '4': () => {
+        if (!answered && questions[currentIndex]?.options.length >= 4) handleAnswer(3);
+      },
+      'p': () => {
+        if (phase === 'playing') {
+          handlePause();
+        } else if (phase === 'paused') {
+          handleResume();
+        }
+      },
+    }),
+    [answered, currentIndex, questions, handleAnswer, phase, handlePause, handleResume],
+  );
+
+  useKeyboardShortcuts(practiceShortcuts, phase === 'playing' || phase === 'paused');
 
   // Results calculation
   const results = useMemo(() => {

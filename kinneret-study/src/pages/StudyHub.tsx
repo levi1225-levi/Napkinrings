@@ -16,6 +16,7 @@ import { FlashcardSession } from '../components/flashcard/FlashcardSession';
 import QuizSession from '../components/quiz/QuizSession';
 import PracticeTest from '../components/quiz/PracticeTest';
 import SpeedRound from '../components/speed/SpeedRound';
+import ChallengeMode from '../components/quiz/ChallengeMode';
 
 const GuidedSession = lazy(() => import('../components/guided/GuidedSession'));
 
@@ -251,6 +252,9 @@ export default function StudyHub() {
                 );
               })}
             </div>
+
+            {/* Challenge mode */}
+            <ChallengeMode />
           </motion.div>
         ) : (
           <motion.div

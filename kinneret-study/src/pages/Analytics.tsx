@@ -1,4 +1,5 @@
 import React, { Suspense, useMemo } from 'react';
+import ShareProgress from '../components/analytics/ShareProgress';
 import { motion } from 'framer-motion';
 import {
   LineChart,
@@ -317,15 +318,20 @@ export default function Analytics() {
     >
       {/* Page header */}
       <motion.div variants={sectionVariant} className="mb-6">
-        <h1
-          className="text-2xl font-bold"
-          style={{ color: COLORS.textPrimary, fontFamily: 'var(--font-ui)' }}
-        >
-          Analytics
-        </h1>
-        <p className="text-sm mt-1" style={{ color: COLORS.textSecondary }}>
-          Track your progress
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1
+              className="text-2xl font-bold"
+              style={{ color: COLORS.textPrimary, fontFamily: 'var(--font-ui)' }}
+            >
+              Analytics
+            </h1>
+            <p className="text-sm mt-1" style={{ color: COLORS.textSecondary }}>
+              Track your progress
+            </p>
+          </div>
+          <ShareProgress />
+        </div>
       </motion.div>
 
       {/* Stats overview */}

@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts';
 import { Brain, Layers, Zap, ArrowRight, RotateCcw, X } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { quizQuestions as QUIZ_QUESTIONS } from '../../data/quizQuestions';
@@ -226,6 +227,27 @@ export default function QuizSession() {
   const handleDone = useCallback(() => {
     setStudyMode(null);
   }, [setStudyMode]);
+
+  /* ── Keyboard shortcuts ──────────────────────────────────────── */
+  const quizShortcuts = useMemo(
+    () => ({
+      '1': () => {
+        if (!answered && orderedQuestions[currentIndex]?.options.length >= 1) handleAnswer(0);
+      },
+      '2': () => {
+        if (!answered && orderedQuestions[currentIndex]?.options.length >= 2) handleAnswer(1);
+      },
+      '3': () => {
+        if (!answered && orderedQuestions[currentIndex]?.options.length >= 3) handleAnswer(2);
+      },
+      '4': () => {
+        if (!answered && orderedQuestions[currentIndex]?.options.length >= 4) handleAnswer(3);
+      },
+    }),
+    [answered, currentIndex, orderedQuestions, handleAnswer],
+  );
+
+  useKeyboardShortcuts(quizShortcuts, phase === 'playing');
 
   // Slide variants
   const slideVariants = {

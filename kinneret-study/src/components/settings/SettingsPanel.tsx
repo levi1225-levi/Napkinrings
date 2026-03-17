@@ -10,6 +10,8 @@ import {
 import { useAppStore } from '../../store/appStore';
 import { getSession } from '../../lib/auth';
 import Modal from '../ui/Modal';
+import ExportStudySheet from './ExportStudySheet';
+import StudyGroups from './StudyGroups';
 
 /* ────────────────────────────────────────────
  *  Reusable setting sub-components
@@ -515,6 +517,9 @@ export default function SettingsPanel() {
         </SettingRow>
       </Section>
 
+      {/* ── Study Groups ── */}
+      <StudyGroups />
+
       {/* ── Data ── */}
       <Section title="Data">
         <div className="flex flex-col gap-3 py-3">
@@ -549,6 +554,8 @@ export default function SettingsPanel() {
               Import
             </button>
           </div>
+
+          <ExportStudySheet />
 
           <button
             onClick={() => setShowResetModal(true)}
@@ -612,6 +619,9 @@ export default function SettingsPanel() {
           </button>
         </div>
       </Section>
+
+      {/* Study Groups */}
+      <StudyGroups />
 
       {/* Reset confirmation modal */}
       <Modal

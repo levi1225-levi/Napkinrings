@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Lightbulb, ChevronDown, ChevronUp, Link2 } from 'lucide-react';
+import { Clock, Lightbulb, ChevronDown, ChevronUp, Link2, Volume2 } from 'lucide-react';
+import { useAudioPronunciation } from '../../hooks/useAudioPronunciation';
 import type { Card } from '../../data/cards';
 import { CATEGORY_COLORS, getCardById } from '../../data/cards';
 import type { CardState } from '../../lib/sm2';
@@ -52,6 +53,7 @@ export function FlashcardDisplay({
   elapsedTime,
 }: FlashcardDisplayProps) {
   const [notesOpen, setNotesOpen] = useState(false);
+  const { speak, isSpeaking } = useAudioPronunciation();
 
   const toggleNotes = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -117,19 +119,46 @@ export function FlashcardDisplay({
 
           {/* Hebrew */}
           {card.hebrew && (
-            <span
-              lang="he"
-              dir="rtl"
-              className="text-[3rem] leading-tight font-bold mb-3"
-              style={{
-                fontFamily: '"Frank Ruhl Libre", serif',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                textShadow: '0 0 40px rgba(79,142,247,0.12)',
-              }}
-            >
-              {card.hebrew}
-            </span>
+            <div className="flex items-center gap-2 mb-3">
+              <span
+                lang="he"
+                dir="rtl"
+                className="text-[3rem] leading-tight font-bold"
+                style={{
+                  fontFamily: '"Frank Ruhl Libre", serif',
+                  fontWeight: 700,
+                  color: 'var(--text-primary)',
+                  textShadow: '0 0 40px rgba(79,142,247,0.12)',
+                }}
+              >
+                {card.hebrew}
+              </span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  speak(card.hebrew);
+                }}
+                aria-label="Pronounce Hebrew"
+                style={{
+                  background: 'rgba(79,142,247,0.12)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 36,
+                  height: 36,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background 0.2s',
+                }}
+              >
+                <Volume2
+                  size={18}
+                  strokeWidth={2.2}
+                  style={{ color: isSpeaking ? '#34c759' : '#4f8ef7' }}
+                />
+              </button>
+            </div>
           )}
 
           {/* Transliteration */}
@@ -172,12 +201,42 @@ export function FlashcardDisplay({
           }}
         >
           {/* Term header */}
-          <h3
-            className="text-sm font-semibold uppercase tracking-wide mb-4"
-            style={{ color: catColor }}
-          >
-            {card.term}
-          </h3>
+          <div className="flex items-center gap-2 mb-4">
+            <h3
+              className="text-sm font-semibold uppercase tracking-wide"
+              style={{ color: catColor }}
+            >
+              {card.term}
+            </h3>
+            {card.transliteration && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  speak(card.transliteration!, 'en-US');
+                }}
+                aria-label="Pronounce transliteration"
+                style={{
+                  background: 'rgba(79,142,247,0.12)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 36,
+                  height: 36,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background 0.2s',
+                  flexShrink: 0,
+                }}
+              >
+                <Volume2
+                  size={16}
+                  strokeWidth={2.2}
+                  style={{ color: isSpeaking ? '#34c759' : '#4f8ef7' }}
+                />
+              </button>
+            )}
+          </div>
 
           {/* Definition */}
           <p
